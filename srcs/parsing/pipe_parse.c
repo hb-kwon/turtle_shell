@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 11:46:25 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/04 14:11:45 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/05 17:59:22 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,16 @@ void	count_quote(char *line, int *i)
 int	count_parse(char *line)
 {
 	int	i;
+	int	j;
 	int	cnt;
 
-	i = -1;
+	i = 0;
+	j = -1;
 	cnt = 0;
 	while (line[i])
 	{
-		count_quote(line, &i);
+		count_quote(line, &j);
+		i = j;
 		cnt++;
 	}
 	return (cnt);
@@ -82,7 +85,7 @@ char	**make_cmd_array(char *line, char **res, t_parse *parse)
 	parse->i = 0;
 	parse->j = -1;
 	parse->k = 0;
-	while (line[parse->i] && parse->k < parse->cnt)
+	while (parse->k < parse->cnt)
 	{
 		count_quote(line, &parse->j);
 		res[parse->k] = ft_strcpy_i_to_j(line, parse->i, parse->j);

@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:15:38 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/04 14:26:50 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/05 18:03:37 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,34 +170,37 @@ t_cmd	*make_cmd_set(char **cmd_list)
 t_cmd	*parse(char	*line)
 {
 	char	**cmd_list;
-	int		i;
-	int		j;
-	int		cnt;
-	int		ch_cnt;
+	// int		i;
+	// int		j;
+	// int		cnt;
+	// int		ch_cnt;
 	t_cmd	*tmp;
 
 	if (!line)
 		return (NULL);
-	ft_strskip(&line, " \t\n");
-	cnt = ft_count(line);
-	cmd_list = (char **)malloc(sizeof(char *) * (cnt + 1));
-	i = -1;
-	while (++i < cnt)
-	{
-		j = -1;
-		ch_cnt = ft_ch_count(line);
-		cmd_list[i] = ft_strnew(ch_cnt);
-		while (*line && !ft_strchr(" \t\n", *line) && ++j < ch_cnt)
-			cmd_list[i][j] = *(line++);
-		cmd_list[i][j + 1] = '\0';
-		ft_strskip(&line, " \t\n");
-		if (!line)
-			return (NULL);
-	}
-	cmd_list[cnt] = NULL;
-	// cmd_list = ft_parsing(line);
-	tmp = (t_cmd *)malloc(sizeof(t_cmd));
-	tmp = make_cmd_set(cmd_list);
+	// ft_strskip(&line, " \t\n");
+	// cnt = ft_count(line);
+	// cmd_list = (char **)malloc(sizeof(char *) * (cnt + 1));
+	// i = -1;
+	// while (++i < cnt)
+	// {
+	// 	j = -1;
+	// 	ch_cnt = ft_ch_count(line);
+	// 	cmd_list[i] = ft_strnew(ch_cnt);
+	// 	while (*line && !ft_strchr(" \t\n", *line) && ++j < ch_cnt)
+	// 		cmd_list[i][j] = *(line++);
+	// 	cmd_list[i][j + 1] = '\0';
+	// 	ft_strskip(&line, " \t\n");
+	// 	if (!line)
+	// 		return (NULL);
+	// }
+	// cmd_list[cnt] = NULL;
+	cmd_list = ft_parsing(line);
+	int i = -1;
+	while (cmd_list[++i])
+		printf("cmd list check after parsing : %s\n", cmd_list[i]);
+	// tmp = (t_cmd *)malloc(sizeof(t_cmd));
+	// tmp = make_cmd_set(cmd_list);
 	// while (tmp)
 	// {
 	// 	printf("parsing cmd arg check before return : %s\n", tmp->arg);
