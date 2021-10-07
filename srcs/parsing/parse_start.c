@@ -6,12 +6,15 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:15:38 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/07 00:06:05 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/07 16:17:12 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+** command name이 필요한가?
+*/
 t_cmd	*make_cmd(char *cmd_list)
 {
 	t_cmd	*cmd;
@@ -48,7 +51,7 @@ t_cmd	*make_cmd_set(char **cmd_list)
 		}
 		i++;
 	}
-	ft_free_array(cmd_list);
+	ft_free_arr(cmd_list);
 	while (cmd->prev)
 		cmd = cmd->prev;
 	return (cmd);
@@ -64,8 +67,11 @@ t_cmd	*parse_start(char *line)
 	cmd_list = parse_line(line);
 	// debug
 	int i = -1;
+	printf("==========================================\n");
 	while (cmd_list[++i])
 		printf("cmd list check after parsing : %s\n", cmd_list[i]);
+	printf("==========================================\n");
+	//end
 	if (!cmd_list)
 		return (NULL);
 	return (make_cmd_set(cmd_list));

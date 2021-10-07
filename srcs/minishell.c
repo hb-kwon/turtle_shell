@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 19:16:49 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/05 18:04:04 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/07 16:19:41 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	minishell(char **en)
 		// if (get_next_line(0, &line) > 0)
 		// {
 			line = read_line();
-			shell->cmd = parse(line);
+			shell->cmd = parse_start(line);
 			// while (shell->cmd)
 			// {
 			// 	printf("parsing cmd check after return : %s\n", shell->cmd->arg);
