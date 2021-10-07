@@ -6,7 +6,7 @@
 #    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/10/07 15:21:38 by hkwon            ###   ########.fr        #
+#    Updated: 2021/10/07 18:10:05 by hkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS_PARSE = $(addprefix $(SRCS_PARSE_DIR)/, \
 		parse_line.c\
 		parse_token.c\
 		parse_token_arr.c\
+		parse_token_list.c\
 )
 
 SRCS_MAIN = $(addprefix $(SRCS_DIR)/, \

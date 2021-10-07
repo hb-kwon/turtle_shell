@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:32:48 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/07 16:34:37 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/07 17:48:58 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,16 @@
 
 static void	args_redirect_arr(char *cmd_list, int *index, int *flag)
 {
-	printf("cmd_list index check : %c\n", cmd_list[*index]);
-	printf("cmd_list index check : %c\n", cmd_list[*(index + 1)]);
-	printf("cmd_list index check : %c\n", cmd_list[*(index + 2)]);
-	if (cmd_list[*index] == '<' && cmd_list[*(index + 1)] != '<')
+	if (cmd_list[*index] == '<' && cmd_list[*index + 1] != '<')
 		*flag |= RD_IN;
-	else if (cmd_list[*index] == '>' && cmd_list[*(index + 1)] != '>')
+	else if (cmd_list[*index] == '>' && cmd_list[*index + 1] != '>')
 		*flag |= RD_OUT;
-	else if (cmd_list[*index] == '>' && cmd_list[*(index + 1)] == '>')
+	else if (cmd_list[*index] == '>' && cmd_list[*index + 1] == '>')
 	{
 		*flag |= RD_APPEND;
 		(*index)++;
 	}
-	else if (cmd_list[*index] == '<' && cmd_list[*(index + 1)] == '<')
+	else if (cmd_list[*index] == '<' && cmd_list[*index + 1] == '<')
 	{
 		*flag |= RD_HEREDOC;
 		(*index)++;
@@ -118,5 +115,6 @@ char	**parse_token_arr(char **args, char *cmd_list)
 	index[2] = -1;
 	while (args[++index[2]])
 		printf("arument check atfer copy : %s\n", args[index[2]]);
+	printf("==========================================\n");
 	return (args);
 }

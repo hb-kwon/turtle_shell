@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/07 15:32:11 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/07 18:10:32 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # define RD_OUT 2
 # define RD_APPEND 4
 # define RD_HEREDOC	8
+# define COMMAND 16
+# define ARGUMENT 32
 
 typedef struct s_mini	t_mini;
 typedef struct s_cmd	t_cmd;
@@ -90,6 +92,7 @@ t_cmd	*parse_start(char *line);
 char	**parse_line(char *line);
 t_token	*parse_token(char *cmd_list);
 char	**parse_token_arr(char **args, char *cmd_list);
+t_token	*make_token_list(char **args);
 
 /*
 ** execute commands

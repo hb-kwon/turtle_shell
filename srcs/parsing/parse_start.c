@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:15:38 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/07 16:17:12 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/07 18:09:19 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_cmd	*make_cmd(char *cmd_list)
 {
 	t_cmd	*cmd;
 
-	cmd = (t_cmd *)ft_malloc(sizeof(t_cmd));
+	cmd = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
 	cmd->token = parse_token(cmd_list);
@@ -28,15 +28,15 @@ t_cmd	*make_cmd(char *cmd_list)
 	return (cmd);
 }
 
-t_cmd	*make_cmd_set(char **cmd_list)
+t_cmd	*make_cmd_list(char **cmd_list)
 {
 	t_cmd	*cmd;
 	t_cmd	*tmp;
 	int		i;
 
-	i = 0;
+	i = -1;
 	cmd = NULL;
-	while (cmd_list[i])
+	while (cmd_list[++i])
 	{
 		tmp = make_cmd(cmd_list[i]);
 		if (!tmp)
@@ -49,7 +49,6 @@ t_cmd	*make_cmd_set(char **cmd_list)
 			tmp->prev = cmd;
 			cmd = cmd->next;
 		}
-		i++;
 	}
 	ft_free_arr(cmd_list);
 	while (cmd->prev)
@@ -74,5 +73,5 @@ t_cmd	*parse_start(char *line)
 	//end
 	if (!cmd_list)
 		return (NULL);
-	return (make_cmd_set(cmd_list));
+	return (make_cmd_list(cmd_list));
 }
