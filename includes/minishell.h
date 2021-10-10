@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/09 19:02:29 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/10 17:53:09 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 # include <unistd.h>
 # include <string.h>
 # include <fcntl.h>
+# include <termcap.h>
 # include <termios.h>
+# include <signal.h>
 # include "libft.h"
 
 # define PATH_MAX 1024
@@ -95,15 +97,27 @@ struct s_mini
 	t_cmd			*cmd;
 	t_history		*hist;
 	int				exit_status;
+	pid_t			pid;
+	int				signal;
 	int				pipe_flag;
 	int				pre_flag;
 	int				re_flag;
 	int				fds[2];
-	struct termios	term;
+	char			*line;
+	struct termios	term_sh;
+	struct termios	term_ori;
 };
 
+extern t_mini				g_mini;
+
 int		main(int argc, char *argv[], char *envp[]);
+void	init_shell(char ***en, char *envp[]);
 void	minishell(char **en);
+
+/*
+** init
+*/
+void	signal_handle(int sig_num);
 
 /*
 ** parsing
@@ -115,19 +129,15 @@ char	**parse_token_arr(char **args, char *cmd_list);
 t_token	*make_token_list(char **args);
 
 /*
-** execute commands
+** execute
 */
 char	**execute(char **args, char **en);
 
 /*
-** builtin commands
+** builtin
 */
 char	*blt_str(int i);
 char	**(*blt_func(int i))(char **args, char **en);
-
-/*
-** builtin function
-*/
 char	**ft_echo(char **args, char **en);
 char	**ft_cd(char **args, char **en);
 char	**ft_pwd(char **args, char **en);
@@ -136,7 +146,9 @@ char	**ft_unset(char **args, char **en);
 char	**ft_env(char **args, char **en);
 char	**ft_exit(char **args, char **en);
 
-// utils
+/*
+** utils function
+*/
 char	*ft_strnew(size_t size);
 void	*ft_malloc(size_t size);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
