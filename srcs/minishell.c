@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 19:16:49 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/10 18:08:59 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/11 23:26:51 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@
 ** COMMAND 16
 ** ARGUMENT 32
 */
-static char	*read_line(void)
-{
-	char	*line;
+// static char	*read_line(void)
+// {
+// 	char	*line;
 
-	line = NULL;
-	get_next_line(0, &line);
-	return (line);
-}
+// 	line = NULL;
+// 	get_next_line(0, &line);
+// 	return (line);
+// }
 
 void	show_prompt(void)
 {
@@ -75,36 +75,34 @@ void	minishell(char **en)
 {
 	int		status;
 	char	*line;
+	int		ret;
 	t_mini	shell;
 
 	status = 1;
-	// shell->hist = NULL;
 	while (status)
 	{
 		//터미널을 종료시키는 인터럽트를 발생시켰을 때, 터미널이 종료되는게 아니라 우리의 minishell 프로그램만 종료되도록 액션을 변경해줘야 한다. 이런 핸들러 역할을 하는게 아래의 signal 함수이다.
-		show_prompt();
+		// show_prompt();
 		// run_term(shell->term);
-		// if (get_next_line(0, &line) > 0)
-		// {
-		line = read_line(); //history && read_line->getch()
-		// if (check_line(shell->line))
+		line = readline(""); //history && read_line->getch()
+		if (!line)
+			break ;
+		add_history(line);
 		shell.cmd = parse_start(line);
-			//debug
-			
-			while (shell.cmd)
-			{
-				while(shell.cmd->token)
-				{
-					printf("parsing cmd check after return : %s\n", shell.cmd->token->arg);
-					printf("parsing cmd check after return : %d\n", shell.cmd->token->type);
-					shell.cmd->token = shell.cmd->token->next;
-				}
-				shell.cmd = shell.cmd->next;
-			}
-			//end
-			// status = run_shell(shell->cmd, &en);
-			free(line);
+		// debug
+		// while (shell.cmd)
+		// {
+		// 	while(shell.cmd->token)
+		// 	{
+		// 		printf("parsing cmd check after return : %s\n", shell.cmd->token->arg);
+		// 		printf("parsing cmd check after return : %d\n", shell.cmd->token->type);
+		// 		shell.cmd->token = shell.cmd->token->next;
+		// 	}
+		// 	shell.cmd = shell.cmd->next;
 		// }
+		// end
+		// status = run_shell(shell->cmd, &en);
+		free(line);
 	}
 	(void)en;
 }
@@ -113,3 +111,4 @@ void	minishell(char **en)
 //getch() -> 따로 만들어줘야한다.
 //parsing -> token화 시키기
 //예외처리는 큰 것부터 하고 builtin부터 동작하게 만들기
+

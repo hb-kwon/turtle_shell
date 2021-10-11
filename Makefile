@@ -6,7 +6,7 @@
 #    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/10/10 18:00:47 by hkwon            ###   ########.fr        #
+#    Updated: 2021/10/11 23:14:37 by hkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,8 @@ all : $(NAME)
 
 $(NAME) : $(LIBFT)
 	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -I $(LIB_DIR)/$(INCLUDE_DIR) \
-	-L ./$(LIB_DIR) -lncurses -lft -o $(NAME) $(SRCS)
+	-L ./$(LIB_DIR) -lreadline -L/usr/local/opt/readline/lib -I/usr/local/opt/readline/include \
+	-lft -o $(NAME) $(SRCS)
 
 # $(OBJS_DIR) :
 # 	@mkdir -p $(OBJS_DIR)

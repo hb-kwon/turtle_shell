@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/10 18:12:28 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/11 23:11:30 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <unistd.h>
 # include <string.h>
 # include <fcntl.h>
-# include <termcap.h>
-# include <termios.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <signal.h>
 # include "libft.h"
 
@@ -28,9 +28,9 @@
 
 # define NONE 0
 # define CMD 1
-# define REDIRECT 2
-# define PIPE 4
-# define ARG 8
+# define ARG 2
+# define REDIRECT 4
+# define PIPE 8
 # define S_QUOTE 16
 # define D_QUOTE 32
 
@@ -46,6 +46,7 @@ typedef struct s_cmd		t_cmd;
 typedef struct s_token		t_token;
 typedef struct s_parse		t_parse;
 typedef struct s_history	t_history;
+typedef struct s_read		t_read;
 
 /*
 ** parse struct
@@ -81,31 +82,19 @@ struct	s_cmd
 	t_cmd	*prev;
 };
 
-/*
-** history struct
-*/
-struct s_history
-{
-	char		*curr;
-	char		*backup;
-	t_history	*next;
-	t_history	*prev;
-};
-
 struct s_mini
 {
 	t_cmd			*cmd;
 	t_history		*hist;
 	int				exit_status;
 	pid_t			pid;
-	int				signal;
 	int				pipe_flag;
 	int				pre_flag;
 	int				re_flag;
 	int				fds[2];
 	char			*line;
-	struct termios	term_sh;
-	struct termios	term_ori;
+	// struct termios	term_sh;
+	// struct termios	term_ori;
 };
 
 extern t_mini				g_mini;
@@ -113,11 +102,6 @@ extern t_mini				g_mini;
 int		main(int argc, char *argv[], char *envp[]);
 void	init_shell(char ***en, char *envp[]);
 void	minishell(char **en);
-
-/*
-** init
-*/
-void	signal_handle(int sig_num);
 
 /*
 ** parsing
