@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 19:16:49 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/11 23:26:51 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/12 17:58:37 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,6 @@
 ** COMMAND 16
 ** ARGUMENT 32
 */
-// static char	*read_line(void)
-// {
-// 	char	*line;
-
-// 	line = NULL;
-// 	get_next_line(0, &line);
-// 	return (line);
-// }
-
-void	show_prompt(void)
-{
-	char	buf[PATH_MAX];
-
-	getcwd(buf, PATH_MAX);
-	write(1, buf, ft_strlen(buf));
-	write(1, " > ", 3);
-}
 
 // static int	run_shell(t_mini *shell)
 // {
@@ -84,12 +67,26 @@ void	minishell(char **en)
 		//터미널을 종료시키는 인터럽트를 발생시켰을 때, 터미널이 종료되는게 아니라 우리의 minishell 프로그램만 종료되도록 액션을 변경해줘야 한다. 이런 핸들러 역할을 하는게 아래의 signal 함수이다.
 		// show_prompt();
 		// run_term(shell->term);
-		line = readline(""); //history && read_line->getch()
-		if (!line)
-			break ;
-		add_history(line);
-		shell.cmd = parse_start(line);
+		//history && read_line->getch()
+		line = readline("input> ");
+		if (line == NULL)
+		{
+			printf("exit\n");
+			free(line);
+			exit(0);
+		}
+		else if (ft_strchr("\n", *line))
+			continue ;
+		else
+		{
+			printf("output> %s\n", line);
+			shell.cmd = parse_start(line);
+			add_history(line);
+			free(line);
+			line = NULL;
+		}
 		// debug
+		// shell.cmd = parse_start(line);
 		// while (shell.cmd)
 		// {
 		// 	while(shell.cmd->token)
@@ -102,7 +99,6 @@ void	minishell(char **en)
 		// }
 		// end
 		// status = run_shell(shell->cmd, &en);
-		free(line);
 	}
 	(void)en;
 }
@@ -111,4 +107,3 @@ void	minishell(char **en)
 //getch() -> 따로 만들어줘야한다.
 //parsing -> token화 시키기
 //예외처리는 큰 것부터 하고 builtin부터 동작하게 만들기
-
