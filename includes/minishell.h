@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/12 18:49:41 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/14 16:02:39 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include <string.h>
 # include <fcntl.h>
 # include <termios.h>
+# include <signal.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include <signal.h>
 # include "libft.h"
 
 # define PATH_MAX 1024
@@ -113,6 +113,8 @@ void	minishell(char **en);
 */
 void	init_shell(char ***en, char *envp[]);
 void	show_prompt(void);
+void	signal_int(int sig_num);
+void	signal_quit(int sig_num);
 /*
 ** parsing
 */
