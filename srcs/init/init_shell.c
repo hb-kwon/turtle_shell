@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:45:14 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/12 18:52:35 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/14 16:44:09 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ void	signal_int(int sig_num)
 	// 	!kill(g_global.pid, signo)
 	// 	ft_putstr_fd("\n", STDOUT_FILENO);
 	// }
-	if (sig_num != SIGINT)
-		return ;
-	ft_putstr_fd("\n", STDOUT);
-	if (rl_on_new_line() == -1)
-		exit(1);
-	rl_replace_line("", 1);
-	rl_redisplay();
+	// ft_putstr_fd("\n", STDOUT_FILENO);
+// 	char	buf[PATH_MAX];
+// 	char	*tmp;
+
+// 	tmp = ft_strjoin(getcwd(buf, PATH_MAX), " > ");
+// 	ft_putstr_fd(tmp, 1);
+// 	ft_putstr_fd("\n", 1);
 }
 
 void	signal_quit(int sig_num)
@@ -84,7 +84,12 @@ void	signal_quit(int sig_num)
 void	init_shell(char ***en, char *envp[])
 {
 	init_env(en, envp);
-	init_term();
-	signal(SIGINT, signal_int); //ctrl + c
-	signal(SIGQUIT, signal_quit); //ctrl + '\'
+	signal(SIGINT, signal_int);//ctrl + c
+	// signal(SIGQUIT, signal_quit);//ctrl + '\'
+	// init_term();
 }
+
+/*
+** 터미널을 종료시키는 인터럽트를 발생시켰을 때, 터미널이 종료되는게 아니라 우리의 minishell 프로그램만 종료되도록 액션을 변경해줘야 한다.
+** 이런 핸들러 역할을 하는게 아래의 signal 함수이다.
+*/
