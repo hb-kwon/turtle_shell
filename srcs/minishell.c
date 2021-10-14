@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 19:16:49 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/12 18:49:14 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/14 16:13:21 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,34 +60,40 @@ void	minishell(char **en)
 	char	*line;
 	int		ret;
 	t_mini	shell;
+	char	buf[PATH_MAX];
+	char	*tmp;
 
 	status = 1;
 	while (status)
 	{
-		//터미널을 종료시키는 인터럽트를 발생시켰을 때, 터미널이 종료되는게 아니라 우리의 minishell 프로그램만 종료되도록 액션을 변경해줘야 한다. 이런 핸들러 역할을 하는게 아래의 signal 함수이다.
+		tmp = ft_strjoin(getcwd(buf, PATH_MAX), " > ");
 		// show_prompt();
 		// run_term(shell->term);
 		//history && read_line->getch()
-		tcsetattr(STDIN_FILENO, TCSANOW, &g_mini.term_ori);
-		line = readline("input> ");
+		line = readline(tmp);
 		if (line == NULL)
 		{
-			printf("exit\n");
+			//커서를 한 줄 위로, 12칸 뒤로 이동하는 기능
+			// ft_putstr_fd("\x1b[1A", STDOUT);
+			// ft_putstr_fd("\033[12C", STDOUT);
+			printf("\x1b[1A\033[%zuCexit\n", ft_strlen(tmp));
 			free(line);
+			free(tmp);
 			exit(0);
 		}
 		else if (ft_strchr("\n", *line))
 			continue ;
 		else
 		{
-			// printf("output> %s\n", line);
+			// line -> flag check : ls | pwd
+			// syntax_check -> ok -> parsing
 			shell.cmd = parse_start(line);
 			add_history(line);
 			free(line);
+			free(tmp);
 			line = NULL;
 		}
 		// debug
-		shell.cmd = parse_start(line);
 		while (shell.cmd)
 		{
 			while(shell.cmd->token)
@@ -99,7 +105,8 @@ void	minishell(char **en)
 			shell.cmd = shell.cmd->next;
 		}
 		// end
-		// status = run_shell(shell->cmd, &en);
+		// status = run_shell(shell, &en);
+		// 동작하는 부분에서 어떻게 간략하게 받을까?
 	}
 	(void)en;
 }
