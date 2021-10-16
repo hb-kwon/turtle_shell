@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/14 16:02:39 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/16 16:01:02 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ struct	s_cmd
 struct s_mini
 {
 	t_cmd			*cmd;
-	t_history		*hist;
 	int				exit_status;
 	pid_t			pid;
 	int				sig_flag;
@@ -99,6 +98,7 @@ struct s_mini
 	int				re_flag;
 	int				fds[2];
 	char			*line;
+	char			*path;
 	struct termios	term_sh;
 	struct termios	term_ori;
 };
@@ -112,9 +112,11 @@ void	minishell(char **en);
 ** init
 */
 void	init_shell(char ***en, char *envp[]);
-void	show_prompt(void);
+void	init_line(char **line);
+int		init_check(char *line);
 void	signal_int(int sig_num);
 void	signal_quit(int sig_num);
+
 /*
 ** parsing
 */
