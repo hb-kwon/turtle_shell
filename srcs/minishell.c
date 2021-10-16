@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 19:16:49 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/14 16:13:21 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/16 15:46:27 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,49 +60,21 @@ void	minishell(char **en)
 	char	*line;
 	int		ret;
 	t_mini	shell;
-	char	buf[PATH_MAX];
-	char	*tmp;
 
 	status = 1;
 	while (status)
 	{
-		tmp = ft_strjoin(getcwd(buf, PATH_MAX), " > ");
-		// show_prompt();
-		// run_term(shell->term);
-		//history && read_line->getch()
-		line = readline(tmp);
-		if (line == NULL)
-		{
-			//커서를 한 줄 위로, 12칸 뒤로 이동하는 기능
-			// ft_putstr_fd("\x1b[1A", STDOUT);
-			// ft_putstr_fd("\033[12C", STDOUT);
-			printf("\x1b[1A\033[%zuCexit\n", ft_strlen(tmp));
-			free(line);
-			free(tmp);
-			exit(0);
-		}
-		else if (ft_strchr("\n", *line))
-			continue ;
-		else
-		{
-			// line -> flag check : ls | pwd
-			// syntax_check -> ok -> parsing
-			shell.cmd = parse_start(line);
-			add_history(line);
-			free(line);
-			free(tmp);
-			line = NULL;
-		}
+		init_line(&shell.line);
 		// debug
-		while (shell.cmd)
+		while (g_mini.cmd)
 		{
-			while(shell.cmd->token)
+			while(g_mini.cmd->token)
 			{
-				printf("parsing cmd check after return : %s\n", shell.cmd->token->arg);
-				printf("parsing cmd check after return : %d\n", shell.cmd->token->type);
-				shell.cmd->token = shell.cmd->token->next;
+				printf("parsing cmd check after return : %s\n", g_mini.cmd->token->arg);
+				printf("parsing cmd check after return : %d\n", g_mini.cmd->token->type);
+				g_mini.cmd->token = g_mini.cmd->token->next;
 			}
-			shell.cmd = shell.cmd->next;
+			g_mini.cmd = g_mini.cmd->next;
 		}
 		// end
 		// status = run_shell(shell, &en);

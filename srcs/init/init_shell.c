@@ -6,20 +6,11 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:45:14 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/14 16:44:09 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/16 14:43:58 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	show_prompt(void)
-{
-	char	buf[PATH_MAX];
-
-	getcwd(buf, PATH_MAX);
-	write(1, buf, ft_strlen(buf));
-	write(1, " > ", 3);
-}
 
 void	init_env(char ***en, char *envp[])
 {
@@ -70,6 +61,11 @@ void	signal_int(int sig_num)
 // 	tmp = ft_strjoin(getcwd(buf, PATH_MAX), " > ");
 // 	ft_putstr_fd(tmp, 1);
 // 	ft_putstr_fd("\n", 1);
+	if (rl_on_new_line() == -1)
+		exit(1);
+	rl_replace_line(" ", 1);
+	rl_replace_line(" ", 1);
+	rl_redisplay();
 }
 
 void	signal_quit(int sig_num)
@@ -77,7 +73,7 @@ void	signal_quit(int sig_num)
 	g_mini.sig_flag = sig_num;
 	if (rl_on_new_line() == -1)
 		exit(1);
-	rl_replace_line("", 1);
+	rl_replace_line(" ", 1);
 	rl_redisplay();
 }
 
@@ -85,7 +81,7 @@ void	init_shell(char ***en, char *envp[])
 {
 	init_env(en, envp);
 	signal(SIGINT, signal_int);//ctrl + c
-	// signal(SIGQUIT, signal_quit);//ctrl + '\'
+	signal(SIGQUIT, signal_quit);//ctrl + '\'
 	// init_term();
 }
 

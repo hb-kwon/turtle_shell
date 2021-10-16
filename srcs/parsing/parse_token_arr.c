@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:32:48 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/08 14:22:23 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/14 15:26:17 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,19 +104,7 @@ char	**parse_token_arr(char **args, char *cmd_list)
 		}
 		else
 			args_redirect_arr(cmd_list, &index[0], &flag);
-		//debug
-		printf("index[0] check in token list argument : %d\n", index[0]);
-		printf("index[1] check in token list argument : %d\n", index[1]);
-		printf("index[2] check in token list argument : %d\n", index[2]);
-		printf("==========================================\n");
-		//end
 	}
 	args[index[2]] = NULL;
-	//debug
-	index[2] = -1;
-	while (args[++index[2]])
-		printf("arument check atfer copy : %s\n", args[index[2]]);
-	printf("==========================================\n");
-	//end
 	return (args);
 }
