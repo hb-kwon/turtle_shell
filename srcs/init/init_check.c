@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 16:03:49 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/16 18:14:11 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/18 19:16:55 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,7 @@ int	init_check(char *line)
 		return (0);
 	while (line[i])
 	{
-		printf("line check space before skip : %cEnd\n", line[i]);
-		if (ft_strchr("\t\n ", line[i]))
-		{
-			if (!line[i])
-				return (0);
-			i++;
-		}
-		else
-			i++;
-		printf("line check space after skip : %cEnd\n", line[i]);
+		//flag	redirect/pipe/quote/
 	}
 	return (1);
 }
