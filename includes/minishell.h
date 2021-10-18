@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/16 16:01:02 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/18 16:50:12 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	minishell(char **en);
 ** init
 */
 void	init_shell(char ***en, char *envp[]);
-void	init_line(char **line);
+void	init_line(t_mini *shell);
 int		init_check(char *line);
 void	signal_int(int sig_num);
 void	signal_quit(int sig_num);
