@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:47 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/09/08 12:54:49 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/13 09:45:50 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int check_export(char *str, char ***en)
 }
 
 // 만약 글로벌 변수를 사용하고 싶지 않다면 삼중포인터로 가져와야 할거같다.
-int	ft_export(char *line, char **en)
+int	ft_export(t_mini *shell)
 {
 	int i;
 	int status;
@@ -63,11 +63,11 @@ int	ft_export(char *line, char **en)
 	// char *value;
 
 	status = 0;
-	buff = ft_split(line, ' ');
+	buff = make_buff(shell);
 	i = 0;
 
 	if(!buff[1])
-		print_export(g_envp);
+		print_export(shell->envp);
 	else
 	{
 		// " \ "문자 제거는 나중에 하자
@@ -80,13 +80,12 @@ int	ft_export(char *line, char **en)
 		// key에 " - " 가 있으면 에러
 		
 		if(ft_strchr(buff[1], '='))
-			status = check_export(buff[i],&g_envp);
+			status = check_export(buff[i], &shell->envp);
 		else
 			while(buff[++i])
 			{
-				status = check_export(buff[i],&g_envp);
+				status = check_export(buff[i], &shell->envp);
 			}
 	}
-	(void)en;
 	return (status);
 }

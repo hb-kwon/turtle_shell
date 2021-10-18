@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/07 18:10:32 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/18 19:23:22 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,15 @@
 # include <string.h>
 # include <fcntl.h>
 # include <termios.h>
-# include "libft.h"
-
-# define PATH_MAX 1024
+# include <errno.h>
+# include "../libft/includes/libft.h"
+# include <sys/wait.h>
+// # define PATH_MAX 1024
 # define BLTIN_NUM 7
+
+# define STDIN 			0
+# define STDOUT 		1
+# define STDERR 		2
 
 # define NONE 0
 # define CMD 1
@@ -69,17 +74,19 @@ struct	s_cmd
 	t_token	*token;
 	t_cmd	*next;
 	t_cmd	*prev;
+	//임시로 만들예정스
+	int		pipe_flag;
+	int		pre_flag;
+	int		re_flag;
+	int		fds[2];
 };
 
 // 하면서 필요한 부분을 구조체에 넣어서
 struct s_mini
 {
 	t_cmd	*cmd;
+	char	**envp;
 	int		exit_status;
-	int		pipe_flag;
-	int		pre_flag;
-	int		re_flag;
-	int		fds[2];
 };
 
 int		main(int argc, char *argv[], char *envp[]);
@@ -103,18 +110,21 @@ char	**execute(char **args, char **en);
 ** builtin commands
 */
 char	*blt_str(int i);
-char	**(*blt_func(int i))(char **args, char **en);
+int	(*blt_func(int i))(t_mini *shell);
+
 
 /*
 ** builtin function
 */
-char	**ft_echo(char **args, char **en);
-char	**ft_cd(char **args, char **en);
-char	**ft_pwd(char **args, char **en);
-char	**ft_export(char **args, char **en);
-char	**ft_unset(char **args, char **en);
-char	**ft_env(char **args, char **en);
-char	**ft_exit(char **args, char **en);
+int		ft_echo(t_mini *shell);
+int		ft_cd(t_mini *shell);
+int		ft_pwd(t_mini *shell);
+int		ft_export(t_mini *shell);
+int		ft_unset(t_mini *shell);
+int		ft_env(t_mini *shell);
+int		ft_exit(t_mini *shell);
+
+int run_blt(t_mini *shell, int i);
 
 // utils
 char	*ft_strnew(size_t size);
@@ -123,5 +133,10 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strncat(char *s1, const char *s2, size_t n);
 void	ft_strclr(char *s);
 char	*ft_strcat(char *s1, const char *s2);
+
+int print_error1(char *msg, char *err_num);
+int print_error2(char *msg1, char *msg2, char *err_num);
+char			*find_en(char *key, char **en);
+char **make_buff(t_mini *shell);
 
 #endif

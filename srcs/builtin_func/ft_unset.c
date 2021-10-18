@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:52 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/09/08 14:37:56 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/13 09:45:29 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int unset_en(char *str, char ***en)
 }
 
 // 이것또한 파이프라인 뒤쪽에 있다면 실행되지 않는다.
-int	ft_unset(char *line, char **en)
+int	ft_unset(t_mini *shell)
 {
 	int i;
 	int status;
@@ -72,11 +72,11 @@ int	ft_unset(char *line, char **en)
 
 	i = 0;
 	status = 0;
-	buff = ft_split(line, ' ');
+	buff = make_buff(shell);
+	i = 0;
 	while (buff[++i])
 	{
-		status = check_env(buff[i]) && unset_en(buff[i], &g_envp);
+		status = check_env(buff[i]) && unset_en(buff[i], &shell->envp);
 	}
-	(void)en;
 	return (status);
 }

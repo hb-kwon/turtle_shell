@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: ysong <ysong@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/10/07 18:10:05 by hkwon            ###   ########.fr        #
+#    Updated: 2021/10/13 06:46:28 by ysong            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,14 +15,16 @@ LIBFT = libft.a
 
 CC = gcc
 # CFLAGS = -Wall -Wextra -Werror
-CFLAGS = -g3 -fsanitize=address
+# CFLAGS = -g3 -fsanitize=address
+CFLAGS = -g
+
 
 AR = ar rc
 RM = rm -f
 
 INCLUDE_DIR = ./includes
 SRCS_DIR = ./srcs
-# OBJS_DIR = ./objs
+OBJS_DIR = ./objs
 LIB_DIR = ./libft
 
 SRCS_BUILTIN_DIR = $(SRCS_DIR)/builtin_func
@@ -46,15 +48,14 @@ SRCS_PARSE = $(addprefix $(SRCS_PARSE_DIR)/, \
 )
 
 SRCS_MAIN = $(addprefix $(SRCS_DIR)/, \
-		main.c minishell.c)
+		main.c minishell.c utils.c builtin.c)
 
 SRCS = \
 	$(SRCS_MAIN) \
 	$(SRCS_PARSE) \
-	# $(SRCS_BUILTIN)
+	$(SRCS_BUILTIN)
 
-
-# OBJS = $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
+OBJS = $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 
 vpath %.c \
 	$(SRCS_DIR) \
@@ -65,13 +66,13 @@ all : $(NAME)
 
 $(NAME) : $(LIBFT)
 	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -I $(LIB_DIR)/$(INCLUDE_DIR) \
-	-L ./$(LIB_DIR) -lft -o $(NAME) $(SRCS)
+	-L ./$(LIB_DIR) -lft -o $(NAME) $(SRCS) libft.a
 
-# $(OBJS_DIR) :
-# 	@mkdir -p $(OBJS_DIR)
+$(OBJS_DIR) :
+	@mkdir -p $(OBJS_DIR)
 
-# $(OBJS_DIR)/%.o : %.c | $(OBJS_DIR)
-# 	$(CC) $(CFLAGS) -o $@ -I$(INCLUDE_DIR) -c $^
+$(OBJS_DIR)/%.o : %.c | $(OBJS_DIR)
+	$(CC) $(CFLAGS) -o $@ -I$(INCLUDE_DIR) -c $^
 
 $(LIBFT) :
 	@make -C $(LIB_DIR)

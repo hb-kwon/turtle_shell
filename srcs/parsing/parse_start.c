@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_start.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:15:38 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/07 18:09:19 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/18 19:22:28 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_cmd	*make_cmd_list(char **cmd_list)
 {
 	t_cmd	*cmd;
 	t_cmd	*tmp;
+	t_token *target;
 	int		i;
 
 	i = -1;
@@ -39,6 +40,23 @@ t_cmd	*make_cmd_list(char **cmd_list)
 	while (cmd_list[++i])
 	{
 		tmp = make_cmd(cmd_list[i]);
+		//test
+		if(cmd_list[i+1] == NULL)
+			tmp->pipe_flag = 0;
+		else
+			tmp->pipe_flag = 1;
+		//test end
+		//test2
+		target = tmp->token;
+		while (target)
+		{
+			if (target->type == RD_OUT)
+			{
+				tmp->re_flag = 1;
+			}
+			target = target->next;
+		}
+		//test2 end
 		if (!tmp)
 			return (NULL);
 		if (cmd == NULL)
@@ -64,14 +82,9 @@ t_cmd	*parse_start(char *line)
 	if (!line)
 		return (NULL);
 	cmd_list = parse_line(line);
-	// debug
-	int i = -1;
-	printf("==========================================\n");
-	while (cmd_list[++i])
-		printf("cmd list check after parsing : %s\n", cmd_list[i]);
-	printf("==========================================\n");
 	//end
 	if (!cmd_list)
 		return (NULL);
-	return (make_cmd_list(cmd_list));
+	t_cmd *temp = make_cmd_list(cmd_list);
+	return (temp);
 }
