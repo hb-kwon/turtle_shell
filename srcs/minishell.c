@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 19:16:49 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/16 15:46:27 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/18 19:36:38 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,22 @@ void	minishell(char **en)
 	status = 1;
 	while (status)
 	{
-		init_line(&shell.line);
+		init_line(&shell);
 		// debug
-		while (g_mini.cmd)
+		while (shell.cmd)
 		{
-			while(g_mini.cmd->token)
+			if (!shell.cmd)
 			{
-				printf("parsing cmd check after return : %s\n", g_mini.cmd->token->arg);
-				printf("parsing cmd check after return : %d\n", g_mini.cmd->token->type);
-				g_mini.cmd->token = g_mini.cmd->token->next;
+				printf("parsing error\n");
+				exit (0);
 			}
-			g_mini.cmd = g_mini.cmd->next;
+			while(shell.cmd->token)
+			{
+				printf("parsing cmd check after return : %s\n", shell.cmd->token->arg);
+				printf("parsing cmd check after return : %d\n", shell.cmd->token->type);
+				shell.cmd->token = shell.cmd->token->next;
+			}
+			shell.cmd = shell.cmd->next;
 		}
 		// end
 		// status = run_shell(shell, &en);

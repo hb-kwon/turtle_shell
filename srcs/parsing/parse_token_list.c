@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 16:19:54 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/11 21:54:51 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/18 19:37:00 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ t_token	*make_token_list(char **args)
 		connect_token_list(&token, &tmp);
 	}
 	ft_free_arr(args);
+	if (token == NULL)
+		return (NULL);
 	while (token->prev)
 		token = token->prev;
 	return (token);
