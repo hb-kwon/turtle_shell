@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:45:14 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/18 19:37:30 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/19 17:25:01 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,6 @@ void	init_env(char ***en, char *envp[])
 // terminal setting
 void	init_term(void)
 {
-	// tcgetattr(STDIN_FILENO, &g_mini.term_ori);
-	// tcgetattr(STDIN_FILENO, &g_mini.term_sh);
-	// g_mini.term_sh.c_lflag &= ~(ICANON | ECHO);
-	// g_mini.term_sh.c_lflag |= VEOF;
-	// g_mini.term_sh.c_cc[VMIN] = 1;
-	// g_mini.term_sh.c_cc[VTIME] = 0;
-	// tcsetattr(STDIN_FILENO, TCSANOW, &g_mini.term_sh);
-	// tcsetattr(STDIN_FILENO, TCSANOW, &g_mini.term_ori);
 	if (tcgetattr(STDIN_FILENO, &g_mini.term_ori) == -1)
 	{
 		ft_putstr_fd("error", 2);
@@ -79,9 +71,9 @@ void	signal_quit(int signum)
 void	init_shell(char ***en, char *envp[])
 {
 	init_env(en, envp);
-	init_term();
-	signal(SIGINT, signal_int);//ctrl + c
-	signal(SIGQUIT, signal_quit);//ctrl + '\'
+	// init_term();
+	signal(SIGINT, signal_int);
+	signal(SIGQUIT, signal_quit);
 }
 
 /*
