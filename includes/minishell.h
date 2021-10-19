@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/18 19:23:22 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/19 16:47:55 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # include "../libft/includes/libft.h"
 # include <sys/wait.h>
 // # define PATH_MAX 1024
+# include <signal.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+
 # define BLTIN_NUM 7
 
 # define STDIN 			0
@@ -31,9 +35,9 @@
 
 # define NONE 0
 # define CMD 1
-# define REDIRECT 2
-# define PIPE 4
-# define ARG 8
+# define ARG 2
+# define REDIRECT 4
+# define PIPE 8
 # define S_QUOTE 16
 # define D_QUOTE 32
 
@@ -44,11 +48,20 @@
 # define COMMAND 16
 # define ARGUMENT 32
 
-typedef struct s_mini	t_mini;
-typedef struct s_cmd	t_cmd;
-typedef struct s_token	t_token;
-typedef struct s_parse	t_parse;
+# define STDIN 			0
+# define STDOUT 		1
+# define STDERR 		2
 
+typedef struct s_mini		t_mini;
+typedef struct s_cmd		t_cmd;
+typedef struct s_token		t_token;
+typedef struct s_parse		t_parse;
+typedef struct s_history	t_history;
+typedef struct s_read		t_read;
+
+/*
+** parse struct
+*/
 struct s_parse
 {
 	int		i;
@@ -58,7 +71,9 @@ struct s_parse
 	char	**pstr;
 };
 
-// token struct
+/*
+** token struct
+*/
 struct s_token
 {
 	int		type;
@@ -67,7 +82,9 @@ struct s_token
 	t_token	*prev;
 };
 
-// cmd struct
+/*
+** cmd struct
+*/
 struct	s_cmd
 {
 	int		type;
@@ -81,16 +98,31 @@ struct	s_cmd
 	int		fds[2];
 };
 
-// 하면서 필요한 부분을 구조체에 넣어서
 struct s_mini
 {
 	t_cmd	*cmd;
 	char	**envp;
 	int		exit_status;
+	// 아래 부분 모름
+	char			*line;
+	char			*path;
+	struct termios	term_sh;
+	struct termios	term_ori;
 };
+
+extern t_mini				g_mini;
 
 int		main(int argc, char *argv[], char *envp[]);
 void	minishell(char **en);
+
+/*
+** init
+*/
+void	init_shell(char ***en, char *envp[]);
+void	init_line(t_mini *shell);
+int		init_check(char *line);
+void	signal_int(int sig_num);
+void	signal_quit(int sig_num);
 
 /*
 ** parsing
@@ -102,12 +134,12 @@ char	**parse_token_arr(char **args, char *cmd_list);
 t_token	*make_token_list(char **args);
 
 /*
-** execute commands
+** execute
 */
 char	**execute(char **args, char **en);
 
 /*
-** builtin commands
+** builtin
 */
 char	*blt_str(int i);
 int	(*blt_func(int i))(t_mini *shell);

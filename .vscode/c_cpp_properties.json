@@ -7,7 +7,7 @@
                 "${workspaceFolder}/includes"
             ],
             "compilerPath": "/usr/bin/gcc",
-            "cStandard": "gnu17",
+            "cStandard": "gnu11",
             "cppStandard": "c++17",
             "intelliSenseMode": "linux-gcc-x64"
         }

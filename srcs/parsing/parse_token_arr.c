@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:32:48 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/08 14:22:27 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/19 16:37:50 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,5 @@ char	**parse_token_arr(char **args, char *cmd_list)
 			args_redirect_arr(cmd_list, &index[0], &flag);
 	}
 	args[index[2]] = NULL;
-	index[2] = -1;
 	return (args);
 }

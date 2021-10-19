@@ -6,29 +6,28 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 19:16:49 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/18 19:44:38 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/19 16:46:18 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*read_line(void)
-{
-	char	*line;
+/*
+** NONE 0
+** CMD 1
+** REDIRECT 2
+** PIPE 4
+** ARG 8
+** S_QUOTE 16
+** D_QUOTE 32
 
-	line = NULL;
-	get_next_line(0, &line);
-	return (line);
-}
-
-void	show_prompt(void)
-{
-	char	buf[PATH_MAX];
-
-	getcwd(buf, PATH_MAX);
-	write(1, buf, ft_strlen(buf));
-	write(1, " > ", 3);
-}
+** RD_IN 1
+** RD_OUT 2
+** RD_APPEND 4
+** RD_HEREDOC	8
+** COMMAND 16
+** ARGUMENT 32
+*/
 
 // static int	run_shell(t_mini *shell)
 // {
@@ -155,21 +154,32 @@ void	minishell(char **en)
 {
 	int		status;
 	char	*line;
-	t_mini	*shell;
+	int		ret;
+	t_mini	shell;
 
 	status = 1;
 	while (status)
 	{
-		show_prompt();
-		shell = (t_mini *)malloc(sizeof(t_mini));
-		shell->envp = en;
-		if (get_next_line(0, &line) > 0)
+		init_line(&shell);
+		// debug
+		while (shell.cmd)
 		{
-			t_cmd * temp = parse_start(line);
-			shell->cmd = temp;
-			status = run_shell(shell);
-			free(line);
+			if (!shell.cmd)
+			{
+				printf("parsing error\n");
+				exit (0);
+			}
+			while(shell.cmd->token)
+			{
+				printf("parsing cmd check after return : %s\n", shell.cmd->token->arg);
+				printf("parsing cmd check after return : %d\n", shell.cmd->token->type);
+				shell.cmd->token = shell.cmd->token->next;
+			}
+			shell.cmd = shell.cmd->next;
 		}
+		// end
+		// status = run_shell(shell, &en);
+		// 동작하는 부분에서 어떻게 간략하게 받을까?
 	}
 	(void)en;
 }

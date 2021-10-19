@@ -6,7 +6,7 @@
 #    By: ysong <ysong@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/10/13 06:46:28 by ysong            ###   ########.fr        #
+#    Updated: 2021/10/19 16:45:39 by ysong            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,13 @@ SRCS_BUILTIN = $(addprefix $(SRCS_BUILTIN_DIR)/, \
 		ft_exit.c \
 )
 
+SRCS_INIT_DIR = $(SRCS_DIR)/init
+SRCS_INIT = $(addprefix $(SRCS_INIT_DIR)/, \
+		init_shell.c\
+		init_line.c\
+		init_check.c\
+)
+
 SRCS_PARSE_DIR = $(SRCS_DIR)/parsing
 SRCS_PARSE = $(addprefix $(SRCS_PARSE_DIR)/, \
 		parse_start.c\
@@ -52,6 +59,7 @@ SRCS_MAIN = $(addprefix $(SRCS_DIR)/, \
 
 SRCS = \
 	$(SRCS_MAIN) \
+	$(SRCS_INIT) \
 	$(SRCS_PARSE) \
 	$(SRCS_BUILTIN)
 
@@ -59,14 +67,15 @@ OBJS = $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 
 vpath %.c \
 	$(SRCS_DIR) \
+	$(SRCS_INIT_DIR) \
 	$(SRCS_PARSE_DIR) \
-	# $(SRCS_BUILTIN_DIR)
 
 all : $(NAME)
 
 $(NAME) : $(LIBFT)
 	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -I $(LIB_DIR)/$(INCLUDE_DIR) \
-	-L ./$(LIB_DIR) -lft -o $(NAME) $(SRCS) libft.a
+	-L ./$(LIB_DIR) -lreadline -L/Users/hkwon/.brew/opt/readline/lib -I/Users/hkwon/.brew/opt/readline/include \
+	-lft -o $(NAME) $(SRCS)
 
 $(OBJS_DIR) :
 	@mkdir -p $(OBJS_DIR)

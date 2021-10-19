@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:15:38 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/18 19:22:28 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/19 16:35:32 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 /*
 ** command name이 필요한가?
+** command name이 필요한 이유 : blt_func을 실행할 때 문자열을 비교하여 실행하기 위해
 */
 t_cmd	*make_cmd(char *cmd_list)
 {
@@ -77,7 +78,6 @@ t_cmd	*make_cmd_list(char **cmd_list)
 t_cmd	*parse_start(char *line)
 {
 	char	**cmd_list;
-	t_cmd	*tmp;
 
 	if (!line)
 		return (NULL);
