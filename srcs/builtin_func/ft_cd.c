@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/04 14:11:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/04 11:18:42 by hkwon            ###   ########.fr       */
+/*   Created: 2021/10/19 19:19:13 by hkwon             #+#    #+#             */
+/*   Updated: 2021/10/19 19:19:19 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	cd_en(char *path, char **buff, char **en)
 		chdir(find_en("HOME", en));
 }
 
-int		ft_cd(char *line, char **en)
+int		ft_cd(t_mini *shell)
 {
 	char	*path;
 	char	**buff;
 
-	buff = ft_split(line, ' ');
+	buff = make_buff(shell);
 	path = NULL;
 	if (buff[1] != NULL && buff[1][0] != '~' && buff[1][0] != '$')
 	{
@@ -41,8 +41,8 @@ int		ft_cd(char *line, char **en)
 			print_error2("cd", path, strerror(errno));
 	}
 	else if (buff[1] == NULL || buff[1][0] == '~')
-		cd_home(path, buff, en);
+		cd_home(path, buff, shell->envp);
 	else if (buff[1][0] == '$')
-		cd_en(path, buff, en);
+		cd_en(path, buff, shell->envp);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 22:33:42 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/09/18 17:11:16 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/19 19:17:23 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,5 @@ void	ft_pipe_process(t_info *info, char *argv[], char *envp[])
 	waitpid(pid1, NULL, 0);
 	waitpid(pid2, NULL, 0);
 }
-
 
 // execve를 사용할 때 fork()에 관한 pid check

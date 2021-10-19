@@ -6,13 +6,13 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 13:26:18 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/19 19:06:47 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/19 19:18:55 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void print_error_blt(char *str)
+void	print_error_blt(char *str)
 {
 	write(1, str, strlen(str));
 	write(1, " ", 1);
@@ -34,14 +34,6 @@ char	*blt_str(int i)
 	return (blt_str[i]);
 }
 
-/*
-** 함수포인터를 이용하여 내장 기능을 수행한다.
-** 함수포인터를 사용하는 이유는 ?
-** exit pwd cd
-** echo env unset export
-** 이차원배열을 만들어서 char *line -> char **cmd로 내장함수를 저장할 수 있게 만들자.
-** 함수포인터를 사용했을 때 인자값이 고정이 되어버린다.
-*/
 char	**(*blt_func(int i))(char **args, char **en)
 {
 	char	**(*blt_func[BLTIN_NUM])(char **args, char **en);
@@ -68,14 +60,24 @@ int	check_cmd(char *cmd)
 		return (1);
 	return (0);
 }
-int	run_blt(t_mini *shell, int i)
+
+int	run_blt(t_mini shell, int i)
 {
 	char	*cmd;
 
-	cmd = shell->cmd->token->arg;
+	cmd = shell.cmd->token->arg;
 	if (!ft_strcmp(cmd, blt_str(i)))
 		(*blt_func(i))(shell);
 	else if (i == 6 && !check_cmd(cmd))
 		print_error_blt(cmd);
 	return (0);
 }
+
+/*
+** 함수포인터를 이용하여 내장 기능을 수행한다.
+** 함수포인터를 사용하는 이유는 ?
+** exit pwd cd
+** echo env unset export
+** 이차원배열을 만들어서 char *line -> char **cmd로 내장함수를 저장할 수 있게 만들자.
+** 함수포인터를 사용했을 때 인자값이 고정이 되어버린다.
+*/

@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/19 19:07:06 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/19 19:20:55 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ struct s_mini
 extern t_mini				g_mini;
 
 int		main(int argc, char *argv[], char *envp[]);
-void	minishell(char **en);
 
 /*
 ** init
@@ -115,7 +114,7 @@ void	init_line(t_mini *shell);
 int		init_check(char *line);
 void	signal_int(int sig_num);
 void	signal_quit(int sig_num);
-int		run_blt(t_mini *shell, int i);
+
 /*
 ** parsing
 */
@@ -126,21 +125,27 @@ char	**parse_token_arr(char **args, char *cmd_list);
 t_token	*make_token_list(char **args);
 
 /*
-** execute
+** run
 */
-char	**execute(char **args, char **en);
+void	minishell(char **en);
+int		run_blt(t_mini shell, int i);
 
 /*
 ** builtin
 */
 char	*blt_str(int i);
 char	**(*blt_func(int i))(char **args, char **en);
-char	**ft_echo(char **args, char **en);
-char	**ft_cd(char **args, char **en);
-char	**ft_pwd(char **args, char **en);
-char	**ft_export(char **args, char **en);
-char	**ft_unset(char **args, char **en);
-char	**ft_env(char **args, char **en);
-char	**ft_exit(char **args, char **en);
+int		ft_echo(t_mini *shell);
+int		ft_cd(t_mini *shell);
+int		ft_pwd(t_mini *shell);
+int		ft_export(t_mini *shell);
+int		ft_unset(t_mini *shell);
+int		ft_env(t_mini *shell);
+int		ft_exit(t_mini *shell);
+
+/*
+** execute
+*/
+char	**execute(char **args, char **en);
 
 #endif

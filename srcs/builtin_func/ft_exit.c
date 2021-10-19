@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/04 14:12:44 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/09/08 09:22:15 by ysong            ###   ########.fr       */
+/*   Created: 2021/10/19 19:22:25 by hkwon             #+#    #+#             */
+/*   Updated: 2021/10/19 19:22:58 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	print_exit(void)
 	ft_putstr_fd("exit\n", 2);
 }
 
-int	ft_exit(char *line, char **en)
+int	ft_exit(t_mini shell)
 {
 	int ac;
 	int status;
 	char **buff;
 
-	buff = ft_split(line, ' ');
+	buff = make_buff(shell);
 	ac = 0;
 	status = 1;
 	while (buff[ac])
@@ -55,13 +55,12 @@ int	ft_exit(char *line, char **en)
 		ft_putstr_fd("exit\n", 2);
 		print_error1("exit", "too many argments");
 		status = 1;
-		return status;
+		return (status);
 	}
 	else
 	{
 		print_error2("exit", buff[1], "numeric argument required");
 		status = 255;
 	}
-	(void)en;
 	return (status);
 }
