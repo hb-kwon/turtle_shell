@@ -6,11 +6,18 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 13:26:18 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/14 12:38:34 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/19 19:06:47 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void print_error_blt(char *str)
+{
+	write(1, str, strlen(str));
+	write(1, " ", 1);
+	ft_putstr("commend not found\n");
+}
 
 char	*blt_str(int i)
 {
@@ -47,4 +54,28 @@ char	**(*blt_func(int i))(char **args, char **en)
 	blt_func[5] = &ft_env;
 	blt_func[6] = &ft_exit;
 	return (blt_func[i]);
+}
+
+int	check_cmd(char *cmd)
+{
+	char	*builtin;
+
+	builtin = cmd;
+	if (!ft_strcmp(builtin, "cd") || !ft_strcmp(builtin, "echo")
+		|| !ft_strcmp(builtin, "pwd") || !ft_strcmp(builtin, "env")
+		|| !ft_strcmp(builtin, "export") || !ft_strcmp(builtin, "export")
+		|| !ft_strcmp(builtin, "unset") || !ft_strcmp(builtin, "exit"))
+		return (1);
+	return (0);
+}
+int	run_blt(t_mini *shell, int i)
+{
+	char	*cmd;
+
+	cmd = shell->cmd->token->arg;
+	if (!ft_strcmp(cmd, blt_str(i)))
+		(*blt_func(i))(shell);
+	else if (i == 6 && !check_cmd(cmd))
+		print_error_blt(cmd);
+	return (0);
 }

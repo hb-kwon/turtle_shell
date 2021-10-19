@@ -6,7 +6,7 @@
 #    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/10/16 16:01:11 by hkwon            ###   ########.fr        #
+#    Updated: 2021/10/19 19:09:27 by hkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,14 +52,21 @@ SRCS_PARSE = $(addprefix $(SRCS_PARSE_DIR)/, \
 		parse_token_list.c\
 )
 
+SRCS_RUN_DIR = $(SRCS_DIR)/run
+SRCS_RUN = $(addprefix $(SRCS_RUN_DIR)/, \
+		builtin.c\
+		minishell.c\
+)
+
 SRCS_MAIN = $(addprefix $(SRCS_DIR)/, \
-		main.c minishell.c)
+		main.c)
 
 SRCS = \
 	$(SRCS_MAIN) \
 	$(SRCS_INIT) \
 	$(SRCS_PARSE) \
-	# $(SRCS_BUILTIN)
+	$(SRCS_RUN) \
+	$(SRCS_BUILTIN) \
 
 
 # OBJS = $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
@@ -68,6 +75,8 @@ vpath %.c \
 	$(SRCS_DIR) \
 	$(SRCS_INIT_DIR) \
 	$(SRCS_PARSE_DIR) \
+	$(SRCS_RUN_DIR) \
+	$(SRCS_BUILTIN_DIR) \
 
 all : $(NAME)
 

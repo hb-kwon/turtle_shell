@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/18 16:50:12 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/19 19:07:06 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,20 +85,19 @@ struct	s_cmd
 	t_token	*token;
 	t_cmd	*next;
 	t_cmd	*prev;
+	int		pipe_flag;
+	int		pre_flag;
+	int		re_flag;
+	int		fds[2];
 };
 
 struct s_mini
 {
 	t_cmd			*cmd;
 	int				exit_status;
-	pid_t			pid;
-	int				sig_flag;
-	int				pipe_flag;
-	int				pre_flag;
-	int				re_flag;
-	int				fds[2];
 	char			*line;
 	char			*path;
+	char			**envp;
 	struct termios	term_sh;
 	struct termios	term_ori;
 };
@@ -116,7 +115,7 @@ void	init_line(t_mini *shell);
 int		init_check(char *line);
 void	signal_int(int sig_num);
 void	signal_quit(int sig_num);
-
+int		run_blt(t_mini *shell, int i);
 /*
 ** parsing
 */
