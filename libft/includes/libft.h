@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 20:11:04 by kwon              #+#    #+#             */
-/*   Updated: 2021/10/16 14:42:14 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/20 15:47:21 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,5 @@ char	*ft_strndup(const char *src, int n);
 char	*ft_strnew(size_t size);
 char	*ft_strcpy_i_to_j(char *line, int i, int j);
 char	*ft_strjoin_free(char *s1, char *s2, int flag);
-
+int		ft_strcmp(const char *s1, const char *s2);
 #endif

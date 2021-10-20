@@ -6,7 +6,7 @@
 #    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/10/19 19:09:27 by hkwon            ###   ########.fr        #
+#    Updated: 2021/10/20 19:07:03 by hkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,8 +54,11 @@ SRCS_PARSE = $(addprefix $(SRCS_PARSE_DIR)/, \
 
 SRCS_RUN_DIR = $(SRCS_DIR)/run
 SRCS_RUN = $(addprefix $(SRCS_RUN_DIR)/, \
-		builtin.c\
 		minishell.c\
+		builtin.c\
+		inner.c\
+		pipe.c\
+		utils.c\
 )
 
 SRCS_MAIN = $(addprefix $(SRCS_DIR)/, \

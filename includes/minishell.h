@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/19 19:20:55 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/20 19:04:35 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <termios.h>
 # include <signal.h>
+# include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft.h"
@@ -81,7 +82,6 @@ struct s_token
 */
 struct	s_cmd
 {
-	int		type;
 	t_token	*token;
 	t_cmd	*next;
 	t_cmd	*prev;
@@ -128,13 +128,15 @@ t_token	*make_token_list(char **args);
 ** run
 */
 void	minishell(char **en);
-int		run_blt(t_mini shell, int i);
-
+int		run_blt(t_mini *shell, int i);
+void	run_inner(t_mini *shell);
+int		pipe_process(t_mini *shell);
+void	child_process(t_mini *shell);
 /*
 ** builtin
 */
 char	*blt_str(int i);
-char	**(*blt_func(int i))(char **args, char **en);
+int		(*blt_func(int i))(t_mini *shell);
 int		ft_echo(t_mini *shell);
 int		ft_cd(t_mini *shell);
 int		ft_pwd(t_mini *shell);
@@ -142,6 +144,14 @@ int		ft_export(t_mini *shell);
 int		ft_unset(t_mini *shell);
 int		ft_env(t_mini *shell);
 int		ft_exit(t_mini *shell);
+
+/*
+** utils
+*/
+char	**make_buff(t_mini *shell);
+char	*find_en(char *key, char **en);
+int		print_error2(char *msg1, char *msg2, char *err_num);
+int		print_error1(char *msg, char *err_num);
 
 /*
 ** execute

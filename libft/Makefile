@@ -6,7 +6,7 @@
 #    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/28 01:44:43 by hkwon             #+#    #+#              #
-#    Updated: 2021/10/16 14:42:20 by hkwon            ###   ########.fr        #
+#    Updated: 2021/10/20 15:47:30 by hkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,6 +100,7 @@ SRCS_STRING = $(addprefix $(SRCS_STRING_DIR)/, \
 			ft_strmapi.c\
 			ft_strnew.c\
 			ft_strcpy_i_to_j.c\
+			ft_strcmp.c\
 			get_next_line.c\
 )
 
