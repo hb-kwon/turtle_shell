@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/19 19:07:15 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/20 21:43:40 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,41 @@
 ** COMMAND 16
 ** ARGUMENT 32
 */
+char	**ft_pipe_path(char *envp[])
+{
+	int		i;
+	char	**paths;
 
-static int	run_shell(t_mini shell)
+	i = -1;
+	while (envp[++i])
+	{
+		if (!ft_strncmp(envp[i], "PATH=", 5))
+		{
+			paths = ft_split(envp[i] + 5, ':');
+			return (paths);
+		}
+	}
+	return (NULL);
+}
+
+static int	run_shell(t_mini *shell)
 {
 	int		i;
 	t_cmd	*temp;
 
-	temp = shell.cmd;
+	temp = shell->cmd;
+	//debug
+	// while (shell->cmd)
+	// {
+	// 	while (shell->cmd->token)
+	// 	{
+	// 		printf("parsing cmd argument check after return : %s\n", shell->cmd->token->arg);
+	// 		printf("parsing cmd type check after return : %d\n", shell->cmd->token->type);
+	// 		shell->cmd->token = shell->cmd->token->next;
+	// 	}
+	// 	shell->cmd = shell->cmd->next;
+	// }
+	// end
 	i = -1;
 	// 이부분을 t_LIST형태로 반복해야됨
 	while (temp)
@@ -42,8 +70,12 @@ static int	run_shell(t_mini shell)
 		if (temp->token->arg == NULL)
 			break ;
 		if (temp->pipe_flag == 0)
+		{
 			while (++i < BLTIN_NUM)
 				run_blt(shell, i);
+			// if (i >= BLTIN_NUM)
+			// 	run_inner(shell);
+		}
 		// else if (shell.re_flag == 1)
 		// 	re_process(shell);
 		// else
@@ -65,19 +97,7 @@ void	minishell(char **en)
 	{
 		shell.envp = en;
 		init_line(&shell);
-		//debug
-		while (shell.cmd)
-		{
-			while (shell.cmd->token)
-			{
-				printf("parsing cmd argument check after return : %s\n", shell.cmd->token->arg);
-				printf("parsing cmd type check after return : %d\n", shell.cmd->token->type);
-				shell.cmd->token = shell.cmd->token->next;
-			}
-			shell.cmd = shell.cmd->next;
-		}
-		// end
-		status = run_shell(shell);
+		status = run_shell(&shell);
 	}
 }
 

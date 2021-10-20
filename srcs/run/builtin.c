@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 13:26:18 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/19 19:18:55 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/20 19:00:41 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ char	*blt_str(int i)
 	return (blt_str[i]);
 }
 
-char	**(*blt_func(int i))(char **args, char **en)
+int	(*blt_func(int i))(t_mini *shell)
 {
-	char	**(*blt_func[BLTIN_NUM])(char **args, char **en);
+	int	(*blt_func[BLTIN_NUM])(t_mini *shell);
 
 	blt_func[0] = &ft_echo;
 	blt_func[1] = &ft_cd;
@@ -61,11 +61,11 @@ int	check_cmd(char *cmd)
 	return (0);
 }
 
-int	run_blt(t_mini shell, int i)
+int	run_blt(t_mini *shell, int i)
 {
 	char	*cmd;
 
-	cmd = shell.cmd->token->arg;
+	cmd = shell->cmd->token->arg;
 	if (!ft_strcmp(cmd, blt_str(i)))
 		(*blt_func(i))(shell);
 	else if (i == 6 && !check_cmd(cmd))

@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:15:38 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/19 16:30:58 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/20 17:09:36 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_cmd	*make_cmd_list(char **cmd_list)
 {
 	t_cmd	*cmd;
 	t_cmd	*tmp;
+	t_token	*target;
 	int		i;
 
 	i = -1;
@@ -40,6 +41,23 @@ t_cmd	*make_cmd_list(char **cmd_list)
 	while (cmd_list[++i])
 	{
 		tmp = make_cmd(cmd_list[i]);
+		//test
+		if(cmd_list[i + 1] == NULL)
+			tmp->pipe_flag = 0;
+		else
+			tmp->pipe_flag = 1;
+		//test end
+		//test2
+		target = tmp->token;
+		while (target)
+		{
+			if (target->type == RD_OUT)
+			{
+				tmp->re_flag = 1;
+			}
+			target = target->next;
+		}
+		//test2 end
 		if (!tmp)
 			return (NULL);
 		if (cmd == NULL)
@@ -64,6 +82,11 @@ t_cmd	*parse_start(char *line)
 	if (!line)
 		return (NULL);
 	cmd_list = parse_line(line);
+	//debug
+	int i = -1;
+	while (cmd_list[++i])
+		printf("cmd_list[%d] check : %s\n", i, cmd_list[i]);
+	//end
 	if (!cmd_list)
 		return (NULL);
 	return (make_cmd_list(cmd_list));
