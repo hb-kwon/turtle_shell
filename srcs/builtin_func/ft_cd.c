@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:19:13 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/19 19:19:19 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/20 16:42:39 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	cd_en(char *path, char **buff, char **en)
 		chdir(find_en("HOME", en));
 }
 
-int		ft_cd(t_mini *shell)
+int	ft_cd(t_mini *shell)
 {
 	char	*path;
 	char	**buff;

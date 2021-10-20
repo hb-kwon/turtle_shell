@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:22:25 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/19 19:22:58 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/20 18:08:58 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ int		ft_isdigit_str(char *str)
 void	print_exit(void)
 {
 	ft_putstr_fd("exit\n", 2);
+	exit(0);
 }
 
-int	ft_exit(t_mini shell)
+int	ft_exit(t_mini *shell)
 {
-	int ac;
-	int status;
-	char **buff;
+	int		ac;
+	int		status;
+	char	**buff;
 
 	buff = make_buff(shell);
 	ac = 0;
