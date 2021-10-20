@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: ysong <ysong@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/10/20 19:07:03 by hkwon            ###   ########.fr        #
+#    Updated: 2021/10/21 07:54:04 by ysong            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ LIBFT = libft.a
 
 CC = gcc
 # CFLAGS = -Wall -Wextra -Werror
-CFLAGS = -g3 -fsanitize=address
+# CFLAGS = -g3 -fsanitize=address
 
 AR = ar rc
 RM = rm -f
@@ -87,6 +87,11 @@ $(NAME) : $(LIBFT)
 	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -I $(LIB_DIR)/$(INCLUDE_DIR) \
 	-L ./$(LIB_DIR) -lreadline -L/Users/hkwon/.brew/opt/readline/lib -I/Users/hkwon/.brew/opt/readline/include \
 	-lft -o $(NAME) $(SRCS)
+	
+# 우분투용 Make
+# $(NAME) : $(LIBFT)
+# 	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -I $(LIB_DIR)/$(INCLUDE_DIR) \
+# 	-o $(NAME) $(SRCS) $(LIB_DIR)/libft.a -lreadline
 
 # $(OBJS_DIR) :
 # 	@mkdir -p $(OBJS_DIR)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/20 19:04:35 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/21 07:55:35 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft.h"
+# include <sys/wait.h>
 
-# define PATH_MAX 1024
+// # define PATH_MAX 1024
 # define BLTIN_NUM 7
 
 # define NONE 0
