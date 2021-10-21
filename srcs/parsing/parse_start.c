@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:15:38 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/20 17:09:36 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/21 13:44:43 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,6 @@ t_cmd	*parse_start(char *line)
 	if (!line)
 		return (NULL);
 	cmd_list = parse_line(line);
-	//debug
-	int i = -1;
-	while (cmd_list[++i])
-		printf("cmd_list[%d] check : %s\n", i, cmd_list[i]);
-	//end
 	if (!cmd_list)
 		return (NULL);
 	return (make_cmd_list(cmd_list));
