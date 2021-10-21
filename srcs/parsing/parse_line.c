@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 11:46:25 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/11 21:54:58 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/21 18:38:48 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** double quote ascii number 34
 ** "" 안의 ""를 처리를 해줄 것 인가?
 ** echo "\"hello\"" -> "hello"
-** echo "\'hello\' -> 'hello'
+** echo "\'hello\' -> \'hello\'
 */
 static void	quote_onoff(char *line, int *s_q, int *d_q, int i)
 {
