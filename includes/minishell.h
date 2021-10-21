@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/21 07:55:35 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/21 14:46:03 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ struct s_mini
 	char			*line;
 	char			*path;
 	char			**envp;
+	pid_t			pid;
 	struct termios	term_sh;
 	struct termios	term_ori;
 };
@@ -130,7 +131,7 @@ t_token	*make_token_list(char **args);
 */
 void	minishell(char **en);
 int		run_blt(t_mini *shell, int i);
-void	run_inner(t_mini *shell);
+int		run_inner(t_mini *shell);
 int		pipe_process(t_mini *shell);
 void	child_process(t_mini *shell);
 /*

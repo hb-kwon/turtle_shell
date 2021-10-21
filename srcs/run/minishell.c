@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/20 21:43:40 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/21 14:50:57 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,6 @@ static int	run_shell(t_mini *shell)
 	t_cmd	*temp;
 
 	temp = shell->cmd;
-	//debug
-	// while (shell->cmd)
-	// {
-	// 	while (shell->cmd->token)
-	// 	{
-	// 		printf("parsing cmd argument check after return : %s\n", shell->cmd->token->arg);
-	// 		printf("parsing cmd type check after return : %d\n", shell->cmd->token->type);
-	// 		shell->cmd->token = shell->cmd->token->next;
-	// 	}
-	// 	shell->cmd = shell->cmd->next;
-	// }
-	// end
 	i = -1;
 	// 이부분을 t_LIST형태로 반복해야됨
 	while (temp)
@@ -72,14 +60,20 @@ static int	run_shell(t_mini *shell)
 		if (temp->pipe_flag == 0)
 		{
 			while (++i < BLTIN_NUM)
-				run_blt(shell, i);
-			// if (i >= BLTIN_NUM)
-			// 	run_inner(shell);
+			{
+				if (!ft_strcmp(temp->token->arg, blt_str(i)))
+				{
+					run_blt(shell, i);
+					break ;
+				}
+			}
+			if (i >= BLTIN_NUM)
+				run_inner(shell);
 		}
-		// else if (shell.re_flag == 1)
+		// else if (temp->re_flag == 1)
 		// 	re_process(shell);
-		// else
-		// 	pipe_process(shell);
+		else
+			pipe_process(shell);
 		temp = temp->next;
 	}
 	return (1);
@@ -89,7 +83,6 @@ void	minishell(char **en)
 {
 	int		status;
 	char	*line;
-	int		ret;
 	t_mini	shell;
 
 	status = 1;
