@@ -6,7 +6,7 @@
 #    By: ysong <ysong@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/10/21 07:54:04 by ysong            ###   ########.fr        #
+#    Updated: 2021/10/22 08:47:46 by ysong            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBFT = libft.a
 CC = gcc
 # CFLAGS = -Wall -Wextra -Werror
 # CFLAGS = -g3 -fsanitize=address
-
+CFLAGS = -g
 AR = ar rc
 RM = rm -f
 
@@ -59,6 +59,7 @@ SRCS_RUN = $(addprefix $(SRCS_RUN_DIR)/, \
 		inner.c\
 		pipe.c\
 		utils.c\
+		redirect.c\
 )
 
 SRCS_MAIN = $(addprefix $(SRCS_DIR)/, \
@@ -83,15 +84,15 @@ vpath %.c \
 
 all : $(NAME)
 
-$(NAME) : $(LIBFT)
-	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -I $(LIB_DIR)/$(INCLUDE_DIR) \
-	-L ./$(LIB_DIR) -lreadline -L/Users/hkwon/.brew/opt/readline/lib -I/Users/hkwon/.brew/opt/readline/include \
-	-lft -o $(NAME) $(SRCS)
-	
-# 우분투용 Make
 # $(NAME) : $(LIBFT)
 # 	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -I $(LIB_DIR)/$(INCLUDE_DIR) \
-# 	-o $(NAME) $(SRCS) $(LIB_DIR)/libft.a -lreadline
+# 	-L ./$(LIB_DIR) -lreadline -L/Users/hkwon/.brew/opt/readline/lib -I/Users/hkwon/.brew/opt/readline/include \
+# 	-lft -o $(NAME) $(SRCS)
+	
+# 우분투용 Make
+$(NAME) : $(LIBFT)
+	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -I $(LIB_DIR)/$(INCLUDE_DIR) \
+	-o $(NAME) $(SRCS) $(LIB_DIR)/libft.a -lreadline
 
 # $(OBJS_DIR) :
 # 	@mkdir -p $(OBJS_DIR)

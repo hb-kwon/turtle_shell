@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/21 14:50:57 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/22 09:02:27 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ static int	run_shell(t_mini *shell)
 	{
 		if (temp->token->arg == NULL)
 			break ;
-		if (temp->pipe_flag == 0)
+		if (temp->re_flag == RD_IN)
+			reprocess(shell);
+		else if (temp->pipe_flag == 0)
 		{
 			while (++i < BLTIN_NUM)
 			{
@@ -70,8 +72,6 @@ static int	run_shell(t_mini *shell)
 			if (i >= BLTIN_NUM)
 				run_inner(shell);
 		}
-		// else if (temp->re_flag == 1)
-		// 	re_process(shell);
 		else
 			pipe_process(shell);
 		temp = temp->next;

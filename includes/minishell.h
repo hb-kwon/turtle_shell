@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/21 14:46:03 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/22 08:39:32 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <readline/history.h>
 # include "libft.h"
 # include <sys/wait.h>
-
+# include <sys/stat.h>
 // # define PATH_MAX 1024
 # define BLTIN_NUM 7
 
@@ -146,6 +146,7 @@ int		ft_export(t_mini *shell);
 int		ft_unset(t_mini *shell);
 int		ft_env(t_mini *shell);
 int		ft_exit(t_mini *shell);
+int		check_cmd(char *cmd);
 
 /*
 ** utils
@@ -159,5 +160,7 @@ int		print_error1(char *msg, char *err_num);
 ** execute
 */
 char	**execute(char **args, char **en);
+
+int		reprocess(t_mini *shell);
 
 #endif
