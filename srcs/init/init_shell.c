@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:45:14 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/19 17:25:01 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/25 16:30:16 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_env(char ***en, char *envp[])
 	return ;
 }
 
+// final
 // terminal setting
 void	init_term(void)
 {

@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:47 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/20 15:43:15 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/25 16:21:00 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int	ft_export(t_mini *shell)
 		// 없다면 생성
 		// key=value형태인데 key가 숫자면 안된다.
 		// key에 " - " 가 있으면 에러
-
 		if(ft_strchr(buff[1], '='))
 			status = check_export(buff[i], &shell->envp);
 		else

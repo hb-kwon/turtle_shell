@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 14:30:16 by ysong             #+#    #+#             */
-/*   Updated: 2021/10/25 12:45:35 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/25 13:29:38 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,49 +32,22 @@ int print_error2(char *msg1, char *msg2, char *err_num)
 	return (-1);
 }
 
-// char	*ft_str_char_join(char *before, char c)
+// char	*check_quote(char *buff)
 // {
-// 	int		len;
-// 	char	*after;
-// 	int		i;
+// 	int	i;
+// 	int	j;
+// 	char	*res;
 
-// 	len = ft_strlen(before);
-// 	if (c == '\n')
-// 		return (before);
-// 	else
+// 	i = -1;
+// 	j = 0;
+// 	while (buff[++i])
 // 	{
-// 		after = (char *)malloc(sizeof(char) * (len + 2));
-// 		i = -1;
-// 		if (before == NULL)
-// 			after[0] = c;
-// 		else
-// 		{
-// 			while (before[++i])
-// 				after[i] = before[i];
-// 			after[i] = c;
-// 			free(before);
-// 		}
-// 		after[len + 1] = '\0';
+// 		if (buff[i] == 34)
+// 			i++;
+// 		printf("buff : %c\n", buff[i]);
 // 	}
-// 	return (after);
+// 	return (buff);
 // }
-
-char	*check_quote(char *buff)
-{
-	int	i;
-	int	j;
-	char	*res;
-
-	i = -1;
-	j = 0;
-	while (buff[++i])
-	{
-		if (buff[i] == 34)
-			i++;
-		printf("buff : %c\n", buff[i]);
-	}
-	return (buff);
-}
 
 char	**make_buff(t_mini *shell)
 {
@@ -98,8 +71,7 @@ char	**make_buff(t_mini *shell)
 	while (temp)
 	{
 		buff[i] = temp->arg;
-		buff[i] = check_quote(buff[i]);
-		printf("check buff after check_quote : %s\n", buff[i]);
+		// buff[i] = check_quote(buff[i]);
 		temp = temp->next;
 		i++;
 	}

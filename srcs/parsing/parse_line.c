@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 11:46:25 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/21 18:38:48 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/25 15:27:03 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@
 */
 static void	quote_onoff(char *line, int *s_q, int *d_q, int i)
 {
-	if (*line == 39)
+	if (*line == '\'')
 	{
 		if (*s_q == 0)
 			*s_q = 1;
 		else if (*s_q == 1)
 			*s_q = 0;
 	}
-	else if (*line == 34)
+	else if (*line == '\"')
 	{
 		if (i == 0 || (*d_q == 0 && *(line - 1) != '\\'))
 			*d_q = 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/22 09:02:27 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/25 16:26:23 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,9 @@ static int	run_shell(t_mini *shell)
 
 	temp = shell->cmd;
 	i = -1;
-	// 이부분을 t_LIST형태로 반복해야됨
 	while (temp)
 	{
-		if (temp->token->arg == NULL)
+		if (temp->token == NULL)
 			break ;
 		if (temp->re_flag == RD_IN)
 			reprocess(shell);
@@ -74,6 +73,7 @@ static int	run_shell(t_mini *shell)
 		}
 		else
 			pipe_process(shell);
+		// prev || next	실행을 시켜야한다.
 		temp = temp->next;
 	}
 	return (1);
@@ -82,15 +82,16 @@ static int	run_shell(t_mini *shell)
 void	minishell(char **en)
 {
 	int		status;
-	char	*line;
 	t_mini	shell;
 
 	status = 1;
 	while (status)
 	{
 		shell.envp = en;
-		init_line(&shell);
-		status = run_shell(&shell);
+		if (init_line(&shell))
+			status = run_shell(&shell);
+		// init_line(&shell);
+		// status = run_shell(&shell);
 	}
 }
 

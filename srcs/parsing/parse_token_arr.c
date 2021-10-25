@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:32:48 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/21 21:04:14 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/25 16:17:10 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,12 @@ char	**parse_token_arr(char **args, char *cmd_list)
 			while (!ft_strchr("<>\t\n ", cmd_list[index[1]]) \
 				&& cmd_list[index[1]])
 				args_quote_arr(cmd_list, &index[1], &flag);
+			// //debug
+			// printf("cmd_list check index0 : %d\n", index[0]);
+			// printf("cmd_list check args0 : %c\n", cmd_list[index[0]]);
+			// printf("cmd_list check index1 : %d\n", index[1]);
+			// printf("cmd_list check args1 : %c\n", cmd_list[index[1]]);
+			// //end
 			args[index[2]] = ft_strcpy_i_to_j(cmd_list, index[0], index[1]);
 			args_join_redirect(args, &index[2], &flag);
 			if (!cmd_list[index[1]])

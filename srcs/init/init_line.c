@@ -6,20 +6,31 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:02:52 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/20 16:30:01 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/25 15:13:34 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	line_input(t_mini *shell)
+static int	line_input(t_mini *shell)
 {
-	shell->cmd = parse_start(g_mini.line);
+	if (!init_check(g_mini.line))
+	{
+		add_history(g_mini.line);
+		free(g_mini.path);
+		free(g_mini.line);
+		g_mini.path = NULL;
+		g_mini.line = NULL;
+		return (0);
+	}
+	else
+		shell->cmd = parse_start(g_mini.line);
 	add_history(g_mini.line);
 	free(g_mini.path);
 	free(g_mini.line);
 	g_mini.path = NULL;
 	g_mini.line = NULL;
+	return (1);
 }
 
 static void	line_enter(void)
@@ -40,7 +51,7 @@ static void	line_eof(void)
 	exit(0);
 }
 
-void	init_line(t_mini *shell)
+int	init_line(t_mini *shell)
 {
 	char	buf[PATH_MAX];
 
@@ -51,5 +62,6 @@ void	init_line(t_mini *shell)
 	else if (ft_strchr("", *(g_mini.line)))
 		line_enter();
 	else
-		line_input(shell);
+		return (line_input(shell));
+	return (1);
 }
