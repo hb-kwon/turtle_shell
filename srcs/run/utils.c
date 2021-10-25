@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 14:30:16 by ysong             #+#    #+#             */
-/*   Updated: 2021/10/25 13:29:38 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/25 18:20:45 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,53 @@ int print_error2(char *msg1, char *msg2, char *err_num)
 	return (-1);
 }
 
-// char	*check_quote(char *buff)
+// char	*ft_str_char_join(char *before, char c)
 // {
-// 	int	i;
-// 	int	j;
+// 	int		len;
+// 	char	*after;
+// 	int		i;
+
+// 	len = ft_strlen(before);
+// 	if (c == '\n')
+// 		return (before);
+// 	else
+// 	{
+// 		after = (char *)malloc(sizeof(char) * (len + 2));
+// 		i = -1;
+// 		if (before == NULL)
+// 			after[0] = c;
+// 		else
+// 		{
+// 			while (before[++i])
+// 				after[i] = before[i];
+// 			after[i] = c;
+// 			free(before);
+// 		}
+// 		after[len + 1] = '\0';
+// 	}
+// 	return (after);
+// }
+
+// char	*make_dup_no_quote(char *buff)
+// {
+// 	int		i;
+// 	int		j;
+// 	int		len;
 // 	char	*res;
 
 // 	i = -1;
-// 	j = 0;
 // 	while (buff[++i])
 // 	{
-// 		if (buff[i] == 34)
-// 			i++;
-// 		printf("buff : %c\n", buff[i]);
+// 		len = 0;
+// 		j = 0;
+// 		if (buff[i] == '\'')
+// 		{
+// 			while (buff[i - 1] == '\\' && buff[i] != '\'')
+// 				len++;
+// 			res = malloc(sizeof(char) * (len + 1));
+// 			res[j++] = buff[i++];
+// 			res[len] = NULL;
+// 		}
 // 	}
 // 	return (buff);
 // }
