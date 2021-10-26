@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 11:04:30 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/25 18:36:09 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/26 18:09:03 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ static void	args_quote(char *cmd_list, int *i, char *flag)
 		while (*flag & D_QUOTE)
 		{
 			(*i)++;
-			if (cmd_list[*i] == '\\')
-				*i += 2;
 			if (cmd_list[*i] == '\"')
 				*flag ^= D_QUOTE;
 		}
@@ -69,6 +67,8 @@ t_token	*parse_token(char *cmd_list)
 {
 	char	**args;
 
+	if (!cmd_list)
+		return (NULL);
 	args = (char **)ft_malloc(sizeof(char *) * (args_count(cmd_list) + 1));
 	if (!args)
 		return (NULL);
