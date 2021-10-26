@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/26 17:52:14 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/26 18:18:11 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ static int	run_shell(t_mini *shell)
 	{
 		if (temp->token == NULL)
 			break ;
-		if (temp->re_flag == RD_IN)
-			reprocess(shell);
+		if (temp->re_flag > 0)
+			redirect(shell);
 		else if (temp->pipe_flag == 0)
 		{
 			while (++i < BLTIN_NUM)
