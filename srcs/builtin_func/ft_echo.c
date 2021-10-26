@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:11:43 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/25 17:03:34 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/26 18:08:41 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int check_option(t_mini *shell)
 		check = check->next;
 	}
 	return (1);
-
 }
 
 int	ft_echo(t_mini *shell)
