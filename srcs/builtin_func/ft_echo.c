@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:11:43 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/25 16:09:21 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/26 15:43:50 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	ft_echo(t_mini *shell)
 	int		flag;
 	char	**temp;
 	char	**buff;
-
 
 	if (!check_option(shell))
 		flag = 2;

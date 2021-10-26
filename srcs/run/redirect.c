@@ -6,50 +6,49 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/10/24 08:08:32 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/26 15:44:16 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char *find_token(t_mini *shell, int type)
+char	*find_token(t_mini *shell, int type)
 {
-    t_token *temp = shell->cmd->token;
+	t_token	*temp = shell->cmd->token;
 
-    while(temp->type != type)
-        temp = temp->next;
-    
-    return temp->arg;
+	while (temp->type != type)
+		temp = temp->next;
+	return (temp->arg);
 }
 char	*find_path(t_mini *shell, char *cmd)
 {
-	int	i;
-    char    *temp;
-    char    *new_path;
-    char    **paths;
-    struct stat s;
+	int			i;
+	char		*temp;
+	char		*new_path;
+	char		**paths;
+	struct stat	s;
 
 	temp = find_en("PATH=", shell->envp);
-    paths = ft_split(temp, ':');
-    i = -1;
+	paths = ft_split(temp, ':');
+	i = -1;
 	while (paths[++i])
 	{
-        temp = ft_strjoin("/", cmd);
-        new_path = ft_strjoin(paths[i], temp);
-        free(temp);
-        if (stat(new_path, &s) == 0)
-            return (new_path);
-        free(new_path);
+	temp = ft_strjoin("/", cmd);
+	new_path = ft_strjoin(paths[i], temp);
+	free(temp);
+	if (stat(new_path, &s) == 0)
+	return (new_path);
+	free(new_path);
 	}
 	return (ft_strdup(cmd));
 }
 
 int reprocess(t_mini *shell)
 {
-    int fd;
-    int i;
-    char *path;
-    char **buff;
+	int fd;
+	int i;
+	char *path;
+	char **buff;
 
     buff = make_buff(shell);
     fd = open(find_token(shell, ARG),  O_WRONLY | O_CREAT | O_TRUNC, 0744);

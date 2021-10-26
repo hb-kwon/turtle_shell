@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 11:04:30 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/21 21:01:24 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/25 18:36:09 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	args_quote(char *cmd_list, int *i, char *flag)
 		*flag |= D_QUOTE;
 		while (*flag & D_QUOTE)
 		{
-			printf("check1 cmd_list[%d] : %c\n", *i, cmd_list[*i]);
 			(*i)++;
 			if (cmd_list[*i] == '\\')
 				*i += 2;
@@ -36,7 +35,7 @@ static void	args_quote(char *cmd_list, int *i, char *flag)
 	else if (cmd_list[*i] == '\'')
 	{
 		while (cmd_list[++(*i)] != '\'')
-			printf("check2 cmd_list[%d] : %c\n", *i, cmd_list[*i]);
+			;
 	}
 }
 

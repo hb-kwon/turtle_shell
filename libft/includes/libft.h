@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 20:11:04 by kwon              #+#    #+#             */
-/*   Updated: 2021/10/21 07:59:56 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/25 13:01:04 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #  define BUFFER_SIZE 5000
 # endif
 
-# define OPEN_MAX 1020
+// # define OPEN_MAX 1020
 
 typedef struct s_list
 {
