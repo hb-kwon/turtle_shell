@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 14:30:16 by ysong             #+#    #+#             */
-/*   Updated: 2021/10/25 18:20:45 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/26 18:14:33 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,53 +59,44 @@ int print_error2(char *msg1, char *msg2, char *err_num)
 // 	return (after);
 // }
 
-// char	*make_dup_no_quote(char *buff)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		len;
-// 	char	*res;
+char	*make_dup_no_quote(char *arg)
+{
+	// int		i;
+	// int		j;
+	// int		len;
+	// char	flag;
+	char	*res;
 
-// 	i = -1;
-// 	while (buff[++i])
-// 	{
-// 		len = 0;
-// 		j = 0;
-// 		if (buff[i] == '\'')
-// 		{
-// 			while (buff[i - 1] == '\\' && buff[i] != '\'')
-// 				len++;
-// 			res = malloc(sizeof(char) * (len + 1));
-// 			res[j++] = buff[i++];
-// 			res[len] = NULL;
-// 		}
-// 	}
-// 	return (buff);
-// }
+	res = arg;
+	return (res);
+}
 
 char	**make_buff(t_mini *shell)
 {
 	t_token	*temp;
-	t_token	*tmp2;
+	t_token	*temp2;
 	char	**buff;
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	tmp2 = shell->cmd->token;
+	temp2 = shell->cmd->token;
 	temp = shell->cmd->token;
-	while (tmp2)
+	while (temp2)
 	{
-		tmp2 = tmp2->next;
+		temp2 = temp2->next;
 		j++;
 	}
 	buff = (char **)malloc(sizeof(char *) * (j + 1));
 	buff[j] = NULL;
 	while (temp)
 	{
-		buff[i] = temp->arg;
-		// buff[i] = check_quote(buff[i]);
+		buff[i] = make_dup_no_quote(temp->arg);
+		//debug
+		printf("=========DEBUG=========\n");
+		printf("buff check : %s\n", buff[i]);
+		//end
 		temp = temp->next;
 		i++;
 	}
