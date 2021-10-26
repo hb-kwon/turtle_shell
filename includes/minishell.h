@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/22 08:39:32 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/23 07:42:46 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,6 @@ int		print_error1(char *msg, char *err_num);
 */
 char	**execute(char **args, char **en);
 
-int		reprocess(t_mini *shell);
+int redirect(t_mini *shell);
 
 #endif

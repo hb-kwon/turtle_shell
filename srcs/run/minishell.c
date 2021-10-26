@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/22 09:02:27 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/23 07:42:34 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ static int	run_shell(t_mini *shell)
 	{
 		if (temp->token->arg == NULL)
 			break ;
-		if (temp->re_flag == RD_IN)
-			reprocess(shell);
+		if (temp->re_flag > 0)
+			redirect(shell);
 		else if (temp->pipe_flag == 0)
 		{
 			while (++i < BLTIN_NUM)
