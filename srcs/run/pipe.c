@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 22:33:46 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/25 16:23:20 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/27 15:47:53 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,11 @@ void child_process(t_mini *shell)
     i = -1;
     while (++i < BLTIN_NUM)
 	{
-        run_blt(shell, i);
+		if (!ft_strcmp(temp_cmd->token->arg, blt_str(i)))
+		{
+			run_blt(shell, i);
+			break ;
+		}
 	}
 	exit(ret);
 }

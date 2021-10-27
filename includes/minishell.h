@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/10/23 07:42:46 by ysong            ###   ########.fr       */
-=======
-/*   Updated: 2021/10/25 14:53:37 by hkwon            ###   ########.fr       */
->>>>>>> 8f026999e43b3750ec2ee4cf5657da249965ad53
+/*   Updated: 2021/10/27 13:53:24 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +134,9 @@ int		run_blt(t_mini *shell, int i);
 int		run_inner(t_mini *shell);
 int		pipe_process(t_mini *shell);
 void	child_process(t_mini *shell);
+
+char	*find_token(t_mini *shell, int type);
+int		redirect(t_mini *shell);
 /*
 ** builtin
 */
@@ -156,6 +155,8 @@ int		check_cmd(char *cmd);
 ** utils
 */
 char	**make_buff(t_mini *shell);
+void	free_buff(char **buff);
+
 char	*find_en(char *key, char **en);
 int		print_error2(char *msg1, char *msg2, char *err_num);
 int		print_error1(char *msg, char *err_num);

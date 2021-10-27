@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:19:13 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/20 21:05:35 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/27 16:55:45 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,21 @@ int	ft_cd(t_mini *shell)
 {
 	char	*path;
 	char	**buff;
+	t_token *token;
 
+	token = shell->cmd->token->next;
 	buff = make_buff(shell);
+
 	path = NULL;
-	if (buff[1] != NULL && buff[1][0] != '~' && buff[1][0] != '$')
+	if (token->arg != NULL && token->arg[0] != '~' && token->arg[0] != '$')
 	{
-		path = buff[1];
+		path = token->arg;
 		if (chdir(path) == -1)
 			print_error2("cd", path, strerror(errno));
 	}
-	else if (buff[1] == NULL || buff[1][0] == '~')
+	else if (token->arg == NULL || token->arg[0] == '~')
 		cd_home(path, buff, shell->envp);
-	else if (buff[1][0] == '$')
+	else if (token->arg[0] == '$')
 		cd_en(path, buff, shell->envp);
 	return (0);
 }

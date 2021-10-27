@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 14:30:16 by ysong             #+#    #+#             */
-/*   Updated: 2021/10/25 18:20:45 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/27 13:55:47 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,15 @@ char	**make_buff(t_mini *shell)
 	return (buff);
 }
 
+void free_buff(char **buff)
+{
+	int i;
+
+	i = -1;
+	while (buff[++i])
+		free(buff[i]);
+	free(buff);
+}
 char	*find_en(char *key, char **en)
 {
 	int	i;

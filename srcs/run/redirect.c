@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/10/26 15:44:16 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/27 11:54:33 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,14 @@ char	*find_token(t_mini *shell, int type)
 {
 	t_token	*temp = shell->cmd->token;
 
-	while (temp->type != type)
+	while (temp && temp->type != type)
 		temp = temp->next;
-	return (temp->arg);
+    if (temp)
+        return (temp->arg);
+    else
+        return (NULL);
 }
+
 char	*find_path(t_mini *shell, char *cmd)
 {
 	int			i;

@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/10/23 07:42:34 by ysong            ###   ########.fr       */
-=======
-/*   Updated: 2021/10/25 16:26:23 by hkwon            ###   ########.fr       */
->>>>>>> 8f026999e43b3750ec2ee4cf5657da249965ad53
+/*   Updated: 2021/10/27 19:05:01 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +84,10 @@ void	minishell(char **en)
 	int		status;
 	t_mini	shell;
 
+	shell.envp = en;
 	status = 1;
 	while (status)
 	{
-		shell.envp = en;
 		if (init_line(&shell))
 			status = run_shell(&shell);
 		// init_line(&shell);

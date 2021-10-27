@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:11:43 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/26 15:43:50 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/27 15:38:23 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,39 +37,42 @@ int check_option(t_mini *shell)
 	return (1);
 
 }
+void print_exit_status(t_mini *shell)
+{
+	ft_putstr_fd(ft_itoa(shell->exit_status), STDOUT);
+}
+void echo_home(char *arg, t_mini *shell)
+{
+	char *temp;
+	if(arg[1] == '?')
+		print_exit_status(shell);
+	temp = find_en(&(arg[1]), shell->envp);
+	ft_putstr_fd(temp, STDOUT);
+
+}
 
 int	ft_echo(t_mini *shell)
 {
-	int		i;
-	int		flag;
-	char	**temp;
-	char	**buff;
-
+	int		n_flag;
+	t_token *token;
+	
+	token = shell->cmd->token->next;
+	n_flag = 0;
 	if (!check_option(shell))
-		flag = 2;
-	else
-		flag = 1;
-	buff = make_buff(shell);
-	i = -1;
-	while(buff[++i])
-		ft_putstr_fd(buff[i], STDOUT);
-	// i = 0;
-	// while (buff[i])
-	// 	i++;
-	// temp = (char **)malloc(sizeof(char *) * (i - flag + 1));
-	// i = -1;
-	// while (buff[++i + flag])
-	// 	temp[i] = buff[i + flag];
-	// temp[i] = NULL;
-	// i = -1;
-	// while(temp[++i])
-	// {
-	// 	write(1, temp[i], ft_strlen(temp[i]));
-	// 	write(1, " ", 1);
-	// }
-	// if (!check_option(shell))
-	// 	return 0;
-	// write(1, "\n", 1);
-	// free(buff);
+	{
+		token = token->next;
+		n_flag = 1;
+	}
+	while(token)
+	{
+		if (token->type != ARGUMENT)
+			break ;
+		ft_putstr_fd(token->arg, STDOUT);
+		ft_putstr_fd(" ", STDOUT);
+		token = token->next;
+	}
+	if (n_flag)
+		return (0);
+	write(1, "\n", 1);
 	return (0);
 }
