@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:11:43 by kwonhyukbae       #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/10/27 15:38:23 by ysong            ###   ########.fr       */
+=======
+/*   Updated: 2021/10/27 17:53:58 by hkwon            ###   ########.fr       */
+>>>>>>> 3d2789a94b6b3d6f9e7b827f848fcd9b0984be9a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +39,6 @@ int check_option(t_mini *shell)
 		check = check->next;
 	}
 	return (1);
-
 }
 void print_exit_status(t_mini *shell)
 {

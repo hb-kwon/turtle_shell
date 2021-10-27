@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 16:06:22 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/07 16:10:23 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/27 17:26:05 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ char	*ft_strjoin_free(char *s1, char *s2, int flag)
 	int		len2;
 	char	*res;
 
-	if (!s1 || !s2)
-		return (0);
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
 	res = (char *)malloc(sizeof(char) + (len1 + len2 + 1));

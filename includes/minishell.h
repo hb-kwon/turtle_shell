@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/27 13:53:24 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/27 19:07:40 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ t_cmd	*parse_start(char *line);
 char	**parse_line(char *line);
 t_token	*parse_token(char *cmd_list);
 char	**parse_token_arr(char **args, char *cmd_list);
+char	*parse_token_quote(char *args);
 t_token	*make_token_list(char **args);
 
 /*

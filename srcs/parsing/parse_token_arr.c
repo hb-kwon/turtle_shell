@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:32:48 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/25 18:27:56 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/27 15:53:32 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ static void	args_quote_arr(char *cmd_list, int *index, int *flag)
 		while (*flag & D_QUOTE)
 		{
 			(*index)++;
-			if (cmd_list[*index] == '\\')
-				*index += 2;
 			if (cmd_list[*index] == '\"')
 				*flag ^= D_QUOTE;
 		}

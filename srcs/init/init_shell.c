@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:45:14 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/25 16:30:16 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/27 16:46:31 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	init_env(char ***en, char *envp[])
 		(*en)[i][j] = 0;
 	}
 	(*en)[i] = NULL;
+	g_mini.envp = *en;
 	return ;
 }
 

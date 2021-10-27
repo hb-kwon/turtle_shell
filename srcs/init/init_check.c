@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 16:03:49 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/25 18:19:39 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/26 17:26:40 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ int	init_check(char *line)
 			i++;
 		else if (line[i] == '\'' || line[i] == '\"')
 			quote_flag_onoff(line[i], &i, &flag);
-		else if (line[i] == '\\' && (flag & D_QUOTE))
-			i += 2;
 		else
 			i++;
 	}

@@ -6,7 +6,11 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/10/27 19:05:01 by ysong            ###   ########.fr       */
+=======
+/*   Updated: 2021/10/27 17:50:49 by hkwon            ###   ########.fr       */
+>>>>>>> 3d2789a94b6b3d6f9e7b827f848fcd9b0984be9a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +94,6 @@ void	minishell(char **en)
 	{
 		if (init_line(&shell))
 			status = run_shell(&shell);
-		// init_line(&shell);
-		// status = run_shell(&shell);
 	}
 }
 

@@ -6,7 +6,7 @@
 #    By: ysong <ysong@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/10/26 17:25:43 by ysong            ###   ########.fr        #
+#    Updated: 2021/10/27 19:07:47 by ysong            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRCS_PARSE = $(addprefix $(SRCS_PARSE_DIR)/, \
 		parse_line.c\
 		parse_token.c\
 		parse_token_arr.c\
+		parse_token_quote.c\
 		parse_token_list.c\
 )
 

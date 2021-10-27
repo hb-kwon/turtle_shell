@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 14:30:16 by ysong             #+#    #+#             */
-/*   Updated: 2021/10/27 13:55:47 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/27 19:07:37 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,80 +32,31 @@ int print_error2(char *msg1, char *msg2, char *err_num)
 	return (-1);
 }
 
-// char	*ft_str_char_join(char *before, char c)
-// {
-// 	int		len;
-// 	char	*after;
-// 	int		i;
-
-// 	len = ft_strlen(before);
-// 	if (c == '\n')
-// 		return (before);
-// 	else
-// 	{
-// 		after = (char *)malloc(sizeof(char) * (len + 2));
-// 		i = -1;
-// 		if (before == NULL)
-// 			after[0] = c;
-// 		else
-// 		{
-// 			while (before[++i])
-// 				after[i] = before[i];
-// 			after[i] = c;
-// 			free(before);
-// 		}
-// 		after[len + 1] = '\0';
-// 	}
-// 	return (after);
-// }
-
-// char	*make_dup_no_quote(char *buff)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		len;
-// 	char	*res;
-
-// 	i = -1;
-// 	while (buff[++i])
-// 	{
-// 		len = 0;
-// 		j = 0;
-// 		if (buff[i] == '\'')
-// 		{
-// 			while (buff[i - 1] == '\\' && buff[i] != '\'')
-// 				len++;
-// 			res = malloc(sizeof(char) * (len + 1));
-// 			res[j++] = buff[i++];
-// 			res[len] = NULL;
-// 		}
-// 	}
-// 	return (buff);
-// }
-
 char	**make_buff(t_mini *shell)
 {
 	t_token	*temp;
-	t_token	*tmp2;
 	char	**buff;
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	tmp2 = shell->cmd->token;
 	temp = shell->cmd->token;
-	while (tmp2)
+	while (temp)
 	{
-		tmp2 = tmp2->next;
+		temp = temp->next;
 		j++;
 	}
 	buff = (char **)malloc(sizeof(char *) * (j + 1));
 	buff[j] = NULL;
+	temp = shell->cmd->token;
 	while (temp)
 	{
 		buff[i] = temp->arg;
-		// buff[i] = check_quote(buff[i]);
+		//debug
+		printf("=========DEBUG=========\n");
+		printf("buff check : %s\n", buff[i]);
+		//end
 		temp = temp->next;
 		i++;
 	}
