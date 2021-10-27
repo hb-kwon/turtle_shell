@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:11:43 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/26 18:18:23 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/27 17:53:58 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,26 @@ int	ft_echo(t_mini *shell)
 	else
 		flag = 1;
 	buff = make_buff(shell);
+	// i = -1;
+	// while(buff[++i])
+	// 	ft_putstr_fd(buff[i], STDOUT);
+	i = 0;
+	while (buff[i])
+		i++;
+	temp = (char **)malloc(sizeof(char *) * (i - flag + 1));
 	i = -1;
-	while(buff[++i])
-		ft_putstr_fd(buff[i], STDOUT);
-	// i = 0;
-	// while (buff[i])
-	// 	i++;
-	// temp = (char **)malloc(sizeof(char *) * (i - flag + 1));
-	// i = -1;
-	// while (buff[++i + flag])
-	// 	temp[i] = buff[i + flag];
-	// temp[i] = NULL;
-	// i = -1;
-	// while(temp[++i])
-	// {
-	// 	write(1, temp[i], ft_strlen(temp[i]));
-	// 	write(1, " ", 1);
-	// }
-	// if (!check_option(shell))
-	// 	return 0;
-	// write(1, "\n", 1);
-	// free(buff);
+	while (buff[++i + flag])
+		temp[i] = buff[i + flag];
+	temp[i] = NULL;
+	i = -1;
+	while(temp[++i])
+	{
+		write(1, temp[i], ft_strlen(temp[i]));
+		write(1, " ", 1);
+	}
+	if (!check_option(shell))
+		return 0;
+	write(1, "\n", 1);
+	free(buff);
 	return (0);
 }
