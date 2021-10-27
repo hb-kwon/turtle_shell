@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 11:04:30 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/26 18:09:03 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/27 17:33:29 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static int	args_count(char *cmd_list)
 t_token	*parse_token(char *cmd_list)
 {
 	char	**args;
+	int		i;
 
 	if (!cmd_list)
 		return (NULL);
@@ -73,5 +74,14 @@ t_token	*parse_token(char *cmd_list)
 	if (!args)
 		return (NULL);
 	args = parse_token_arr(args, cmd_list);
+	i = -1;
+	while (args[++i])
+		args[i] = parse_token_quote(args[i]);
+	//debug
+	printf("==========DEBUG==========\n");
+	i = -1;
+	while (args[++i])
+		printf("token arr check : %s\n", args[i]);
+	//end
 	return (make_token_list(args));
 }

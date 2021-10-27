@@ -6,11 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/10/23 07:42:46 by ysong            ###   ########.fr       */
-=======
-/*   Updated: 2021/10/25 14:53:37 by hkwon            ###   ########.fr       */
->>>>>>> 8f026999e43b3750ec2ee4cf5657da249965ad53
+/*   Updated: 2021/10/27 15:34:43 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +124,7 @@ t_cmd	*parse_start(char *line);
 char	**parse_line(char *line);
 t_token	*parse_token(char *cmd_list);
 char	**parse_token_arr(char **args, char *cmd_list);
+char	*parse_token_quote(char *args);
 t_token	*make_token_list(char **args);
 
 /*

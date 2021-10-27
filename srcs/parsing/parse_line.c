@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 11:46:25 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/26 16:58:05 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/27 16:24:06 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** echo "\"hello\"" -> "hello"
 ** echo "\'hello\'"" -> \'hello\'
 */
-static void	quote_onoff(char *line, int *s_q, int *d_q, int i)
+static void	quote_onoff(char *line, int *s_q, int *d_q)
 {
 	if (*line == '\'')
 	{
@@ -48,7 +48,7 @@ static void	count_quote(char *line, int *i)
 	while (line[*i])
 	{
 		if (line[*i] == 34 || line[*i] == 39)
-			quote_onoff(&(line[*i]), &s_q, &d_q, *i);
+			quote_onoff(&(line[*i]), &s_q, &d_q);
 		if (line[*i] == '|' && (s_q == 0 && d_q == 0))
 			break ;
 		(*i)++;
