@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:52 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/25 14:59:24 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/28 16:26:50 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int check_env(char *en_name)
+static int check_env(char *en_name)
 {
 	int i;
 
@@ -27,7 +27,7 @@ int check_env(char *en_name)
 	return (1);
 }
 
-int		check_key_value(char *str, char *envs)
+static int	check_key_value(char *str, char *envs)
 {
 	int	i;
 
@@ -39,7 +39,7 @@ int		check_key_value(char *str, char *envs)
 	return (0);
 }
 
-int unset_en(char *str, char ***en)
+static int unset_en(char *str, char ***en)
 {
 	int i;
 	int last;

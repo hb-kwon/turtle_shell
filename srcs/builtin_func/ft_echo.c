@@ -6,13 +6,13 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:11:43 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/27 19:08:28 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/28 16:21:53 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int check_option(t_mini *shell)
+static int check_option(t_mini *shell)
 {
 	t_token	*tmp2;
 	t_token	*check;
@@ -36,11 +36,13 @@ int check_option(t_mini *shell)
 	}
 	return (1);
 }
+
 void print_exit_status(t_mini *shell)
 {
 	ft_putstr_fd(ft_itoa(shell->exit_status), STDOUT);
 }
-void echo_home(char *arg, t_mini *shell)
+
+static void echo_home(char *arg, t_mini *shell)
 {
 	char *temp;
 	if(arg[1] == '?')

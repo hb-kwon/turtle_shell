@@ -6,13 +6,13 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:47 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/27 18:50:52 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/28 16:22:45 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_export(char **en)
+static void	print_export(char **en)
 {
 	int i;
 
@@ -24,13 +24,13 @@ void	print_export(char **en)
 	}
 }
 
-void add_export(char *str, char **new, int i)
+static void add_export(char *str, char **new, int i)
 {
 	new[i] = ft_strdup(str);
 	new[i + 1] = NULL;
 }
 
-int check_export(char *str, char ***en)
+static int check_export(char *str, char ***en)
 {
 	int i;
 	char **new;

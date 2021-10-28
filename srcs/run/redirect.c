@@ -6,46 +6,11 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/10/27 11:54:33 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/28 16:20:32 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*find_token(t_mini *shell, int type)
-{
-	t_token	*temp = shell->cmd->token;
-
-	while (temp && temp->type != type)
-		temp = temp->next;
-    if (temp)
-        return (temp->arg);
-    else
-        return (NULL);
-}
-
-char	*find_path(t_mini *shell, char *cmd)
-{
-	int			i;
-	char		*temp;
-	char		*new_path;
-	char		**paths;
-	struct stat	s;
-
-	temp = find_en("PATH=", shell->envp);
-	paths = ft_split(temp, ':');
-	i = -1;
-	while (paths[++i])
-	{
-	temp = ft_strjoin("/", cmd);
-	new_path = ft_strjoin(paths[i], temp);
-	free(temp);
-	if (stat(new_path, &s) == 0)
-	return (new_path);
-	free(new_path);
-	}
-	return (ft_strdup(cmd));
-}
 
 int reprocess(t_mini *shell)
 {
@@ -83,6 +48,7 @@ int reprocess(t_mini *shell)
     free(buff);
     return (EXIT_SUCCESS);
 }
+
 int outreprocess(t_mini *shell)
 {
     int fd;

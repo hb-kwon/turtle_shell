@@ -6,13 +6,13 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:19:13 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/27 16:55:45 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/28 16:21:35 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-// buff에 알맞은 이름을 모르겠슴... cmd 이후의 line? 이라고 밖에
-void	cd_home(char *path, char **buff, char **en)
+
+static void	cd_home(char *path, char **buff, char **en)
 {
 	path = find_en("HOME", en);
 	if (chdir(path) == -1)
@@ -20,7 +20,7 @@ void	cd_home(char *path, char **buff, char **en)
 	(void)buff;
 }
 
-void	cd_en(char *path, char **buff, char **en)
+static void	cd_en(char *path, char **buff, char **en)
 {
 	path = find_en(&(buff[1][1]), en);
 	if (chdir(path) == -1)

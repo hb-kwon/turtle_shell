@@ -6,7 +6,7 @@
 #    By: ysong <ysong@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/10/27 19:07:47 by ysong            ###   ########.fr        #
+#    Updated: 2021/10/28 16:54:41 by ysong            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +59,14 @@ SRCS_RUN = $(addprefix $(SRCS_RUN_DIR)/, \
 		builtin.c\
 		inner.c\
 		pipe.c\
-		utils.c\
 		redirect.c\
+)
+
+SRCS_UTILS_DIR = $(SRCS_DIR)/utils
+SRCS_UTILS = $(addprefix $(SRCS_UTILS_DIR)/, \
+		find.c\
+		print.c\
+		utils.c\
 )
 
 SRCS_MAIN = $(addprefix $(SRCS_DIR)/, \
@@ -72,7 +78,7 @@ SRCS = \
 	$(SRCS_PARSE) \
 	$(SRCS_RUN) \
 	$(SRCS_BUILTIN) \
-
+	$(SRCS_UTILS) \
 
 # OBJS = $(addprefix $(OBJS_DIR)/, $(notdir $(SRCS:.c=.o)))
 
@@ -82,6 +88,7 @@ vpath %.c \
 	$(SRCS_PARSE_DIR) \
 	$(SRCS_RUN_DIR) \
 	$(SRCS_BUILTIN_DIR) \
+	$(SRCS_UTILS_DIR) \
 
 all : $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/27 19:09:16 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/28 18:01:19 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static int	run_shell(t_mini *shell)
 		// prev || next	실행을 시켜야한다.
 		temp = temp->next;
 	}
+	// free_token 만들기;
 	return (1);
 }
 

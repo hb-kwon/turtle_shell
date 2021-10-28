@@ -3,20 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:22:25 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/20 21:08:41 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/28 16:22:17 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//exit_status 란?
-// void 형으로 교체해야할듯?
-// 만약 메인문을 끝까지 진행하려면
-// 파이프라인이 진행중이면 exit는 작동하지 않음
-int		ft_isdigit_str(char *str)
+static int	ft_isdigit_str(char *str)
 {
 	int	idx;
 
@@ -30,7 +26,7 @@ int		ft_isdigit_str(char *str)
 	return (1);
 }
 
-void	print_exit(void)
+static void	print_exit(void)
 {
 	ft_putstr_fd("exit\n", 2);
 	exit(0);

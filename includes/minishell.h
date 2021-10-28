@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/27 19:07:40 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/28 16:27:19 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,9 +135,8 @@ int		run_blt(t_mini *shell, int i);
 int		run_inner(t_mini *shell);
 int		pipe_process(t_mini *shell);
 void	child_process(t_mini *shell);
-
-char	*find_token(t_mini *shell, int type);
 int		redirect(t_mini *shell);
+
 /*
 ** builtin
 */
@@ -159,6 +158,9 @@ char	**make_buff(t_mini *shell);
 void	free_buff(char **buff);
 
 char	*find_en(char *key, char **en);
+char	*find_token(t_mini *shell, int type);
+char	*find_path(t_mini *shell, char *cmd);
+
 int		print_error2(char *msg1, char *msg2, char *err_num);
 int		print_error1(char *msg, char *err_num);
 

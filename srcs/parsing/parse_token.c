@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 11:04:30 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/27 17:33:29 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/27 22:04:17 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ t_token	*parse_token(char *cmd_list)
 	i = -1;
 	while (args[++i])
 		args[i] = parse_token_quote(args[i]);
-	//debug
-	printf("==========DEBUG==========\n");
-	i = -1;
-	while (args[++i])
-		printf("token arr check : %s\n", args[i]);
-	//end
+	// //debug
+	// printf("==========DEBUG==========\n");
+	// i = -1;
+	// while (args[++i])
+	// 	printf("token arr check : %s\n", args[i]);
+	// //end
 	return (make_token_list(args));
 }
