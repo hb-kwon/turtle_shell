@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/28 18:01:19 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/28 19:58:44 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,23 @@ static int	run_shell(t_mini *shell)
 		// prev || next	실행을 시켜야한다.
 		temp = temp->next;
 	}
-	// free_token 만들기;
+	free_cmd(shell);
 	return (1);
 }
 
 void	minishell(char **en)
 {
 	int		status;
-	t_mini	shell;
+	t_mini	*shell;
 
-	shell.envp = en;
+	shell->envp = en;
 	status = 1;
 	while (status)
 	{
-		if (init_line(&shell))
-			status = run_shell(&shell);
+		shell = (t_mini *)malloc(sizeof(t_mini));
+		if (init_line(shell))
+			status = run_shell(shell);
+		free(shell);
 	}
 }
 

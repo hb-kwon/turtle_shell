@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/28 16:27:19 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/28 19:24:55 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ char	*find_path(t_mini *shell, char *cmd);
 int		print_error2(char *msg1, char *msg2, char *err_num);
 int		print_error1(char *msg, char *err_num);
 
+void	free_cmd(t_mini *shell);
 /*
 ** execute
 */

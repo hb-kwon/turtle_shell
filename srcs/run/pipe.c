@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 22:33:46 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/28 16:54:59 by ysong            ###   ########.fr       */
+/*   Updated: 2021/10/28 18:33:31 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,21 @@ void child_process(t_mini *shell)
 	exit(ret);
 }
 
+int pipe_check(t_mini *shell)
+{
+	if (shell->cmd->next || shell->cmd->prev)
+		return (1);
+	return (0);
+}
 int pipe_process(t_mini *shell)
 {
 	pid_t	pid;
 	int		status;
-	// t_mini *next_shell;
 	t_cmd	*temp_cmd;
 	t_cmd	*temp_next_cmd;
 
-	// if (pipe_check(shell))
-	// 	return (0);
+	if (!pipe_check(shell))
+		return (0);
 	temp_cmd = shell->cmd;
 	temp_next_cmd = temp_cmd->next;
 	if(temp_cmd->pipe_flag == 1)

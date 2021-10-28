@@ -6,7 +6,7 @@
 #    By: ysong <ysong@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/10/28 16:54:41 by ysong            ###   ########.fr        #
+#    Updated: 2021/10/28 20:26:21 by ysong            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ SRCS_UTILS = $(addprefix $(SRCS_UTILS_DIR)/, \
 		find.c\
 		print.c\
 		utils.c\
+		free.c\
 )
 
 SRCS_MAIN = $(addprefix $(SRCS_DIR)/, \
