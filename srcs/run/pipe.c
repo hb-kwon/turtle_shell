@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 22:33:46 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/01 22:02:14 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/01 22:16:07 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void child_process(t_mini *shell)
 {
-    int     i;
-	t_mini *next_shell;
+	int		i;
+	t_mini	*next_shell;
 	t_cmd	*temp_cmd;
 	t_cmd	*temp_next_cmd;
 	int ret;
@@ -26,10 +26,8 @@ void child_process(t_mini *shell)
 
     buff = make_buff(shell);
 	ret = EXIT_SUCCESS;
-
 	temp_cmd = shell->cmd;
 	temp_next_cmd = temp_cmd->next;
-
 	if (temp_cmd->pipe_flag == 1)
 	{
 		dup2(temp_next_cmd->fds[1], STDOUT);
@@ -63,6 +61,7 @@ int pipe_check(t_mini *shell)
 		return (1);
 	return (0);
 }
+
 int pipe_process(t_mini *shell)
 {
 	pid_t	pid;
@@ -72,6 +71,9 @@ int pipe_process(t_mini *shell)
 
 	if (!pipe_check(shell))
 		return (0);
+	//debug
+	printf("pipe process start\n");
+	//end
 	temp_cmd = shell->cmd;
 	temp_next_cmd = temp_cmd->next;
 	if(temp_cmd->pipe_flag == 1)
@@ -88,5 +90,5 @@ int pipe_process(t_mini *shell)
 	if(temp_cmd->fds[0] != 0)
 		close(temp_cmd->fds[0]);
 	shell->cmd = shell->cmd->next;
-	return 0;
+	return (0);
 }

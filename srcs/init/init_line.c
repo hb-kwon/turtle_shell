@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:02:52 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/01 21:51:22 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/01 22:16:58 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ static int	line_input(t_mini *shell)
 	return (1);
 }
 
-static void	line_enter(void)
+static int	line_enter(void)
 {
 	free(g_mini.path);
 	free(g_mini.line);
 	g_mini.path = NULL;
 	g_mini.line = NULL;
+	return (0);
 }
 
 //todo 나중에 통화로 상담
@@ -67,6 +68,7 @@ int	init_line(t_mini *shell)
 {
 	char	buf[PATH_MAX];
 
+	tcsetattr(STDIN_FILENO, TCSANOW, &g_mini.term_ori);
 	g_mini.path = ft_strjoin(getcwd(buf, PATH_MAX), "$ ");
 	// g_mini.line = (char *)malloc(sizeof(char) * ft_strlen(g_mini.path)+1);
 	g_mini.line = readline(g_mini.path);

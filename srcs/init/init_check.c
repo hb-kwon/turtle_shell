@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 16:03:49 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/26 17:26:40 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/01 17:36:15 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_print_synerr(char c)
 {
-	ft_putstr_fd("minishell: syntax error near unexpected token `", STDERR_FILENO);
+	ft_putstr_fd("minishell: syntax error", STDERR_FILENO);
 	write(STDERR_FILENO, &c, 1);
 	ft_putstr_fd("\'\n", STDERR_FILENO);
 	g_mini.exit_status = 258;
