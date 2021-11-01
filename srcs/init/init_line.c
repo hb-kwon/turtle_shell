@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:02:52 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/26 16:26:47 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/01 18:19:55 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ static int	line_input(t_mini *shell)
 	return (1);
 }
 
-static void	line_enter(void)
+static int	line_enter(void)
 {
 	free(g_mini.path);
 	free(g_mini.line);
 	g_mini.path = NULL;
 	g_mini.line = NULL;
+	return (0);
 }
 
 static void	line_eof(void)
@@ -55,12 +56,13 @@ int	init_line(t_mini *shell)
 {
 	char	buf[PATH_MAX];
 
+	tcsetattr(STDIN_FILENO, TCSANOW, &g_mini.term_ori);
 	g_mini.path = ft_strjoin(getcwd(buf, PATH_MAX), "$ ");
 	g_mini.line = readline(g_mini.path);
 	if (g_mini.line == NULL)
 		line_eof();
 	else if (ft_strchr("", *(g_mini.line)))
-		line_enter();
+		return (line_enter());
 	else
 		return (line_input(shell));
 	return (1);

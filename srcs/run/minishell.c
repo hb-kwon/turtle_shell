@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/01 15:12:37 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/01 21:48:01 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,10 @@ void	minishell(char **en)
 	while (status)
 	{
 		shell = (t_mini *)malloc(sizeof(t_mini));
-		shell->envp = en;
+		// shell->envp = en;
 		if (init_line(shell))
 			status = run_shell(shell);
+		en = shell->envp;
 		free(shell);
 	}
 }
@@ -99,3 +100,6 @@ void	minishell(char **en)
 //getch() -> 따로 만들어줘야한다.
 //parsing -> token화 시키기
 //예외처리는 큰 것부터 하고 builtin부터 동작하게 만들기
+
+
+//todo

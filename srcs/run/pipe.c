@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 22:33:46 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/01 15:26:27 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/01 21:29:42 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ void child_process(t_mini *shell)
 	t_cmd	*temp_next_cmd;
 	int	ret;
 
-	//debug
-	printf("pipe child process start\n");
-	//end
 	ret = EXIT_SUCCESS;
 	temp_cmd = shell->cmd;
 	temp_next_cmd = temp_cmd->next;
@@ -42,15 +39,10 @@ void child_process(t_mini *shell)
 	{
 		if (!ft_strcmp(temp_cmd->token->arg, blt_str(i)))
 		{
-			//debug
-			printf("pipe builtin func start\n");
-			//end
 			run_blt(shell, i);
 			break ;
 		}
 	}
-	if (i >= BLTIN_NUM)
-		run_inner(shell);
 	exit(ret);
 }
 
@@ -68,7 +60,8 @@ int pipe_process(t_mini *shell)
 	t_cmd	*temp_cmd;
 	t_cmd	*temp_next_cmd;
 
-	if (!pipe_check(shell))		return (0);
+	if (!pipe_check(shell))
+		return (0);
 	//debug
 	printf("pipe process start\n");
 	//end

@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 18:54:37 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/01 14:26:47 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/01 17:29:34 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_token(t_token *tkn)
 		temp = temp->next;
 		keep->next = NULL;
 		keep->prev = NULL;
-		free(keep->arg);
+		// free(keep->arg);
 		free(keep);
 	}
 }
