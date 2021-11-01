@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/28 19:58:44 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/01 15:12:37 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ static int	run_shell(t_mini *shell)
 		}
 		else
 			pipe_process(shell);
-		// prev || next	실행을 시켜야한다.
 		temp = temp->next;
 	}
 	free_cmd(shell);
@@ -85,11 +84,11 @@ void	minishell(char **en)
 	int		status;
 	t_mini	*shell;
 
-	shell->envp = en;
 	status = 1;
 	while (status)
 	{
 		shell = (t_mini *)malloc(sizeof(t_mini));
+		shell->envp = en;
 		if (init_line(shell))
 			status = run_shell(shell);
 		free(shell);

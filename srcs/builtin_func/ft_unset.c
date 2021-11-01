@@ -3,27 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:52 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/28 16:26:50 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/01 15:23:23 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int check_env(char *en_name)
+static int	check_env(char *en_name)
 {
-	int i;
+	int	i;
 
 	i = -1;
-	while(en_name[++i])
-		if(ft_isalnum(en_name[i]))
+	while (en_name[++i])
+	{
+		if (ft_isalnum(en_name[i]))
 			;
 		else
 			return (0);
-	if(!i)
-		return(0);
+	}
+	if (!i)
+		return (0);
 	return (1);
 }
 
@@ -39,10 +41,10 @@ static int	check_key_value(char *str, char *envs)
 	return (0);
 }
 
-static int unset_en(char *str, char ***en)
+static int	unset_en(char *str, char ***en)
 {
-	int i;
-	int last;
+	int	i;
+	int	last;
 
 	last = 0;
 	while (((*en)[last]))
@@ -51,6 +53,7 @@ static int unset_en(char *str, char ***en)
 		return (-1);
 	i = -1;
 	while ((*en)[++i])
+	{
 		if (check_key_value(str, (*en)[i]))
 		{
 			free((*en)[i]);
@@ -59,6 +62,7 @@ static int unset_en(char *str, char ***en)
 			(*en)[last - 1] = NULL;
 			return (1);
 		}
+	}
 	return (1);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 22:33:46 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/28 18:33:31 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/01 15:26:27 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,18 @@
 
 void child_process(t_mini *shell)
 {
-    int     i;
-	t_mini *next_shell;
+	int		i;
+	t_mini	*next_shell;
 	t_cmd	*temp_cmd;
 	t_cmd	*temp_next_cmd;
-	int ret;
+	int	ret;
 
+	//debug
+	printf("pipe child process start\n");
+	//end
 	ret = EXIT_SUCCESS;
-
 	temp_cmd = shell->cmd;
 	temp_next_cmd = temp_cmd->next;
-
 	if (temp_cmd->pipe_flag == 1)
 	{
 		dup2(temp_next_cmd->fds[1], STDOUT);
@@ -36,15 +37,20 @@ void child_process(t_mini *shell)
 		dup2(temp_cmd->fds[0], STDIN);
 		close(temp_cmd->fds[0]);
 	}
-    i = -1;
-    while (++i < BLTIN_NUM)
+	i = -1;
+	while (++i < BLTIN_NUM)
 	{
 		if (!ft_strcmp(temp_cmd->token->arg, blt_str(i)))
 		{
+			//debug
+			printf("pipe builtin func start\n");
+			//end
 			run_blt(shell, i);
 			break ;
 		}
 	}
+	if (i >= BLTIN_NUM)
+		run_inner(shell);
 	exit(ret);
 }
 
@@ -54,6 +60,7 @@ int pipe_check(t_mini *shell)
 		return (1);
 	return (0);
 }
+
 int pipe_process(t_mini *shell)
 {
 	pid_t	pid;
@@ -61,8 +68,10 @@ int pipe_process(t_mini *shell)
 	t_cmd	*temp_cmd;
 	t_cmd	*temp_next_cmd;
 
-	if (!pipe_check(shell))
-		return (0);
+	if (!pipe_check(shell))		return (0);
+	//debug
+	printf("pipe process start\n");
+	//end
 	temp_cmd = shell->cmd;
 	temp_next_cmd = temp_cmd->next;
 	if(temp_cmd->pipe_flag == 1)
@@ -79,5 +88,5 @@ int pipe_process(t_mini *shell)
 	if(temp_cmd->fds[0] != 0)
 		close(temp_cmd->fds[0]);
 	shell->cmd = shell->cmd->next;
-	return 0;
+	return (0);
 }

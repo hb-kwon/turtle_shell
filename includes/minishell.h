@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/28 19:24:55 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/01 15:10:02 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,12 +125,15 @@ char	**parse_line(char *line);
 t_token	*parse_token(char *cmd_list);
 char	**parse_token_arr(char **args, char *cmd_list);
 char	*parse_token_quote(char *args);
+int		parse_dquote_string(char **res, char *args, int i);
+int		parse_normal_string(char **res, char *args, int i);
 t_token	*make_token_list(char **args);
 
 /*
 ** run
 */
 void	minishell(char **en);
+int		check_cmd(char *cmd);
 int		run_blt(t_mini *shell, int i);
 int		run_inner(t_mini *shell);
 int		pipe_process(t_mini *shell);
@@ -154,6 +157,9 @@ int		check_cmd(char *cmd);
 /*
 ** utils
 */
+char	*set_value(char *arg, int idx);
+char	*find_value(char *name, char **envp);
+int		turn_on_flag(int *flag, int quote, int idx);
 char	**make_buff(t_mini *shell);
 void	free_buff(char **buff);
 

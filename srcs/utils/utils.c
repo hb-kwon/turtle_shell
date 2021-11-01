@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 14:30:16 by ysong             #+#    #+#             */
-/*   Updated: 2021/10/27 22:40:19 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/01 14:30:04 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int		turn_on_flag(int *flag, int quote, int idx)
+{
+	if (*flag & quote)
+		*flag ^= quote;
+	else
+		*flag |= quote;
+	idx++;
+	return (idx);
+}
 
 char	**make_buff(t_mini *shell)
 {
@@ -33,10 +43,6 @@ char	**make_buff(t_mini *shell)
 	while (temp)
 	{
 		buff[i] = temp->arg;
-		//debug
-		printf("=========DEBUG=========\n");
-		printf("buff check : %s\n", buff[i]);
-		//end
 		temp = temp->next;
 		i++;
 	}

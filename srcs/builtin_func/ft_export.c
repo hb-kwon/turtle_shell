@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:47 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/28 16:22:45 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/01 15:22:38 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	print_export(char **en)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (en[++i])
@@ -24,25 +24,28 @@ static void	print_export(char **en)
 	}
 }
 
-static void add_export(char *str, char **new, int i)
+static void	add_export(char *str, char **new, int i)
 {
 	new[i] = ft_strdup(str);
 	new[i + 1] = NULL;
 }
 
-static int check_export(char *str, char ***en)
+static int	check_export(char *str, char ***en)
 {
-	int i;
-	char **new;
+	int		i;
+	char	**new;
 
 	i = -1;
-	while((*en)[++i])
+	while ((*en)[++i])
+	{
 		if (!ft_strncmp((*en)[i], str, ft_strlen(str)))
 		{
 			(*en)[i] = ft_strdup(str);
 			return (1);
 		}
-	if (!(new = malloc(sizeof(char*) * (i + 2))))
+	}
+	new = malloc(sizeof(char *) * (i + 2));
+	if (!new)
 		return (0);
 	i = -1;
 	while ((*en)[++i])
@@ -61,7 +64,7 @@ int	ft_export(t_mini *shell)
 	i = 0;
 
 	t_token *token;
-	
+
 	token = shell->cmd->token->next;
 	if(!token)
 		print_export(shell->envp);
