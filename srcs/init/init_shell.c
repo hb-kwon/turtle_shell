@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:45:14 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/27 16:46:31 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/30 02:38:51 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	init_env(char ***en, char *envp[])
 	i = -1;
 	while (envp[++i])
 		NULL;
-	(*en) = (char **)ft_malloc(sizeof(char *) * i);
+	(*en) = (char **)malloc(sizeof(char *) * i+1);
 	i = -1;
 	while (envp[++i])
 	{
-		(*en)[i] = (char *)ft_malloc(PATH_MAX + 1);
+		(*en)[i] = (char *)malloc(PATH_MAX + 1);
 		j = -1;
 		while (envp[i][++j])
 			(*en)[i][j] = envp[i][j];

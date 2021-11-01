@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/28 19:58:44 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/01 22:09:04 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ static int	run_shell(t_mini *shell)
 	i = -1;
 	while (temp)
 	{
-		if (temp->token == NULL)
+		if (temp == NULL)
 			break ;
-		if (temp->re_flag > 0)
+		if (temp && temp->re_flag > 0)
 			redirect(shell);
 		else if (temp->pipe_flag == 0)
 		{
@@ -71,6 +71,8 @@ static int	run_shell(t_mini *shell)
 			if (i >= BLTIN_NUM)
 				run_inner(shell);
 		}
+
+		
 		else
 			pipe_process(shell);
 		// prev || next	실행을 시켜야한다.
@@ -80,18 +82,28 @@ static int	run_shell(t_mini *shell)
 	return (1);
 }
 
+t_mini *malloc_shell()
+{
+	t_mini *temp;
+
+	temp = (t_mini *)malloc(sizeof(t_mini));
+	temp->cmd = NULL;
+	return (temp);
+
+}
 void	minishell(char **en)
 {
 	int		status;
 	t_mini	*shell;
 
-	shell->envp = en;
 	status = 1;
 	while (status)
 	{
-		shell = (t_mini *)malloc(sizeof(t_mini));
+		shell = malloc_shell();
+		shell->envp = en;
 		if (init_line(shell))
 			status = run_shell(shell);
+		en = shell->envp;
 		free(shell);
 	}
 }

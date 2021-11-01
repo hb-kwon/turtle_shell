@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_start.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:15:38 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/26 18:08:52 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/10/30 02:12:19 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ t_cmd	*make_cmd(char *cmd_list)
 	cmd->token = parse_token(cmd_list);
 	cmd->next = NULL;
 	cmd->prev = NULL;
+	cmd->pipe_flag = 0;
+	cmd->pre_flag = 0;
+	cmd->re_flag = 0;
 	return (cmd);
 }
 

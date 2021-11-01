@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 22:33:46 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/28 18:33:31 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/01 22:02:14 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ void child_process(t_mini *shell)
 	t_cmd	*temp_cmd;
 	t_cmd	*temp_next_cmd;
 	int ret;
+	char **buff;
+	char *path;
+	path = find_path(shell, find_token(shell, COMMAND));
 
+    buff = make_buff(shell);
 	ret = EXIT_SUCCESS;
 
 	temp_cmd = shell->cmd;
@@ -36,15 +40,20 @@ void child_process(t_mini *shell)
 		dup2(temp_cmd->fds[0], STDIN);
 		close(temp_cmd->fds[0]);
 	}
-    i = -1;
-    while (++i < BLTIN_NUM)
-	{
-		if (!ft_strcmp(temp_cmd->token->arg, blt_str(i)))
-		{
-			run_blt(shell, i);
-			break ;
-		}
-	}
+    if (check_cmd(find_token(shell, COMMAND)))
+    {
+        i = -1;
+        while (++i < BLTIN_NUM)
+        {
+            if (!ft_strcmp(find_token(shell, COMMAND), blt_str(i)))
+            {
+                run_blt(shell, i);
+                break ;
+            }
+        }
+    }
+    else if (execve(path, buff, shell->envp) == -1)
+			;
 	exit(ret);
 }
 
