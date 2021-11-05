@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:02:52 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/01 22:16:58 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/05 21:23:37 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static int	line_enter(void)
 	return (0);
 }
 
-//todo 나중에 통화로 상담
 static void	temp_line_enter(t_mini *shell)
 {
 	free(g_mini.path);
