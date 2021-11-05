@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 14:30:16 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/01 21:44:49 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/04 00:43:27 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,10 @@ void free_buff(char **buff)
 	while (buff[++i])
 		free(buff[i]);
 	free(buff);
+}
+
+void save_old_fds(int *old_fds)
+{
+	old_fds[0] = dup(STDIN_FILENO);
+	old_fds[1] = dup(STDOUT_FILENO);
 }

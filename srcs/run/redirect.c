@@ -6,179 +6,84 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/01 22:16:56 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/04 22:54:50 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	reprocess(t_mini *shell)
+static int	redirect_in(t_mini *shell, int *rd_fds)
 {
-	int		fd;
-	int		i;
-	char	*path;
-	char	**buff;
+	if (rd_fds[0] > 0)
+		close(rd_fds[0]);
+	rd_fds[0] = open(find_token(shell, ARG), O_RDONLY);
+	//todo
+	if (rd_fds[0] == -1)
+		// return (ft_print_err(find_token(shell, ARG), strerror(errno), NULL, 1));
+		return (-1);
+	dup2(rd_fds[0], STDIN_FILENO);
+	return (1);
+}
 
-	buff = make_buff(shell);
-	fd = open(find_token(shell, ARG),  O_WRONLY | O_CREAT | O_TRUNC, 0744);
-	if (fd < 0)
+static void	redirect_out(t_mini *shell, int *rd_fds)
+{
+	if (rd_fds[1] > 0)
+		close(rd_fds[1]);
+	rd_fds[1] = open(find_token(shell, ARG), O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	dup2(rd_fds[1], STDOUT_FILENO);
+}
+
+static void	redirect_app(t_mini *shell, int *rd_fds)
+{
+	if (rd_fds[1] > 0)
+		close(rd_fds[1]);
+    rd_fds[1] =	open(find_token(shell, ARG), O_WRONLY | O_CREAT | O_APPEND, 0644);
+	dup2(rd_fds[1], STDOUT_FILENO);
+    
+}
+
+int	redirect_process(t_mini *shell, int *rd_fds)
+{
+    t_token *target_token;
+    int temp;
+    rd_fds[0] = 0;
+    rd_fds[1] = 0;
+
+    target_token = shell->cmd->token;
+    if (shell->cmd->re_flag == RD_IN)
 	{
-		print_error2(find_token(shell, ARG), "no such file or dicretory","");
+        redirect_in(shell, rd_fds);
 		return (0);
 	}
-	if(!(path = find_path(shell, find_token(shell, COMMAND))))
-		return (print_error2(find_token(shell, ARG), "no such file or dicretory",""));
-	dup2(fd, STDOUT_FILENO);
-	close(fd);
-	if (check_cmd(find_token(shell, COMMAND)))
+    else if (shell->cmd->re_flag == RD_OUT)
+        redirect_out(shell, rd_fds);
+    else if (shell->cmd->re_flag == RD_APPEND)
+        redirect_app(shell, rd_fds);
+    return (1);
+    // else if (shell->cmd->re_flag == RD_HEREDOC)
+    //     redirect_herdoc(shell);
+}
+
+void		redirect_close(int *rd_fds)
+{
+	if (rd_fds[0] > 0)
+		close(rd_fds[0]);
+	if (rd_fds[1] > 0)
+		close(rd_fds[1]);
+}
+
+void		redirect_restore(int *rd_fds, int *old_fds)
+{
+	if (rd_fds[0] > 0)
 	{
-		i = -1;
-		while (++i < BLTIN_NUM)
-		{
-			if (!ft_strcmp(find_token(shell, COMMAND), blt_str(i)))
-			{
-				run_blt(shell, i);
-				break ;
-			}
-		}
+		dup2(old_fds[0], STDIN_FILENO);
+		close(rd_fds[0]);
+		close(old_fds[0]);
 	}
-	else if (execve(path, buff, shell->envp) == -1)
-		return (print_error2(find_token(shell, ARG), "no such file or dicretory",""));
-	free(path);
-	free(buff);
-	return (EXIT_SUCCESS);
-}
-
-int add_reprocess(t_mini *shell)
-{
-	int fd;
-	int i;
-	char *path;
-	char **buff;
-
-    buff = make_buff(shell);
-    fd = open(find_token(shell, ARG),  O_WRONLY | O_CREAT | O_APPEND, 0744);
-    if (fd < 0)
-    {
-        print_error2(find_token(shell, ARG), "no such file or dicretory","");
-        return (0);
-    }
-    if(!(path = find_path(shell, find_token(shell, COMMAND))))
-            return (print_error2(find_token(shell, ARG), "no such file or dicretory",""));
-    dup2(fd, STDOUT_FILENO);
-    close(fd);
-    if (check_cmd(find_token(shell, COMMAND)))
-    {
-        i = -1;
-        while (++i < BLTIN_NUM)
-        {
-            if (!ft_strcmp(find_token(shell, COMMAND), blt_str(i)))
-            {
-                run_blt(shell, i);
-                break ;
-            }
-        }
-    }
-    else if (execve(path, buff, shell->envp) == -1)
-            return (print_error2(find_token(shell, ARG), "no such file or dicretory",""));
-    free(path);
-    free(buff);
-    return (EXIT_SUCCESS);
-}
-
-int outreprocess(t_mini *shell)
-{
-	int		fd;
-	int		i;
-	char	*path;
-	char	**buff;
-
-    buff = make_buff(shell);
-    fd = open(find_token(shell, ARG), O_WRONLY | O_CREAT | O_RDONLY, 0744);
-    if (fd < 0)
-    {
-        print_error2(find_token(shell, ARG), "no such file or dicretory","");
-        return (0);
-    }
-    if(!(path = find_path(shell, find_token(shell, COMMAND))))
-            return (print_error2(find_token(shell, ARG), "no such file or dicretory",""));
-    dup2(fd, STDIN_FILENO);
-    close(fd);
-    if (check_cmd(find_token(shell, COMMAND)))
-    {
-        i = -1;
-        while (++i < BLTIN_NUM)
-        {
-            if (!ft_strcmp(find_token(shell, COMMAND), blt_str(i)))
-            {
-                run_blt(shell, i);
-                break ;
-            }
-        }
-    }
-    else if (execve(path, buff, shell->envp) == -1)
-            return (print_error2(find_token(shell, ARG), "no such file or dicretory",""));
-    free(path);
-    free(buff);
-    return (EXIT_SUCCESS);
-}
-int add_outreprocess(t_mini *shell)
-{
-    int fd;
-    int i;
-    char *path;
-    char **buff;
-
-    buff = make_buff(shell);
-    fd = open(find_token(shell, ARG), O_WRONLY | O_CREAT | O_APPEND, 0744);
-    if (fd < 0)
-    {
-        print_error2(find_token(shell, ARG), "no such file or dicretory","");
-        return (0);
-    }
-    if(!(path = find_path(shell, find_token(shell, COMMAND))))
-            return (print_error2(find_token(shell, ARG), "no such file or dicretory",""));
-    dup2(fd, STDIN_FILENO);
-    close(fd);
-    if (check_cmd(find_token(shell, COMMAND)))
-    {
-        i = -1;
-        while (++i < BLTIN_NUM)
-        {
-            if (!ft_strcmp(find_token(shell, COMMAND), blt_str(i)))
-            {
-                run_blt(shell, i);
-                break ;
-            }
-        }
-    }
-    else if (execve(path, buff, shell->envp) == -1)
-            return (print_error2(find_token(shell, ARG), "no such file or dicretory",""));
-    free(path);
-    free(buff);
-    return (EXIT_SUCCESS);
-}
-int redirect(t_mini *shell)
-{
-	int	i;
-	int	temp;
-	int	status;
-	pid_t	pid;
-
-    i = 0;
-    pid = fork();
-    if (pid == 0)
-    {
-        if (shell->cmd->re_flag == RD_IN)
-            temp = reprocess(shell);
-        else if (shell->cmd->re_flag == RD_OUT)
-            temp = outreprocess(shell);
-        else if (shell->cmd->re_flag == RD_APPEND)
-            temp = add_reprocess(shell);
-        else if (shell->cmd->re_flag == RD_HEREDOC)
-            temp = add_outreprocess(shell);
-        exit(temp);
-    }
-    wait(&status);
-    return (0);
+	if (rd_fds[1] > 0)
+	{
+		dup2(old_fds[1], STDOUT_FILENO);
+		close(rd_fds[1]);
+		close(old_fds[1]);
+	}
 }

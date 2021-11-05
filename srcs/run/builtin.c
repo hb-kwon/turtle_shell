@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 13:26:18 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/01 15:12:21 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/05 01:56:24 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,29 @@ int	check_cmd(char *cmd)
 int	run_blt(t_mini *shell, int i)
 {
 	char	*cmd;
-
+	int rd_fds[2];
+	int old_fds[2];
+	
 	cmd = shell->cmd->token->arg;
+	save_old_fds(old_fds);
+	if (shell->cmd->pipe_flag > 0)
+		pipe_blt_run(i, shell);
+	else
+	{
+		if(!redirect_process(shell, rd_fds))
+		{
+			redirect_restore(rd_fds, old_fds);
+			return (0);
+		}
+		(*blt_func(i))(shell);
+		if (i == 6 && !check_cmd(cmd))
+			print_error_blt(cmd);
+		redirect_restore(rd_fds, old_fds);
+	}
 	// if (!ft_strcmp(cmd, blt_str(i)))
 	// 	(*blt_func(i))(shell);
 	// else if (i == 6 && !check_cmd(cmd))
 	// 	print_error_blt(cmd);
-	(*blt_func(i))(shell);
-	if (i == 6 && !check_cmd(cmd))
-		print_error_blt(cmd);
 	return (0);
 }
 

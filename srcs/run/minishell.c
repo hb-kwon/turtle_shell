@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/01 22:15:33 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/05 03:57:58 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,54 @@ char	**ft_pipe_path(char *envp[])
 	}
 	return (NULL);
 }
+void pipe_blt_run(int i, t_mini *shell)
+{
+	int temp_num;
+	int status;
+	int rd_fds[2];
+	int old_fds[2];
+	char *cmd;
 
+	cmd = shell->cmd->token->arg;
+	save_old_fds(old_fds);
+	pipe(shell->cmd->fds);
+	g_mini.pid = fork();
+	if (g_mini.pid == 0)
+	{
+		pipe_process(shell);
+		if (!redirect_process(shell, rd_fds))
+			exit(1);
+		(*blt_func(i))(shell);
+		if (i == 6 && !check_cmd(cmd))
+			print_error_blt(cmd);
+		exit(0);
+	}
+	// else if (g_mini.pid == -1)
+	else
+	{
+		wait(&status);
+		if (status >> 8 != 0)
+			g_mini.exit_status = status >> 8;
+		redirect_close(rd_fds);
+		pipe_restore(shell, old_fds);
+	}
+}
+static int run_blitin(int *i, t_cmd *temp, t_mini *shell)
+{
+	int temp_num;
+
+	temp_num = -1;
+	while (++temp_num < BLTIN_NUM)
+	{
+		if (!ft_strcmp(temp->token->arg, blt_str(temp_num)))
+		{
+			run_blt(shell, temp_num);
+			break ;
+		}
+	}
+	(*i) = temp_num;
+	return (0);
+}
 static int	run_shell(t_mini *shell)
 {
 	int		i;
@@ -54,26 +101,11 @@ static int	run_shell(t_mini *shell)
 	i = -1;
 	while (temp)
 	{
-		if (temp == NULL)
-			break ;
-		if (temp && temp->re_flag > 0)
-			redirect(shell);
-		else if (temp->pipe_flag == 0)
-		{
-			while (++i < BLTIN_NUM)
-			{
-				if (!ft_strcmp(temp->token->arg, blt_str(i)))
-				{
-					run_blt(shell, i);
-					break ;
-				}
-			}
-			if (i >= BLTIN_NUM)
-				run_inner(shell);
-		}		
-		else
-			pipe_process(shell);
+		run_blitin(&i, temp, shell);
+		if (i >= BLTIN_NUM)
+			run_inner(shell);
 		temp = temp->next;
+		shell->cmd = shell->cmd->next;
 	}
 	free_cmd(shell);
 	return (1);
@@ -88,6 +120,7 @@ t_mini *malloc_shell()
 	return (temp);
 
 }
+
 void	minishell(char **en)
 {
 	int		status;

@@ -6,89 +6,64 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 22:33:46 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/01 22:16:07 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/05 04:13:10 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // pipe
 #include "minishell.h"
 
-void child_process(t_mini *shell)
-{
-	int		i;
-	t_mini	*next_shell;
-	t_cmd	*temp_cmd;
-	t_cmd	*temp_next_cmd;
-	int ret;
-	char **buff;
-	char *path;
-	path = find_path(shell, find_token(shell, COMMAND));
-
-    buff = make_buff(shell);
-	ret = EXIT_SUCCESS;
-	temp_cmd = shell->cmd;
-	temp_next_cmd = temp_cmd->next;
-	if (temp_cmd->pipe_flag == 1)
-	{
-		dup2(temp_next_cmd->fds[1], STDOUT);
-		close(temp_next_cmd->fds[1]);
-	}
-	if (temp_cmd->fds[0] != 0)
-	{
-		dup2(temp_cmd->fds[0], STDIN);
-		close(temp_cmd->fds[0]);
-	}
-    if (check_cmd(find_token(shell, COMMAND)))
-    {
-        i = -1;
-        while (++i < BLTIN_NUM)
-        {
-            if (!ft_strcmp(find_token(shell, COMMAND), blt_str(i)))
-            {
-                run_blt(shell, i);
-                break ;
-            }
-        }
-    }
-    else if (execve(path, buff, shell->envp) == -1)
-			;
-	exit(ret);
-}
-
-int pipe_check(t_mini *shell)
-{
-	if (shell->cmd->next || shell->cmd->prev)
-		return (1);
-	return (0);
-}
-
 int pipe_process(t_mini *shell)
 {
-	pid_t	pid;
-	int		status;
-	t_cmd	*temp_cmd;
-	t_cmd	*temp_next_cmd;
-
-	if (!pipe_check(shell))
-		return (0);
-	//debug
-	printf("pipe process start\n");
-	//end
-	temp_cmd = shell->cmd;
-	temp_next_cmd = temp_cmd->next;
-	if(temp_cmd->pipe_flag == 1)
+	t_cmd *temp;
+	
+	temp = shell->cmd;
+	if (temp->next || temp->prev)
 	{
-		temp_next_cmd->pre_flag = 1;
-		pipe(temp_next_cmd->fds);
+		if (temp->next && !temp->prev)
+		{
+			dup2(temp->fds[1], STDOUT_FILENO);
+		}
+		else if (temp->next && temp->prev)
+		{
+			dup2(temp->fds[1], STDOUT_FILENO);
+			dup2(temp->prev->fds[0], STDIN_FILENO);
+		}
+		else if (!temp->next && temp->prev)
+		{
+			dup2(temp->prev->fds[0], STDIN_FILENO);
+		}
 	}
-	pid = fork();
-	if(pid == 0)
-		child_process(shell);
-	waitpid(pid, &status, 0);
-	if(temp_cmd->pipe_flag == 1)
-		close(temp_next_cmd->fds[1]);
-	if(temp_cmd->fds[0] != 0)
-		close(temp_cmd->fds[0]);
-	shell->cmd = shell->cmd->next;
 	return (0);
+}
+
+void pipe_restore(t_mini *shell, int *old_fds)
+{
+	t_cmd * temp;
+	
+	temp = shell->cmd;
+	if (temp->next || temp->prev)
+	{
+		if (temp->next && !temp->prev)
+		{
+			close (temp->fds[1]);
+		}
+		else if (temp->next && temp->prev)
+		{
+			close(temp->prev->fds[0]);
+			close(temp->fds[1]);
+		}
+		else if (!temp->next && temp->prev)
+		{
+			dup2(old_fds[1], STDOUT_FILENO);
+			close(temp->prev->fds[0]);
+		}
+		else if (!temp->next && temp->prev)
+		{
+			dup2(old_fds[1], STDOUT_FILENO);
+			close(temp->prev->fds[0]);
+			close(temp->fds[1]);
+			close(temp->fds[0]);
+		}
+	}
 }

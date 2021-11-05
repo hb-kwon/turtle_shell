@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inner.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/01 15:21:06 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/05 04:13:03 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,31 +39,29 @@ static char	**ft_pipe_path(char *envp[])
 	return (NULL);
 }
 
-void	run_inner_child(t_mini *shell)
+void	run_inner_child(t_mini *shell, int *rd_fds)
 {
 	char	**buff;
 	char	**paths;
 	char	*path;
-	char	*path_cmd;
 	int		i;
-
+	struct stat s;
+	
+	i = 0;
+	// printf("test_all %d\n",i++);
+	pipe_process(shell);
+	if (!redirect_process(shell, rd_fds))
+		exit (1);
 	buff = make_buff(shell);
-	paths = ft_pipe_path(shell->envp);
-	i = -1;
-	while (paths[++i])
+	path = find_path(shell, find_token(shell, COMMAND));
+	if (stat(path, &s) == 0)
 	{
-		path = ft_strjoin(paths[i], "/");
-		path_cmd = ft_strjoin(path, buff[0]);
-		if (access(path_cmd, F_OK | X_OK) == 0)
-		{
-			if (execve(path_cmd, buff, shell->envp) == -1)
-				exit(1);
-		}
-		free(path);
-		free(path_cmd);
+		if (execve(path, buff, shell->envp) == -1)
+			exit(EXIT_FAILURE);
 	}
-	ft_free(buff);
-	ft_free(paths);
+	// ft_free(buff);
+	// ft_free(paths);
+	exit(EXIT_SUCCESS);
 }
 
 static void	run_inner_parent(t_mini *shell)
@@ -83,12 +81,23 @@ static void	run_inner_parent(t_mini *shell)
 
 int	run_inner(t_mini *shell)
 {
+	int status;
+	int	old_fds[2];
+	int rd_fds[2];
+
+	save_old_fds(old_fds);
+	pipe(shell->cmd->fds);
 	g_mini.pid = fork();
 	if (g_mini.pid == 0)
-		run_inner_child(shell);
+		run_inner_child(shell, rd_fds);
 	else if (g_mini.pid == -1)
 		print_error1("fork error", strerror(errno));
 	else
+	{
 		run_inner_parent(shell);
+		redirect_close(rd_fds);
+		pipe_restore(shell, old_fds);
+	}
+	// shell->cmd = shell->cmd->next;
 	return (1);
 }

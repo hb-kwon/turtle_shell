@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/01 17:47:19 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/05 02:03:57 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ struct s_mini
 	char			*path;
 	char			**envp;
 	pid_t			pid;
+	int		fds[2];
 	struct termios	term_sh;
 	struct termios	term_ori;
 };
@@ -137,8 +138,14 @@ int		check_cmd(char *cmd);
 int		run_blt(t_mini *shell, int i);
 int		run_inner(t_mini *shell);
 int		pipe_process(t_mini *shell);
+void	pipe_restore(t_mini *shell, int *old_fds);
+
 void	child_process(t_mini *shell);
-int		redirect(t_mini *shell);
+int		redirect_process(t_mini *shell, int *rd_fds);
+void	redirect_close(int *rd_fds);
+void		redirect_restore(int *rd_fds, int *old_fds);
+void pipe_blt_run(int i, t_mini *shell);
+void	print_error_blt(char *str);
 
 /*
 ** builtin
@@ -171,6 +178,8 @@ int		print_error2(char *msg1, char *msg2, char *err_num);
 int		print_error1(char *msg, char *err_num);
 
 void	free_cmd(t_mini *shell);
+
+void	save_old_fds(int *old_fds);
 /*
 ** execute
 */
