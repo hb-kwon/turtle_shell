@@ -6,17 +6,43 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 13:26:18 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/05 01:56:24 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/06 21:09:36 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_error_blt(char *str)
+void pipe_blt_run(int i, t_mini *shell)
 {
-	write(1, str, strlen(str));
-	write(1, " ", 1);
-	ft_putstr("commend not found\n");
+	int temp_num;
+	int status;
+	int rd_fds[2];
+	int old_fds[2];
+	char *cmd;
+
+	cmd = shell->cmd->token->arg;
+	save_old_fds(old_fds);
+	pipe(shell->cmd->fds);
+	g_mini.pid = fork();
+	if (g_mini.pid == 0)
+	{
+		pipe_process(shell);
+		if (!redirect_process(shell, rd_fds))
+			exit(1);
+		(*blt_func(i))(shell);
+		if (i == 6 && !check_cmd(cmd))
+			print_error_blt(cmd);
+		exit(0);
+	}
+	// else if (g_mini.pid == -1)
+	else
+	{
+		wait(&status);
+		if (status >> 8 != 0)
+			g_mini.exit_status = status >> 8;
+		redirect_close(rd_fds);
+		pipe_restore(shell, old_fds);
+	}
 }
 
 char	*blt_str(int i)

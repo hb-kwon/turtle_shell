@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/05 02:03:57 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/06 21:18:46 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ struct s_mini
 	char			*path;
 	char			**envp;
 	pid_t			pid;
-	int		fds[2];
 	struct termios	term_sh;
 	struct termios	term_ori;
 };
@@ -115,8 +114,8 @@ int		main(int argc, char *argv[], char *envp[]);
 void	init_shell(char ***en, char *envp[]);
 int		init_line(t_mini *shell);
 int		init_check(char *line);
-void	signal_int(int sig_num);
-void	signal_quit(int sig_num);
+// void	signal_int(int sig_num);
+// void	signal_quit(int sig_num);
 
 /*
 ** parsing
@@ -143,8 +142,7 @@ void	pipe_restore(t_mini *shell, int *old_fds);
 void	child_process(t_mini *shell);
 int		redirect_process(t_mini *shell, int *rd_fds);
 void	redirect_close(int *rd_fds);
-void		redirect_restore(int *rd_fds, int *old_fds);
-void pipe_blt_run(int i, t_mini *shell);
+void	redirect_restore(int *rd_fds, int *old_fds);
 void	print_error_blt(char *str);
 
 /*
@@ -178,6 +176,7 @@ int		print_error2(char *msg1, char *msg2, char *err_num);
 int		print_error1(char *msg, char *err_num);
 
 void	free_cmd(t_mini *shell);
+void	ft_free(char **arr);
 
 void	save_old_fds(int *old_fds);
 /*

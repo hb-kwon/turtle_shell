@@ -6,40 +6,13 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/06 20:45:08 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/06 21:08:24 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_free(char **arr)
-{
-	int	i;
-
-	i = -1;
-	while (arr[++i])
-		free(arr[i]);
-	free(arr);
-}
-
-static char	**ft_pipe_path(char *envp[])
-{
-	int		i;
-	char	**paths;
-
-	i = -1;
-	while (envp[++i])
-	{
-		if (!ft_strncmp(envp[i], "PATH=", 5))
-		{
-			paths = ft_split(envp[i] + 5, ':');
-			return (paths);
-		}
-	}
-	return (NULL);
-}
-
-void	run_inner_child(t_mini *shell, int *rd_fds)
+static void	run_inner_child(t_mini *shell, int *rd_fds)
 {
 	char	**buff;
 	char	**paths;
@@ -98,6 +71,5 @@ int	run_inner(t_mini *shell)
 		redirect_close(rd_fds);
 		pipe_restore(shell, old_fds);
 	}
-	// shell->cmd = shell->cmd->next;
 	return (1);
 }

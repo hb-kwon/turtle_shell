@@ -6,11 +6,10 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 22:33:46 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/05 04:13:10 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/06 21:14:40 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// pipe
 #include "minishell.h"
 
 int pipe_process(t_mini *shell)
