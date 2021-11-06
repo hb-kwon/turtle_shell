@@ -6,13 +6,13 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/05 21:14:31 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/06 01:01:39 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	redirect_out(t_mini *shell, int *rd_fds)
+static int	redirect_in(t_mini *shell, int *rd_fds)
 {
 	if (rd_fds[0] > 0)
 		close(rd_fds[0]);
@@ -25,7 +25,7 @@ static int	redirect_out(t_mini *shell, int *rd_fds)
 	return (1);
 }
 
-static void	redirect_in(t_mini *shell, int *rd_fds)
+static void	redirect_out(t_mini *shell, int *rd_fds)
 {
 	if (rd_fds[1] > 0)
 		close(rd_fds[1]);
@@ -50,18 +50,18 @@ int	redirect_process(t_mini *shell, int *rd_fds)
     rd_fds[1] = 0;
 
     target_token = shell->cmd->token;
-    if (shell->cmd->re_flag == RD_OUT)
+    if (find_token(shell, RD_IN))
 	{
-        redirect_out(shell, rd_fds);
+        redirect_in(shell, rd_fds);
 		return (0);
 	}
-    else if (shell->cmd->re_flag == RD_IN)
-        redirect_in(shell, rd_fds);
-    else if (shell->cmd->re_flag == RD_HEREDOC)
+    else if (find_token(shell, RD_OUT))
+        redirect_out(shell, rd_fds);
+    else if (find_token(shell, RD_APPEND))
         redirect_app(shell, rd_fds);
-    return (1);
-    // else if (shell->cmd->re_flag == RD_HEREDOC)
+    // else if (find_token(shell, RD_HEREDOC))
     //     redirect_herdoc(shell);
+    return (1);
 }
 
 void		redirect_close(int *rd_fds)

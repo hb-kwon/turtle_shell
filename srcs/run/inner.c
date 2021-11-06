@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/05 04:13:03 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/06 20:45:08 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void	run_inner_child(t_mini *shell, int *rd_fds)
 		if (execve(path, buff, shell->envp) == -1)
 			exit(EXIT_FAILURE);
 	}
-	// ft_free(buff);
-	// ft_free(paths);
+	ft_free(buff);
+	ft_free(paths);
 	exit(EXIT_SUCCESS);
 }
 
