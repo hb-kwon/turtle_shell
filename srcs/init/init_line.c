@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:02:52 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/05 21:23:37 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/06 03:21:53 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static void	temp_line_enter(t_mini *shell)
 static void	line_eof(void)
 {
 	printf("\x1b[1A\033[%zuCexit\n", ft_strlen(g_mini.path));
+	// printf("exit");
 	free(g_mini.path);
 	free(g_mini.line);
 	g_mini.path = NULL;
@@ -67,7 +68,6 @@ int	init_line(t_mini *shell)
 {
 	char	buf[PATH_MAX];
 
-	tcsetattr(STDIN_FILENO, TCSANOW, &g_mini.term_ori);
 	g_mini.path = ft_strjoin(getcwd(buf, PATH_MAX), "$ ");
 	// g_mini.line = (char *)malloc(sizeof(char) * ft_strlen(g_mini.path)+1);
 	g_mini.line = readline(g_mini.path);
