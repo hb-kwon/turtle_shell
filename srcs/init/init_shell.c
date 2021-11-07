@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:45:14 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/06 04:06:19 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/07 16:00:20 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,20 +40,30 @@ static void signal_int(int signo)
 	//todo
 	if (signo != SIGINT)
 		return ;
-	printf("\b\b  \b\b\n"); // Move to a new line
-    if (rl_on_new_line() == -1)
-		exit(1); // Regenerate the prompt on a newline
-	rl_replace_line("", 0); // Clear the previous text
-	rl_redisplay();
+	if (g_mini.pid == 0)
+	{
+		printf("\b\b  \b\b\n"); // Move to a new line
+		if (rl_on_new_line() == -1)
+			exit(1); // Regenerate the prompt on a newline
+		rl_replace_line("", 0); // Clear the previous text
+		rl_redisplay();
+	}
+	else
+	{
+		printf("\n");
+		g_mini.sig_on = 1;
+	}
 }
 
 static void	signal_quit(int signo)
 {
-	g_mini.exit_status = 130;
 	if (g_mini.pid == 0)
 		printf("\b\b  \b\b");
 	else
+	{
 		printf("Quit: 3\n");
+		g_mini.sig_on = 1;
+	}
 }
 
 void	init_shell(char ***en, char *envp[])

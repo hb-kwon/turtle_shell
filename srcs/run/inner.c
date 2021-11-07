@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inner.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/06 21:08:24 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/07 16:00:47 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	run_inner_child(t_mini *shell, int *rd_fds)
 	char	*path;
 	int		i;
 	struct stat s;
-	
+
 	i = 0;
 	// printf("test_all %d\n",i++);
 	pipe_process(shell);
@@ -44,8 +44,8 @@ static void	run_inner_parent(t_mini *shell)
 	wait(&status);
 	if (status >> 8 == 255)
 		g_mini.exit_status = 255;
-	// else if (g_mini.signal_on)
-	// 	g_mini.exit_status = status + 128;
+	else if (g_mini.sig_on)
+		g_mini.exit_status = status + 128;
 	else if (status >> 8 != 0)
 		g_mini.exit_status = status >> 8;
 	else

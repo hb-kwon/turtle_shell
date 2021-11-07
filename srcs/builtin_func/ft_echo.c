@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:11:43 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/28 16:21:53 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/07 15:50:48 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,13 @@ static void echo_home(char *arg, t_mini *shell)
 		print_exit_status(shell);
 	temp = find_en(&(arg[1]), shell->envp);
 	ft_putstr_fd(temp, STDOUT);
-
 }
 
 int	ft_echo(t_mini *shell)
 {
 	int		n_flag;
 	t_token *token;
-	
+
 	token = shell->cmd->token->next;
 	n_flag = 0;
 	if (!check_option(shell))
