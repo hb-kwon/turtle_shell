@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:45:14 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/07 16:00:20 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/07 17:41:22 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,33 +37,46 @@ void	init_env(char ***en, char *envp[])
 
 static void signal_int(int signo)
 {
-	//todo
-	if (signo != SIGINT)
-		return ;
-	if (g_mini.pid == 0)
+	if (g_mini.pid > 0)
 	{
-		printf("\b\b  \b\b\n"); // Move to a new line
-		if (rl_on_new_line() == -1)
-			exit(1); // Regenerate the prompt on a newline
-		rl_replace_line("", 0); // Clear the previous text
-		rl_redisplay();
+		if (!kill(g_mini.pid, signo))
+		{
+			printf("\n");
+			g_mini.sig_on = 1;
+		}
+		else
+		{
+			printf("\b\b  \b\b\n");
+			if (rl_on_new_line() == -1)
+				exit(1);
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
 	}
 	else
 	{
-		printf("\n");
-		g_mini.sig_on = 1;
+		printf("\b\b  \b\b\n");
+		if (rl_on_new_line() == -1)
+			exit(1);
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 }
 
 static void	signal_quit(int signo)
 {
-	if (g_mini.pid == 0)
-		printf("\b\b  \b\b");
-	else
+	if (g_mini.pid > 0)
 	{
-		printf("Quit: 3\n");
-		g_mini.sig_on = 1;
+		if (!kill(g_mini.pid, signo))
+		{
+			printf("Quit: 3\n");
+			g_mini.sig_on = 1;
+		}
+		else
+			printf("\b\b  \b\b");
 	}
+	else
+		printf("\b\b  \b\b");
 }
 
 void	init_shell(char ***en, char *envp[])

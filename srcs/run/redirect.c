@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/06 01:01:39 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/07 18:26:06 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,25 @@ static int	redirect_in(t_mini *shell, int *rd_fds)
 {
 	if (rd_fds[0] > 0)
 		close(rd_fds[0]);
+	printf("redirection in args : %s\n", find_token(shell, ARG));
 	rd_fds[0] = open(find_token(shell, ARG), O_RDONLY);
 	//todo
 	if (rd_fds[0] == -1)
 		// return (ft_print_err(find_token(shell, ARG), strerror(errno), NULL, 1));
 		return (-1);
 	dup2(rd_fds[0], STDIN_FILENO);
+	printf("finish rd in\n");
 	return (1);
 }
 
 static void	redirect_out(t_mini *shell, int *rd_fds)
 {
+	printf("redirection out args : %s\n", find_token(shell, ARG));
 	if (rd_fds[1] > 0)
 		close(rd_fds[1]);
 	rd_fds[1] = open(find_token(shell, ARG), O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	dup2(rd_fds[1], STDOUT_FILENO);
+	printf("finish rd out\n");
 }
 
 static void	redirect_app(t_mini *shell, int *rd_fds)
@@ -39,7 +43,7 @@ static void	redirect_app(t_mini *shell, int *rd_fds)
 		close(rd_fds[1]);
     rd_fds[1] =	open(find_token(shell, ARG), O_WRONLY | O_CREAT | O_APPEND, 0644);
 	dup2(rd_fds[1], STDOUT_FILENO);
-    
+
 }
 
 int	redirect_process(t_mini *shell, int *rd_fds)
