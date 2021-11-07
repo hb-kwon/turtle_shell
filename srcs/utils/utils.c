@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 14:30:16 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/04 00:43:27 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/07 19:00:29 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,25 @@ int		turn_on_flag(int *flag, int quote, int idx)
 	return (idx);
 }
 
+static int	get_cnt_buff(t_mini *shell)
+{
+	t_token	*temp;
+	int	cnt;
+
+	temp = shell->cmd->token;
+	cnt = 0;
+	while (temp)
+	{
+		if (temp->type == COMMAND || temp->type == ARGUMENT)
+			cnt++;
+		if (temp->next)
+			temp = temp->next;
+		else
+			break ;
+	}
+	return (cnt);
+}
+
 char	**make_buff(t_mini *shell)
 {
 	t_token	*temp;
@@ -30,22 +49,21 @@ char	**make_buff(t_mini *shell)
 	int		j;
 
 	i = 0;
-	j = 0;
-	temp = shell->cmd->token;
-	while (temp)
-	{
-		temp = temp->next;
-		j++;
-	}
+	j = get_cnt_buff(shell);
 	buff = (char **)malloc(sizeof(char *) * (j + 1));
-	buff[j] = NULL;
+	if (!buff)
+		return (NULL);
 	temp = shell->cmd->token;
 	while (temp)
 	{
-		buff[i] = temp->arg;
-		temp = temp->next;
-		i++;
+		if (temp->type == COMMAND || temp->type == ARGUMENT)
+			buff[i++] = temp->arg;
+		if (temp->next)
+			temp = temp->next;
+		else
+			break ;
 	}
+	buff[j] = NULL;
 	return (buff);
 }
 
