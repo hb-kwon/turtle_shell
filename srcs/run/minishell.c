@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/06 21:09:25 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/07 19:12:40 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	minishell(char **en)
 	{
 		shell = malloc_shell();
 		shell->envp = en;
+		g_mini.envp = en;
 		if (init_line(shell))
 			status = run_shell(shell);
 		en = shell->envp;

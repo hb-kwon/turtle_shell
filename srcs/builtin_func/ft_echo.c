@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:11:43 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/07 15:50:48 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/07 19:06:20 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,16 @@ int	ft_echo(t_mini *shell)
 	{
 		if (token->type != ARGUMENT)
 			break ;
-		ft_putstr_fd(token->arg, STDOUT);
-		ft_putstr_fd(" ", STDOUT);
+		if (token->arg[0] == '$')
+		{
+			echo_home(token->arg, shell);
+			break;
+		}
+		else
+		{
+			ft_putstr_fd(token->arg, STDOUT);
+			ft_putstr_fd(" ", STDOUT);
+		}
 		token = token->next;
 	}
 	if (n_flag)

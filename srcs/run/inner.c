@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inner.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/07 16:00:47 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/07 18:07:25 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ static void	run_inner_child(t_mini *shell, int *rd_fds)
 		exit (1);
 	buff = make_buff(shell);
 	path = find_path(shell, find_token(shell, COMMAND));
+	// buff[0] = "ls";
+	buff[i++] = "ls";
+	buff[i++] = "-l";
+	// buff[i++] = "temp";
+	buff[i++] = NULL;
 	if (stat(path, &s) == 0)
 	{
 		if (execve(path, buff, shell->envp) == -1)
