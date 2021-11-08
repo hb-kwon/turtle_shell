@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_token_quote.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:27:50 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/07 15:52:31 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/08 01:14:44 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,6 @@ char	*set_value(char *arg, int idx)
 			res = ft_charjoin(res, arg[idx++]);
 	}
 	return (res);
-}
-
-char	*find_value(char *name, char **envp)
-{
-	int	i;
-	int	len;
-
-	i = -1;
-	len = ft_strlen(name);
-	while (envp[++i])
-	{
-		if (!ft_strncmp(name, envp[i], len))
-		{
-			if (envp[i][len] == '=')
-				return (ft_strchr(envp[i], '=') + 1);
-		}
-	}
-	return (NULL);
 }
 
 char	*parse_token_quote(char *args)

@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/07 19:25:18 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/07 20:51:14 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ static void	run_inner_child(t_mini *shell, char **buff, int *rd_fds)
 	path = find_path(shell, find_token(shell, COMMAND));
 	int i = -1;
 	t_mini *temp = shell;
-	printf("inner path :%s\n", path);
 	while (buff[++i])
 	{
-		printf("inner buff :%s\n", buff[i]);
 		temp->cmd->token = temp->cmd->token->next;
 	}
 	if (stat(path, &s) == 0)
@@ -64,8 +62,6 @@ int	run_inner(t_mini *shell)
 	save_old_fds(old_fds);
 	buff = make_buff(shell);
 	int i = -1;
-	while (buff[++i])
-		printf("buff[%d] : %s\n", i, buff[i]);
 	pipe(shell->cmd->fds);
 	g_mini.pid = fork();
 	if (g_mini.pid == 0)

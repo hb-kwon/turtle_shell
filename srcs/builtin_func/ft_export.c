@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:47 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/01 15:22:38 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/08 09:33:11 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,28 @@ static void	add_export(char *str, char **new, int i)
 	new[i + 1] = NULL;
 }
 
+char *find_key(char *str, int key)
+{
+	int i;
+	char *temp;
+
+	temp = (char *)malloc(sizeof(char) * strlen(str));
+	i = -1;
+	while(str[++i])
+	{
+		if (str[i] == key)
+		{
+			temp[i] = 0;
+			return (temp);
+		}
+		else
+		{
+			temp[i] = str[i];
+		}
+	}
+	return (NULL);
+}
+
 static int	check_export(char *str, char ***en)
 {
 	int		i;
@@ -38,7 +60,9 @@ static int	check_export(char *str, char ***en)
 	i = -1;
 	while ((*en)[++i])
 	{
-		if (!ft_strncmp((*en)[i], str, ft_strlen(str)))
+		char *temp = find_key((*en)[i], '=');
+		char *str_temp  = find_key(str, '=');
+		if (!ft_strncmp(find_key((*en)[i],'='), find_key(str,'='), ft_strlen(str)))
 		{
 			(*en)[i] = ft_strdup(str);
 			return (1);
@@ -55,6 +79,19 @@ static int	check_export(char *str, char ***en)
 	return (1);
 }
 
+int is_export_valid(char *str)
+{
+	int i;
+
+	i = -1;
+	if (ft_isdigit(str[++i]))
+	{
+		return (0);
+	}
+	//나중에 더많은 예외처리 추가예정
+	return (1);
+
+}
 int	ft_export(t_mini *shell)
 {
 	int i;
@@ -70,14 +107,16 @@ int	ft_export(t_mini *shell)
 		print_export(shell->envp);
 	else
 	{
-		if(ft_strchr(token->arg, '='))
-			status = check_export(token->arg, &shell->envp);
-		else
-			while(token)
+		while(token)
+		{
+			if (!is_export_valid(find_key(token->arg, '=')))
 			{
-				status = check_export(token->arg, &shell->envp);
-				token = token->next;
+				// todo printf_error 추가
+				printf("error\n");
 			}
+			status = check_export(token->arg, &shell->envp);
+			token = token->next;
+		}
 	}
 	return (status);
 }

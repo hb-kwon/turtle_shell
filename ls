@@ -1,9 +1,0 @@
-Makefile
-includes
-libft
-libft.a
-ls
-minishell
-s
-srcs
-test
