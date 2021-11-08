@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:11:43 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/07 19:25:36 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/08 18:58:21 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int check_option(t_mini *shell)
 	while (++i < j)
 	{
 		if (!ft_strcmp(check->arg, "-n"))
-			return 0;
+			return (0);
 		check = check->next;
 	}
 	return (1);
@@ -67,20 +67,18 @@ int	ft_echo(t_mini *shell)
 	{
 		if (token->type != ARGUMENT)
 			break ;
-		if (token->arg[0] == '$')
-		{
-			echo_home(token->arg, shell);
-			break;
-		}
-		else
+		else if (token->next && token->next->type == ARGUMENT)
 		{
 			ft_putstr_fd(token->arg, STDOUT);
 			ft_putstr_fd(" ", STDOUT);
 		}
+		else
+			ft_putstr_fd(token->arg, STDOUT);
 		token = token->next;
 	}
 	if (n_flag)
 		return (0);
 	write(1, "\n", 1);
+	g_mini.exit_status = 0;
 	return (0);
 }
