@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:52 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/01 15:23:23 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/08 17:33:13 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,7 @@ int	ft_unset(t_mini *shell)
 	buff = make_buff(shell);
 	i = 0;
 	while (buff[++i])
-	{
 		status = check_env(buff[i]) && unset_en(buff[i], &shell->envp);
-	}
+	g_mini.exit_status = 0;
 	return (status);
 }

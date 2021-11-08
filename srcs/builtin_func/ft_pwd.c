@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:50 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/10/20 16:13:51 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/08 17:33:06 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ int	ft_pwd(t_mini *shell)
 	write(1, "\n", 1);
 	free(pwd);
 	(void)shell;
+	g_mini.exit_status = 0;
 	return (0);
 }

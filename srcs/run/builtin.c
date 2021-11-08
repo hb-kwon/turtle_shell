@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 13:26:18 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/06 21:09:36 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/08 17:34:57 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void pipe_blt_run(int i, t_mini *shell)
 			print_error_blt(cmd);
 		exit(0);
 	}
-	// else if (g_mini.pid == -1)
+	else if (g_mini.pid == -1)
+		print_error1("pid", "fork error");
 	else
 	{
 		wait(&status);
@@ -92,7 +93,7 @@ int	run_blt(t_mini *shell, int i)
 	char	*cmd;
 	int rd_fds[2];
 	int old_fds[2];
-	
+
 	cmd = shell->cmd->token->arg;
 	save_old_fds(old_fds);
 	if (shell->cmd->pipe_flag > 0)
