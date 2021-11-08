@@ -3,16 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   inner.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/07 20:51:14 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/08 19:42:17 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	run_inner_child(t_mini *shell, char **buff, int *rd_fds)
+static int	path_error_check(char *path)
+{
+	if (!path)
+	{
+		//debug
+		printf("path error check start\n");
+		if (ft_strchr(path, '/') || !path)
+			print_error1(path, "No such file or directory");
+		else
+			print_error1(path, "command not found");
+		g_mini.exit_status = 127;
+		free(path);
+		return (0);
+	}
+}
+
+static int	run_inner_child(t_mini *shell, char **buff, int *rd_fds)
 {
 	char	*path;
 	struct stat s;
@@ -21,19 +37,12 @@ static void	run_inner_child(t_mini *shell, char **buff, int *rd_fds)
 	if (!redirect_process(shell, rd_fds))
 		exit (1);
 	path = find_path(shell, find_token(shell, COMMAND));
-	int i = -1;
-	t_mini *temp = shell;
-	while (buff[++i])
-	{
-		temp->cmd->token = temp->cmd->token->next;
-	}
 	if (stat(path, &s) == 0)
 	{
 		if (execve(path, buff, shell->envp) == -1)
 			exit(EXIT_FAILURE);
 	}
-	// ft_free(buff);
-	// ft_free(paths);
+	free(path);
 	exit(EXIT_SUCCESS);
 }
 
@@ -61,7 +70,6 @@ int	run_inner(t_mini *shell)
 
 	save_old_fds(old_fds);
 	buff = make_buff(shell);
-	int i = -1;
 	pipe(shell->cmd->fds);
 	g_mini.pid = fork();
 	if (g_mini.pid == 0)
