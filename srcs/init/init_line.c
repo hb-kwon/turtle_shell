@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:02:52 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/06 03:21:53 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/08 19:39:54 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,7 @@ static int	line_input(t_mini *shell)
 	return (1);
 }
 
-static int	line_enter(void)
-{
-	free(g_mini.path);
-	free(g_mini.line);
-	g_mini.path = NULL;
-	g_mini.line = NULL;
-	return (0);
-}
-
-static void	temp_line_enter(t_mini *shell)
+static int	line_enter(t_mini *shell)
 {
 	free(g_mini.path);
 	free(g_mini.line);
@@ -50,13 +41,12 @@ static void	temp_line_enter(t_mini *shell)
 	g_mini.line = NULL;
 	shell->cmd = NULL;
 	shell = NULL;
+	return (0);
 }
-
 
 static void	line_eof(void)
 {
 	printf("\x1b[1A\033[%zuCexit\n", ft_strlen(g_mini.path));
-	// printf("exit");
 	free(g_mini.path);
 	free(g_mini.line);
 	g_mini.path = NULL;
@@ -69,12 +59,11 @@ int	init_line(t_mini *shell)
 	char	buf[PATH_MAX];
 
 	g_mini.path = ft_strjoin(getcwd(buf, PATH_MAX), "$ ");
-	// g_mini.line = (char *)malloc(sizeof(char) * ft_strlen(g_mini.path)+1);
 	g_mini.line = readline(g_mini.path);
 	if (g_mini.line == NULL)
 		line_eof();
 	else if (ft_strchr("", *(g_mini.line)))
-		temp_line_enter(shell);
+		return (line_enter(shell));
 	else
 		return (line_input(shell));
 	return (1);
