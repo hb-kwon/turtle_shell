@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/07 20:51:14 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/09 02:58:32 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ static void	run_inner_child(t_mini *shell, char **buff, int *rd_fds)
 {
 	char	*path;
 	struct stat s;
+	int i;
 
+	i = -1;
 	pipe_process(shell);
 	if (!redirect_process(shell, rd_fds))
 		exit (1);
 	path = find_path(shell, find_token(shell, COMMAND));
-	int i = -1;
+	i = -1;
 	t_mini *temp = shell;
 	while (buff[++i])
 	{
@@ -32,8 +34,8 @@ static void	run_inner_child(t_mini *shell, char **buff, int *rd_fds)
 		if (execve(path, buff, shell->envp) == -1)
 			exit(EXIT_FAILURE);
 	}
-	// ft_free(buff);
-	// ft_free(paths);
+	ft_free(buff);
+	free(path);
 	exit(EXIT_SUCCESS);
 }
 
