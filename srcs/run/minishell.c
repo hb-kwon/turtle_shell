@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/08 19:30:04 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/09 22:01:53 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static int run_blitin(int *i, t_cmd *temp, t_mini *shell)
 	(*i) = temp_num;
 	return (0);
 }
+
 static int	run_shell(t_mini *shell)
 {
 	int		i;
@@ -71,23 +72,24 @@ t_mini *malloc_shell()
 	temp = (t_mini *)malloc(sizeof(t_mini));
 	temp->cmd = NULL;
 	return (temp);
-
 }
 
 void	minishell(char **en)
 {
 	int		status;
 	t_mini	*shell;
-
+	int cnt = 0;
 	status = 1;
 	while (status)
 	{
 		shell = malloc_shell();
-		shell->envp = en;
-		g_mini.envp = en;
 		if (init_line(shell))
+		{
+			shell->envp = en;
+			g_mini.envp = en;
 			status = run_shell(shell);
-		en = shell->envp;
+			en = shell->envp;
+		}
 		free(shell);
 	}
 }

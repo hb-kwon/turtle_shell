@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_start.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:15:38 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/30 02:12:19 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/09 21:25:47 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_cmd	*make_cmd_list(char **cmd_list)
 	cmd = NULL;
 	while (cmd_list[++i])
 	{
+		printf("cmd_list check : %s\n", cmd_list[i]);
 		tmp = make_cmd(cmd_list[i]);
 		//test
 		if(cmd_list[i + 1] == NULL)

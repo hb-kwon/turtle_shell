@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 20:11:04 by kwon              #+#    #+#             */
-/*   Updated: 2021/11/02 12:29:16 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/09 22:39:59 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_list
 
 void	*ft_memset(void *ptr, int value, size_t size);
 void	ft_bzero(void *ptr, size_t size);
-void	*ft_malloc(size_t size);
 void	*ft_memcpy(void *dest, const void *src, size_t size);
 void	*ft_memccpy(void *dest, const void *src, int c, size_t size);
 void	*ft_memmove(void *dest, const void *src, size_t size);

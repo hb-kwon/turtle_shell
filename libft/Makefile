@@ -6,7 +6,7 @@
 #    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/28 01:44:43 by hkwon             #+#    #+#              #
-#    Updated: 2021/11/01 14:28:20 by hkwon            ###   ########.fr        #
+#    Updated: 2021/11/09 22:39:43 by hkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,6 @@ SRCS_MEMORY_DIR = $(SRCS_DIR)/memory
 SRCS_MEMORY = $(addprefix $(SRCS_MEMORY_DIR)/, \
 			ft_memset.c\
 			ft_bzero.c\
-			ft_malloc.c\
 			ft_memcpy.c\
 			ft_memccpy.c\
 			ft_memmove.c\

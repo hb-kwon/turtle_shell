@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inner.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/09 03:02:25 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/09 21:35:39 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ static int	run_inner_child(t_mini *shell, char **buff, int *rd_fds)
 {
 	char	*path;
 	struct stat s;
-	int i;
 
-	i = -1;
 	pipe_process(shell);
 	if (!redirect_process(shell, rd_fds))
 		exit (1);

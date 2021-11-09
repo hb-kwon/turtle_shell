@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 11:04:30 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/08 19:38:01 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/09 18:32:33 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_token	*parse_token(char *cmd_list)
 
 	if (!cmd_list)
 		return (NULL);
-	args = (char **)ft_malloc(sizeof(char *) * (args_count(cmd_list) + 1));
+	args = (char **)malloc(sizeof(char *) * (args_count(cmd_list) + 1));
 	if (!args)
 		return (NULL);
 	args = parse_token_arr(args, cmd_list);

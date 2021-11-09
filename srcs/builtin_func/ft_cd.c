@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:19:13 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/08 17:32:08 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/09 20:45:48 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,15 @@ int	ft_cd(t_mini *shell)
 
 	token = shell->cmd->token->next;
 	buff = make_buff(shell);
-
 	path = NULL;
-	if (token->arg != NULL && token->arg[0] != '~' && token->arg[0] != '$')
+	if (!token || token->arg[0] == '~')
+		cd_home(path, buff, shell->envp);
+	else if (token->arg != NULL && token->arg[0] != '~' && token->arg[0] != '$')
 	{
 		path = token->arg;
 		if (chdir(path) == -1)
 			print_error2("cd", path, strerror(errno));
 	}
-	else if (token->arg == NULL || token->arg[0] == '~')
-		cd_home(path, buff, shell->envp);
 	else if (token->arg[0] == '$')
 		cd_en(path, buff, shell->envp);
 	g_mini.exit_status = 0;

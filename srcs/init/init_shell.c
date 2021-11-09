@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:45:14 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/07 17:41:22 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/09 19:36:49 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	init_env(char ***en, char *envp[])
 
 	i = -1;
 	while (envp[++i])
-		NULL;
-	(*en) = (char **)malloc(sizeof(char *) * i+1);
+		;
+	(*en) = (char **)malloc(sizeof(char *) * (i + 1));
 	i = -1;
 	while (envp[++i])
 	{
@@ -30,7 +30,7 @@ void	init_env(char ***en, char *envp[])
 			(*en)[i][j] = envp[i][j];
 		(*en)[i][j] = 0;
 	}
-	(*en)[i] = NULL;
+	(*en)[i] = 0;
 	// g_mini.envp = *en;
 	return ;
 }
@@ -46,6 +46,9 @@ static void signal_int(int signo)
 		}
 		else
 		{
+			//mac
+			//printf("\033[%luC  \b\b\n", ft_strlen(g_mini.path));
+			//window
 			printf("\b\b  \b\b\n");
 			if (rl_on_new_line() == -1)
 				exit(1);
@@ -55,6 +58,9 @@ static void signal_int(int signo)
 	}
 	else
 	{
+		//mac
+		// printf("\033[%luC  \b\b\n", ft_strlen(g_mini.path));
+		//window
 		printf("\b\b  \b\b\n");
 		if (rl_on_new_line() == -1)
 			exit(1);
@@ -73,6 +79,9 @@ static void	signal_quit(int signo)
 			g_mini.sig_on = 1;
 		}
 		else
+			//mac
+			//printf("\033[%luC  \b\b", ft_strlen(g_mini.path));
+			//window
 			printf("\b\b  \b\b");
 	}
 	else
