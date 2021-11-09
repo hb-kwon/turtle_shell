@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/09 22:01:53 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/09 23:31:30 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void	minishell(char **en)
 			status = run_shell(shell);
 			en = shell->envp;
 		}
+		free_cmd(shell);
 		free(shell);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:02:52 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/09 22:07:03 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/09 23:51:29 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,7 @@ static int	line_input(t_mini *shell)
 		return (0);
 	}
 	else
-	{
 		shell->cmd = parse_start(g_mini.line);
-		if (!shell->cmd)
-			return (0);
-	}
 	add_history(g_mini.line);
 	free(g_mini.path);
 	free(g_mini.line);
@@ -71,23 +67,4 @@ int	init_line(t_mini *shell)
 		return (line_enter(shell));
 	else
 		return (line_input(shell));
-
-	// int	i;
-
-	// if (!g_mini.line)
-	// 	line_eof(shell);
-	// i = 0;
-	// while (g_mini.line[i] == ' ')
-	// 	i++;
-	// if (!g_mini.line[i])
-	// {
-	// 	free(g_mini.path);
-	// 	free(g_mini.line);
-	// 	shell->cmd = NULL;
-	// 	shell = NULL;
-	// 	return (0);
-	// }
-	// else
-	// 	return (line_input(shell));
-	// return (1);
 }

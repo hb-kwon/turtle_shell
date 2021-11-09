@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 11:04:30 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/09 18:32:33 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/09 23:42:23 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ t_token	*parse_token(char *cmd_list)
 	args = parse_token_arr(args, cmd_list);
 	i = -1;
 	while (args[++i])
+	{
 		args[i] = parse_token_quote(args[i]);
+		if (!args[i])
+			return (NULL);
+	}
 	return (make_token_list(args));
 }
