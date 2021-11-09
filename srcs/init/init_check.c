@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 16:03:49 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/09 22:36:35 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/10 02:34:38 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,18 @@ static void	quote_flag_onoff(char line, int *i, char *flag)
 	}
 }
 
+int line_empty_space(char *line)
+{
+	int	i;
+
+	i = -1;
+	while (line[++i] == ' ')
+		;
+	if (!line[i])
+		return (0);
+	return (1);
+}
+
 int	init_check(char *line)
 {
 	int		i;
@@ -60,13 +72,9 @@ int	init_check(char *line)
 	flag = 0;
 	while (line[i])
 	{
-		while (ft_strchr("\t\n ", line[i]))
-		{
+		if (ft_strchr("\t\n ", line[i]))
 			i++;
-			if (!line[i])
-				return (0);
-		}
-		if (line[i] == '\'' || line[i] == '\"')
+		else if (line[i] == '\'' || line[i] == '\"')
 			quote_flag_onoff(line[i], &i, &flag);
 		else
 			i++;

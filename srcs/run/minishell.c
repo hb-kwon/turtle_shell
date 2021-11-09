@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/09 23:31:30 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/10 02:56:34 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,16 @@ void	minishell(char **en)
 {
 	int		status;
 	t_mini	*shell;
-	int cnt = 0;
+
 	status = 1;
 	while (status)
 	{
 		shell = malloc_shell();
+		shell->envp = en;
+		g_mini.envp = en;
 		if (init_line(shell))
-		{
-			shell->envp = en;
-			g_mini.envp = en;
 			status = run_shell(shell);
-			en = shell->envp;
-		}
-		free_cmd(shell);
+		en = shell->envp;
 		free(shell);
 	}
 }

@@ -6,52 +6,45 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:02:52 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/09 23:51:29 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/10 02:34:26 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void line_free(void)
+{
+	free(g_mini.path);
+	free(g_mini.line);
+	g_mini.path = NULL;
+	g_mini.line = NULL;
+}
 
 static int	line_input(t_mini *shell)
 {
 	if (!init_check(g_mini.line))
 	{
 		add_history(g_mini.line);
-		free(g_mini.path);
-		free(g_mini.line);
-		g_mini.path = NULL;
-		g_mini.line = NULL;
+		line_free();
 		return (0);
 	}
 	else
 		shell->cmd = parse_start(g_mini.line);
 	add_history(g_mini.line);
-	free(g_mini.path);
-	free(g_mini.line);
-	g_mini.path = NULL;
-	g_mini.line = NULL;
+	line_free();
 	return (1);
 }
 
 static int	line_enter(t_mini *shell)
 {
-	free(g_mini.path);
-	free(g_mini.line);
-	g_mini.path = NULL;
-	g_mini.line = NULL;
-
+	line_free();
 	return (0);
 }
 
 static void	line_eof(t_mini *shell)
 {
-	free_cmd(shell);
-	free(shell);
 	printf("\x1b[1A\033[%luCexit\n", ft_strlen(g_mini.path));
-	free(g_mini.path);
-	free(g_mini.line);
-	g_mini.path = NULL;
-	g_mini.line = NULL;
+	line_free();
 	exit(0);
 }
 
@@ -63,7 +56,7 @@ int	init_line(t_mini *shell)
 	g_mini.line = readline(g_mini.path);
 	if (!g_mini.line)
 		line_eof(shell);
-	else if (ft_strchr("", *(g_mini.line)))
+	else if (!line_empty_space(g_mini.line) || ft_strchr("", *(g_mini.line)))
 		return (line_enter(shell));
 	else
 		return (line_input(shell));

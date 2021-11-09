@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 16:34:35 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/09 17:51:41 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/10 01:29:58 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ char			**ft_split(const char *s, char c)
 	int		i;
 
 	i = 0;
-	if (!(res = (char **)malloc(sizeof(char *) * (cnt_word(s, c) + 1))))
+	res = (char **)malloc(sizeof(char *) * (cnt_word(s, c) + 1));
+	if (!res)
 		return (0);
 	while (*s)
 	{
@@ -72,6 +73,6 @@ char			**ft_split(const char *s, char c)
 		else
 			s++;
 	}
-	// res[i] = 0;
+	res[i] = 0;
 	return (res);
 }

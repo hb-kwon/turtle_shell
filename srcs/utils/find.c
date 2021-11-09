@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:38:28 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/09 23:51:40 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/10 01:49:15 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	*find_path(t_mini *shell, char *cmd)
 			return (new_path);
 		free(new_path);
 	}
+	ft_free(paths);
 	return (ft_strdup(cmd));
 }
 

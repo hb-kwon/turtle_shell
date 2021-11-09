@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/09 16:44:11 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/10 02:42:39 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,31 +77,31 @@ static void	redirect_app(t_mini *shell, int *rd_fds)
 	// write(1, "\n", 1);
 	// write(1,find_token(shell, RD_APPEND), ft_strlen(find_token(shell,RD_APPEND)));
 	// write(1, "\n", 1);
-    rd_fds[1] =	open(find_token(shell, RD_APPEND), O_WRONLY | O_CREAT | O_APPEND, 0644);
+	rd_fds[1] =	open(find_token(shell, RD_APPEND), O_WRONLY | O_CREAT | O_APPEND, 0644);
 	dup2(rd_fds[1], STDOUT_FILENO);
 
 }
 
 int	redirect_process(t_mini *shell, int *rd_fds)
 {
-    t_token *target_token;
-    int temp;
-    rd_fds[0] = 0;
-    rd_fds[1] = 0;
+	t_token *target_token;
+	int temp;
+	rd_fds[0] = 0;
+	rd_fds[1] = 0;
 
-    target_token = shell->cmd->token;
-    if (find_token(shell, RD_IN))
+	target_token = shell->cmd->token;
+	if (find_token(shell, RD_IN))
 	{
 		redirect_in(shell, rd_fds);
 		// return (0);
 	}
 	else if (find_token(shell, RD_HEREDOC))
 		redirect_herdoc(shell, rd_fds);
-    else if (find_token(shell, RD_OUT))
-        redirect_out(shell, rd_fds);
-    else if (find_token(shell, RD_APPEND))
-        redirect_app(shell, rd_fds);
-    return (1);
+	else if (find_token(shell, RD_OUT))
+		redirect_out(shell, rd_fds);
+	else if (find_token(shell, RD_APPEND))
+		redirect_app(shell, rd_fds);
+	return (1);
 }
 
 void		redirect_close(int *rd_fds)
