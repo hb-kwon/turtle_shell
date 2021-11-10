@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:47 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 02:38:15 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 03:26:07 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	ft_export(t_mini *shell)
 {
 	int		i;
 	int		status;
-	t_token *token;
+	t_token	*token;
 
 	status = 0;
 	token = shell->cmd->token->next;
@@ -94,8 +94,8 @@ int	ft_export(t_mini *shell)
 		{
 			if (!is_export_valid(find_key(token->arg, '=')))
 			{
-				// todo printf_error 추가
-				printf("error\n");
+				print_error2("export", token->arg, \
+				": not a valid identifier");
 			}
 			status = check_export(token->arg, &shell->envp);
 			token = token->next;

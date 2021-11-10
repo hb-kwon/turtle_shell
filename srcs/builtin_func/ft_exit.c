@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:22:25 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/08 18:21:14 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 03:26:57 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ int	ft_exit(t_mini *shell)
 	else if (ac == 2 && ft_isdigit_str(buff[1]))
 		status = ft_atoi(buff[1]);
 	else if (ac > 2 && ft_isdigit_str(buff[1]))
-	{
 		print_error1("exit", "too many argments");
-		status = 1;
-	}
 	else
 	{
 		print_error2("exit", buff[1], "numeric argument required");

@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:11:43 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 02:26:11 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 03:28:36 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	ft_echo(t_mini *shell)
 	t_token	*token;
 
 	token = shell->cmd->token->next;
-	n_flag = 0;
-	if (n_flag = !check_option(shell))
+	n_flag = !check_option(shell);
+	if (n_flag)
 		token = token->next;
 	while (token)
 	{

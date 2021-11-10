@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/11 03:00:14 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 03:32:06 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@ static int	redirect_in(t_mini *shell, int *rd_fds)
 	}
 	dup2(rd_fds[0], STDIN_FILENO);
 	return (1);
-}
-
-void	ft_close(int fd)
-{
-	if (fd <= 2)
-		return ;
-	close(fd);
 }
 
 static int	redirect_herdoc(t_mini *shell, int *rd_fds)
@@ -88,10 +81,7 @@ int	redirect_process(t_mini *shell, int *rd_fds)
 
 	target_token = shell->cmd->token;
 	if (find_token(shell, RD_IN))
-	{
 		redirect_in(shell, rd_fds);
-		// return (0);
-	}
 	else if (find_token(shell, RD_HEREDOC))
 		redirect_herdoc(shell, rd_fds);
 	else if (find_token(shell, RD_OUT))

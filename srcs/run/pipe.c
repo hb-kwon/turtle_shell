@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 22:33:46 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 03:05:03 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 03:33:35 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	pipe_process(t_mini *shell)
 void	pipe_restore(t_mini *shell, int *old_fds)
 {
 	t_cmd	*temp;
-	
+
 	temp = shell->cmd;
 	if (temp->next || temp->prev)
 	{

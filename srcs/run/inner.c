@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 03:03:16 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 03:33:23 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ static int	path_error_check(char *path)
 static int	run_inner_child(t_mini *shell, char **buff, int *rd_fds)
 {
 	char		*path;
-	struct stat s;
+	struct stat	s;
 	int			i;
+
 	pipe_process(shell);
 	if (!redirect_process(shell, rd_fds))
 		exit (1);
