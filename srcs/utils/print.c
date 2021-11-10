@@ -6,13 +6,13 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:23:36 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/06 21:06:55 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 02:14:27 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int print_error1(char *msg, char *err_num)
+int	print_error1(char *msg, char *err_num)
 {
 	ft_putstr_fd("minishell :", 2);
 	ft_putstr_fd(msg, 2);
@@ -21,7 +21,7 @@ int print_error1(char *msg, char *err_num)
 	return (-1);
 }
 
-int print_error2(char *msg1, char *msg2, char *err_num)
+int	print_error2(char *msg1, char *msg2, char *err_num)
 {
 	ft_putstr_fd("minishell :", 2);
 	ft_putstr_fd(msg1, 2);

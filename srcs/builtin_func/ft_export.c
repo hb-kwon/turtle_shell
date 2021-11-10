@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:47 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 00:11:17 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 02:17:49 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,8 @@ static int	check_export(char *str, char ***en)
 	i = -1;
 	while ((*en)[++i])
 	{
-		// char *temp = find_key((*en)[i], '=');
-		// char *str_temp  = find_key(str, '=');
-		if (!ft_strncmp(find_key((*en)[i], '='), find_key(str, '='), ft_strlen(str)))
+		if (!ft_strncmp(find_key((*en)[i], '='), \
+		find_key(str, '='), ft_strlen(str)))
 		{
 			(*en)[i] = ft_strdup(str);
 			return (1);
@@ -76,19 +75,6 @@ static int	check_export(char *str, char ***en)
 		new[i] = ft_strdup((*en)[i]);
 	add_export(str, new, i);
 	*en = new;
-	return (1);
-}
-
-int	is_export_valid(char *str)
-{
-	int i;
-
-	i = -1;
-	if (ft_isdigit(str[++i]))
-	{
-		return (0);
-	}
-	//나중에 더많은 예외처리 추가예정
 	return (1);
 }
 

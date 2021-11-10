@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: ysong <ysong@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/11/10 01:48:38 by hkwon            ###   ########.fr        #
+#    Updated: 2021/11/11 02:18:01 by ysong            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS_BUILTIN = $(addprefix $(SRCS_BUILTIN_DIR)/, \
 		ft_cd.c \
 		ft_pwd.c \
 		ft_export.c \
+		ft_export2.c \
 		ft_unset.c \
 		ft_env.c \
 		ft_exit.c \

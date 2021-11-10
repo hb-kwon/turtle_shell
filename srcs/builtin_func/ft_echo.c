@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:11:43 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 00:15:03 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 02:26:11 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	print_exit_status(t_mini *shell)
 
 static void	echo_home(char *arg, t_mini *shell)
 {
-	char *temp;
+	char	*temp;
 
 	if (arg[1] == '?')
 		print_exit_status(shell);
@@ -59,13 +59,9 @@ int	ft_echo(t_mini *shell)
 
 	token = shell->cmd->token->next;
 	n_flag = 0;
-	if (!check_option(shell))
-	{
+	if (n_flag = !check_option(shell))
 		token = token->next;
-		n_flag = 1;
-	}
-
-	while(token)
+	while (token)
 	{
 		if (token->type != ARGUMENT)
 			break ;

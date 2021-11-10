@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 14:30:16 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/07 19:00:29 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 02:15:06 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		turn_on_flag(int *flag, int quote, int idx)
+int	turn_on_flag(int *flag, int quote, int idx)
 {
 	if (*flag & quote)
 		*flag ^= quote;
@@ -25,7 +25,7 @@ int		turn_on_flag(int *flag, int quote, int idx)
 static int	get_cnt_buff(t_mini *shell)
 {
 	t_token	*temp;
-	int	cnt;
+	int		cnt;
 
 	temp = shell->cmd->token;
 	cnt = 0;
@@ -67,9 +67,9 @@ char	**make_buff(t_mini *shell)
 	return (buff);
 }
 
-void free_buff(char **buff)
+void	free_buff(char **buff)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (buff[++i])
@@ -77,7 +77,7 @@ void free_buff(char **buff)
 	free(buff);
 }
 
-void save_old_fds(int *old_fds)
+void	save_old_fds(int *old_fds)
 {
 	old_fds[0] = dup(STDIN_FILENO);
 	old_fds[1] = dup(STDOUT_FILENO);

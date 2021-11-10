@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 01:10:24 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 02:18:33 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ int		ft_echo(t_mini *shell);
 int		ft_cd(t_mini *shell);
 int		ft_pwd(t_mini *shell);
 int		ft_export(t_mini *shell);
+int		is_export_valid(char *str);
 int		ft_unset(t_mini *shell);
 int		ft_env(t_mini *shell);
 int		ft_exit(t_mini *shell);
