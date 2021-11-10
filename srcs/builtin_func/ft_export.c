@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:47 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/09 02:34:57 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 00:11:17 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	print_export(char **en)
 	i = -1;
 	while (en[++i])
 	{
-		write(1, "declare -x ",ft_strlen("declare -x "));
+		write(1, "declare -x ", ft_strlen("declare -x "));
 		ft_putendl_fd(en[i], 1);
 	}
 }
@@ -30,14 +30,14 @@ static void	add_export(char *str, char **new, int i)
 	new[i + 1] = NULL;
 }
 
-char *find_key(char *str, int key)
+char	*find_key(char *str, int key)
 {
-	int i;
-	char *temp;
+	int		i;
+	char	*temp;
 
 	temp = (char *)malloc(sizeof(char) * strlen(str));
 	i = -1;
-	while(str[++i])
+	while (str[++i])
 	{
 		if (str[i] == key)
 		{
@@ -60,9 +60,9 @@ static int	check_export(char *str, char ***en)
 	i = -1;
 	while ((*en)[++i])
 	{
-		char *temp = find_key((*en)[i], '=');
-		char *str_temp  = find_key(str, '=');
-		if (!ft_strncmp(find_key((*en)[i],'='), find_key(str,'='), ft_strlen(str)))
+		// char *temp = find_key((*en)[i], '=');
+		// char *str_temp  = find_key(str, '=');
+		if (!ft_strncmp(find_key((*en)[i], '='), find_key(str, '='), ft_strlen(str)))
 		{
 			(*en)[i] = ft_strdup(str);
 			return (1);
@@ -79,7 +79,7 @@ static int	check_export(char *str, char ***en)
 	return (1);
 }
 
-int is_export_valid(char *str)
+int	is_export_valid(char *str)
 {
 	int i;
 
@@ -90,24 +90,22 @@ int is_export_valid(char *str)
 	}
 	//나중에 더많은 예외처리 추가예정
 	return (1);
-
 }
+
 int	ft_export(t_mini *shell)
 {
 	int i;
 	int status;
-
-	status = 0;
-	i = 0;
-
 	t_token *token;
 
+	status = 0;
+
 	token = shell->cmd->token->next;
-	if(!token)
+	if (!token)
 		print_export(shell->envp);
 	else
 	{
-		while(token)
+		while (token)
 		{
 			if (!is_export_valid(find_key(token->arg, '=')))
 			{

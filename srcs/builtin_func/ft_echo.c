@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:11:43 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/08 18:58:21 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 00:15:03 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int check_option(t_mini *shell)
+static int	check_option(t_mini *shell)
 {
 	t_token	*tmp2;
 	t_token	*check;
@@ -37,15 +37,16 @@ static int check_option(t_mini *shell)
 	return (1);
 }
 
-void print_exit_status(t_mini *shell)
+void	print_exit_status(t_mini *shell)
 {
 	ft_putstr_fd(ft_itoa(shell->exit_status), STDOUT);
 }
 
-static void echo_home(char *arg, t_mini *shell)
+static void	echo_home(char *arg, t_mini *shell)
 {
 	char *temp;
-	if(arg[1] == '?')
+
+	if (arg[1] == '?')
 		print_exit_status(shell);
 	temp = find_en(&(arg[1]), shell->envp);
 	ft_putstr_fd(temp, STDOUT);
@@ -54,7 +55,7 @@ static void echo_home(char *arg, t_mini *shell)
 int	ft_echo(t_mini *shell)
 {
 	int		n_flag;
-	t_token *token;
+	t_token	*token;
 
 	token = shell->cmd->token->next;
 	n_flag = 0;
@@ -63,6 +64,7 @@ int	ft_echo(t_mini *shell)
 		token = token->next;
 		n_flag = 1;
 	}
+
 	while(token)
 	{
 		if (token->type != ARGUMENT)

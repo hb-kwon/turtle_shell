@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:52 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/08 17:33:13 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 00:15:54 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ static int	unset_en(char *str, char ***en)
 // 이것또한 파이프라인 뒤쪽에 있다면 실행되지 않는다.
 int	ft_unset(t_mini *shell)
 {
-	int i;
-	int status;
-	char **buff;
+	int		i;
+	int		status;
+	char	**buff;
 
 	i = 0;
 	status = 0;
