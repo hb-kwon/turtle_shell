@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:02:52 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 01:06:50 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 03:52:08 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int	line_input(t_mini *shell)
 static int	line_enter(t_mini *shell)
 {
 	line_free();
+	(void)shell;
 	return (0);
 }
 
@@ -45,6 +46,7 @@ static void	line_eof(t_mini *shell)
 {
 	printf("\x1b[1A\033[%luCexit\n", ft_strlen(g_mini.path));
 	line_free();
+	(void)shell;
 	exit(0);
 }
 
@@ -60,4 +62,5 @@ int	init_line(t_mini *shell)
 		return (line_enter(shell));
 	else
 		return (line_input(shell));
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:11:43 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 03:28:36 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 04:12:55 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static void	echo_home(char *arg, t_mini *shell)
 {
 	char	*temp;
 
+	if (!arg[1])
+		return ;
 	if (arg[1] == '?')
 		print_exit_status(shell);
 	temp = find_en(&(arg[1]), shell->envp);
@@ -65,6 +67,8 @@ int	ft_echo(t_mini *shell)
 	{
 		if (token->type != ARGUMENT)
 			break ;
+		else if (token->next && token->next->type == ARGUMENT && token->next->arg[0] == '$')
+			echo_home(token->arg, shell);
 		else if (token->next && token->next->type == ARGUMENT)
 		{
 			ft_putstr_fd(token->arg, STDOUT);
