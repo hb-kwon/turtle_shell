@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 10:59:00 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/10 02:41:48 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/10 14:04:00 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	init_shell(&en, envp);
 	minishell(en);
+	ft_free(en);
 	(void)argc;
 	(void)argv;
 	return (0);
