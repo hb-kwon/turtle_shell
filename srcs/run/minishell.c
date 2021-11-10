@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/10 02:56:34 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 00:20:33 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@
 ** ARGUMENT 32
 */
 
-static int run_blitin(int *i, t_cmd *temp, t_mini *shell)
+static int	run_blitin(int *i, t_cmd *temp, t_mini *shell)
 {
-	int temp_num;
+	int	temp_num;
 
 	temp_num = -1;
 	while (++temp_num < BLTIN_NUM)
@@ -65,9 +65,9 @@ static int	run_shell(t_mini *shell)
 	return (1);
 }
 
-t_mini *malloc_shell()
+t_mini	*malloc_shell()
 {
-	t_mini *temp;
+	t_mini	*temp;
 
 	temp = (t_mini *)malloc(sizeof(t_mini));
 	temp->cmd = NULL;

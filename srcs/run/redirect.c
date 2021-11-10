@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/10 02:42:39 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 00:24:26 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	redirect_in(t_mini *shell, int *rd_fds)
 	if (rd_fds[0] > 0)
 		close(rd_fds[0]);
 	rd_fds[0] = open(find_token(shell, RD_IN), O_RDONLY);
-	// //todo error
+	//todo error
 	if (rd_fds[0] == -1)
 	{
 		return (-1);
@@ -35,20 +35,20 @@ void	ft_close(int fd)
 
 static int	redirect_herdoc(t_mini *shell, int *rd_fds)
 {
-	char *r;
-	char *end;
-	int fd;
+	char	*r;
+	char	*end;
+	int		fd;
 	//임의의 파일을 만들어서 그걸 입력으로 넣기?
 	if (fd > 0)
 		close(fd);
-	rd_fds[0] = open(".temp.txt",O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	rd_fds[0] = open(".temp.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	end = find_token(shell, RD_HEREDOC);
 	write(1, "> ", 2);
 	r = readline(g_mini.path);
 	while (r > 0)
 	{
 		if (ft_strcmp(r, end) == 0)
-			break;
+			break ;
 		write(1, "> ", 2);
 		write(rd_fds[0], r, strlen(r));
 		write(rd_fds[0], "\n", 1);
@@ -62,24 +62,20 @@ static int	redirect_herdoc(t_mini *shell, int *rd_fds)
 static void	redirect_out(t_mini *shell, int *rd_fds)
 {
 	write(1, "Test3\n", 6);
-
 	if (rd_fds[1] > 0)
 		close(rd_fds[1]);
-	rd_fds[1] = open(find_token(shell, ARG), O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	rd_fds[1] = open(find_token(shell, ARG), \
+	O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	dup2(rd_fds[1], STDOUT_FILENO);
 }
 
 static void	redirect_app(t_mini *shell, int *rd_fds)
 {
-
 	if (rd_fds[1] > 0)
 		close(rd_fds[1]);
-	// write(1, "\n", 1);
-	// write(1,find_token(shell, RD_APPEND), ft_strlen(find_token(shell,RD_APPEND)));
-	// write(1, "\n", 1);
-	rd_fds[1] =	open(find_token(shell, RD_APPEND), O_WRONLY | O_CREAT | O_APPEND, 0644);
+	rd_fds[1] =	open(find_token(shell, RD_APPEND), \
+	O_WRONLY | O_CREAT | O_APPEND, 0644);
 	dup2(rd_fds[1], STDOUT_FILENO);
-
 }
 
 int	redirect_process(t_mini *shell, int *rd_fds)

@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 13:26:18 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/08 17:34:57 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 00:21:50 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void pipe_blt_run(int i, t_mini *shell)
+void	pipe_blt_run(int i, t_mini *shell)
 {
-	int temp_num;
-	int status;
-	int rd_fds[2];
-	int old_fds[2];
-	char *cmd;
+	int		temp_num;
+	int		status;
+	int		rd_fds[2];
+	int		old_fds[2];
+	char	*cmd;
 
 	cmd = shell->cmd->token->arg;
 	save_old_fds(old_fds);
@@ -91,8 +91,8 @@ int	check_cmd(char *cmd)
 int	run_blt(t_mini *shell, int i)
 {
 	char	*cmd;
-	int rd_fds[2];
-	int old_fds[2];
+	int		rd_fds[2];
+	int		old_fds[2];
 
 	cmd = shell->cmd->token->arg;
 	save_old_fds(old_fds);
@@ -100,7 +100,7 @@ int	run_blt(t_mini *shell, int i)
 		pipe_blt_run(i, shell);
 	else
 	{
-		if(!redirect_process(shell, rd_fds))
+		if (!redirect_process(shell, rd_fds))
 		{
 			redirect_restore(rd_fds, old_fds);
 			return (0);
