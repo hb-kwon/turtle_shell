@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/11 03:51:28 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 04:24:07 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	redirect_app(t_mini *shell, int *rd_fds)
 {
 	if (rd_fds[1] > 0)
 		close(rd_fds[1]);
-	rd_fds[1] =	open(find_token(shell, RD_APPEND),	\
+	rd_fds[1] =	open(find_token(shell, RD_APPEND), \
 	O_WRONLY | O_CREAT | O_APPEND, 0644);
 	dup2(rd_fds[1], STDOUT_FILENO);
 }
