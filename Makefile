@@ -6,7 +6,7 @@
 #    By: ysong <ysong@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/11/11 02:18:01 by ysong            ###   ########.fr        #
+#    Updated: 2021/11/11 03:00:47 by ysong            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ SRCS_RUN = $(addprefix $(SRCS_RUN_DIR)/, \
 		inner.c\
 		pipe.c\
 		redirect.c\
+		redirect_close.c\
 )
 
 SRCS_UTILS_DIR = $(SRCS_DIR)/utils

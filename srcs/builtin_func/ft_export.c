@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:47 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 02:17:49 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 02:38:15 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,11 @@ static int	check_export(char *str, char ***en)
 
 int	ft_export(t_mini *shell)
 {
-	int i;
-	int status;
+	int		i;
+	int		status;
 	t_token *token;
 
 	status = 0;
-
 	token = shell->cmd->token->next;
 	if (!token)
 		print_export(shell->envp);

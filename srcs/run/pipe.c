@@ -6,16 +6,16 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 22:33:46 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/06 21:14:40 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 03:05:03 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int pipe_process(t_mini *shell)
+int	pipe_process(t_mini *shell)
 {
-	t_cmd *temp;
-	
+	t_cmd	*temp;
+
 	temp = shell->cmd;
 	if (temp->next || temp->prev)
 	{
@@ -36,17 +36,15 @@ int pipe_process(t_mini *shell)
 	return (0);
 }
 
-void pipe_restore(t_mini *shell, int *old_fds)
+void	pipe_restore(t_mini *shell, int *old_fds)
 {
-	t_cmd * temp;
+	t_cmd	*temp;
 	
 	temp = shell->cmd;
 	if (temp->next || temp->prev)
 	{
 		if (temp->next && !temp->prev)
-		{
 			close (temp->fds[1]);
-		}
 		else if (temp->next && temp->prev)
 		{
 			close(temp->prev->fds[0]);

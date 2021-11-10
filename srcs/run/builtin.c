@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 13:26:18 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 00:21:50 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 02:53:55 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	pipe_blt_run(int i, t_mini *shell)
 {
-	int		temp_num;
 	int		status;
 	int		rd_fds[2];
 	int		old_fds[2];
@@ -110,10 +109,6 @@ int	run_blt(t_mini *shell, int i)
 			print_error_blt(cmd);
 		redirect_restore(rd_fds, old_fds);
 	}
-	// if (!ft_strcmp(cmd, blt_str(i)))
-	// 	(*blt_func(i))(shell);
-	// else if (i == 6 && !check_cmd(cmd))
-	// 	print_error_blt(cmd);
 	return (0);
 }
 

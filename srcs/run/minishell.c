@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 00:20:33 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 02:47:36 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	run_shell(t_mini *shell)
 	return (1);
 }
 
-t_mini	*malloc_shell()
+static t_mini	*malloc_shell(void)
 {
 	t_mini	*temp;
 
