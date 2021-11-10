@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 16:03:49 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/10 02:34:38 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 01:06:38 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	quote_flag_onoff(char line, int *i, char *flag)
 	}
 }
 
-int line_empty_space(char *line)
+int	line_empty_space(char *line)
 {
 	int	i;
 

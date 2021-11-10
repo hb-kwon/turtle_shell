@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/10 02:51:42 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 01:10:24 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int		main(int argc, char *argv[], char *envp[]);
 void	init_shell(char ***en, char *envp[]);
 int		init_line(t_mini *shell);
 int		init_check(char *line);
-int 	line_empty_space(char *line);
+int		line_empty_space(char *line);
 // void	signal_int(int sig_num);
 // void	signal_quit(int sig_num);
 
@@ -186,6 +186,6 @@ void	save_old_fds(int *old_fds);
 */
 char	**execute(char **args, char **en);
 
-int redirect(t_mini *shell);
+int		redirect(t_mini *shell);
 
 #endif

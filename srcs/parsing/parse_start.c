@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_start.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:15:38 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/10 02:43:20 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 01:08:58 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_cmd	*make_cmd_list(char **cmd_list)
 	{
 		tmp = make_cmd(cmd_list[i]);
 		//test
-		if(cmd_list[i + 1] == NULL)
+		if (cmd_list[i + 1] == NULL)
 			tmp->pipe_flag = 0;
 		else
 			tmp->pipe_flag = 1;

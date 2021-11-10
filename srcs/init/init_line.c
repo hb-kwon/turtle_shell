@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:02:52 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/10 02:34:26 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 01:06:50 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void line_free(void)
+static void	line_free(void)
 {
 	free(g_mini.path);
 	free(g_mini.line);
