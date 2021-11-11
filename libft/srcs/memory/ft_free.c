@@ -6,20 +6,16 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 15:11:29 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/07 15:11:51 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 19:24:17 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free_arr(char **arr)
+void	ft_free(void *data)
 {
-	int	i;
-
-	if (!arr)
+	if (!data)
 		return ;
-	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
+	free(data);
+	data = 0;
 }

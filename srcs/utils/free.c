@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 18:54:37 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/10 14:20:08 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 20:02:08 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	free_cmd(t_mini *shell)
 	}
 }
 
-void	ft_free(char **arr)
+void	ft_free_arr(char **arr)
 {
 	int	i;
 

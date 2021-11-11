@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inner.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 03:50:22 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 20:02:00 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ static int	path_error_check(char *path)
 {
 	if (!ft_strchr(path, '/'))
 	{
-		print_error1(path, "command not found");
+		ft_putstr_fd("minishell :", 2);
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd(": ", 2);
+		ft_putendl_fd("command not found", 2);
 		g_mini.exit_status = 127;
 		free(path);
 		return (0);
@@ -34,7 +37,7 @@ static int	run_inner_child(t_mini *shell, char **buff, int *rd_fds)
 		exit (1);
 	path = find_path(shell, find_token(shell, COMMAND));
 	if (!path_error_check(path))
-		return (0);
+		exit(g_mini.exit_status);
 	i = -1;
 	while (buff[++i])
 	{
@@ -58,7 +61,7 @@ static void	run_inner_parent(t_mini *shell, char **buff)
 		g_mini.exit_status = status >> 8;
 	else
 		g_mini.exit_status = 0;
-	ft_free(buff);
+	ft_free_arr(buff);
 	(void)shell;
 }
 
