@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 16:20:42 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 21:35:59 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 21:39:16 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	write_num(char *dest, unsigned int n)
 	}
 }
 
-static int calc_len(int n)
+static int	calc_len(int n)
 {
 	int	len;
 
