@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:02:52 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 03:52:08 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 20:21:53 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,14 @@ static void	line_free(void)
 
 static int	line_input(t_mini *shell)
 {
+	add_history(g_mini.line);
 	if (!init_check(g_mini.line))
 	{
-		add_history(g_mini.line);
 		line_free();
 		return (0);
 	}
 	else
 		shell->cmd = parse_start(g_mini.line);
-	add_history(g_mini.line);
 	line_free();
 	return (1);
 }
@@ -46,7 +45,8 @@ static void	line_eof(t_mini *shell)
 {
 	printf("\x1b[1A\033[%luCexit\n", ft_strlen(g_mini.path));
 	line_free();
-	(void)shell;
+	free_cmd(shell);
+	free(shell);
 	exit(0);
 }
 

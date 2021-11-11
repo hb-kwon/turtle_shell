@@ -6,7 +6,7 @@
 #    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/28 01:44:43 by hkwon             #+#    #+#              #
-#    Updated: 2021/11/09 22:39:43 by hkwon            ###   ########.fr        #
+#    Updated: 2021/11/11 20:14:16 by hkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ SRCS_MEMORY = $(addprefix $(SRCS_MEMORY_DIR)/, \
 			ft_memchr.c\
 			ft_memcmp.c\
 			ft_calloc.c\
-			ft_free_arr.c\
+			ft_free.c\
 )
 
 SRCS_PRINT_DIR = $(SRCS_DIR)/print

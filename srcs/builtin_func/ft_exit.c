@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:22:25 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 03:26:57 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 20:23:58 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ int	ft_exit(t_mini *shell)
 	else
 	{
 		print_error2("exit", buff[1], "numeric argument required");
-		exit(255);
+		status = 255;
 	}
 	g_mini.exit_status = status;
+	system("leaks minishell");
 	exit(status);
 }

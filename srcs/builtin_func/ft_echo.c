@@ -3,39 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:11:43 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 04:29:59 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 20:46:40 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	check_option(t_mini *shell)
-{
-	t_token	*tmp2;
-	t_token	*check;
-	int		j;
-	int		i;
+// static int	check_option(t_mini *shell)
+// {
+// 	t_token	*tmp2;
+// 	t_token	*check;
+// 	int		j;
+// 	int		i;
 
-	j = 0;
-	tmp2 = shell->cmd->token;
-	check = shell->cmd->token;
-	while (tmp2)
-	{
-		tmp2 = tmp2->next;
-		j++;
-	}
-	i = -1;
-	while (++i < j)
-	{
-		if (!ft_strcmp(check->arg, "-n"))
-			return (0);
-		check = check->next;
-	}
-	return (1);
-}
+// 	j = 0;
+// 	tmp2 = shell->cmd->token;
+// 	check = shell->cmd->token;
+// 	while (tmp2)
+// 	{
+// 		tmp2 = tmp2->next;
+// 		j++;
+// 	}
+// 	i = -1;
+// 	while (++i < j)
+// 	{
+// 		if (!ft_strcmp(check->arg, "-n"))
+// 			return (0);
+// 		check = check->next;
+// 	}
+// 	return (1);
+// }
 
 void	print_exit_status(t_mini *shell)
 {
@@ -48,9 +48,12 @@ int	ft_echo(t_mini *shell)
 	t_token	*token;
 
 	token = shell->cmd->token->next;
-	n_flag = !check_option(shell);
-	if (n_flag)
+	n_flag = 0;
+	if (token->next && !ft_strcmp(token->arg, "-n"))
+	{
+		n_flag = 1;
 		token = token->next;
+	}
 	while (token)
 	{
 		if (token->type != ARGUMENT)
