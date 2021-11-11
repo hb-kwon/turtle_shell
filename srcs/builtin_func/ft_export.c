@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:47 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 21:57:28 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/12 00:32:40 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,30 +24,10 @@ static void	print_export(char **en)
 	}
 }
 
-static void	add_export(char *str, char **new, int i)
+void	add_export(char *str, char **new, int i)
 {
 	new[i] = ft_strdup(str);
 	new[i + 1] = NULL;
-}
-
-char	*find_key(char *str, int key)
-{
-	int		i;
-	char	*temp;
-
-	temp = (char *)malloc(sizeof(char) * strlen(str));
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == key)
-		{
-			temp[i] = 0;
-			return (temp);
-		}
-		else
-			temp[i] = str[i];
-	}
-	return (NULL);
 }
 
 static int	check_export(char *str, char ***en)
@@ -73,13 +53,13 @@ static int	check_export(char *str, char ***en)
 		new[i] = ft_strdup((*en)[i]);
 	add_export(str, new, i);
 	*en = new;
-	free(new);
 	return (1);
 }
 
 int	ft_export(t_mini *shell)
 {
 	int		status;
+	char	*temp;
 	t_token	*token;
 
 	status = 0;
@@ -90,12 +70,16 @@ int	ft_export(t_mini *shell)
 	{
 		while (token)
 		{
-			if (!is_export_valid(find_key(token->arg, '=')))
+			temp = find_key(token->arg, '=');
+			if (temp == NULL)
+				export_no_value(token->arg, &shell->envp);
+			else if (!is_export_valid(temp))
 			{
 				print_error2("export", token->arg, \
 				": not a valid identifier");
 			}
-			status = check_export(token->arg, &shell->envp);
+			else
+				status = check_export(token->arg, &shell->envp);
 			token = token->next;
 		}
 	}

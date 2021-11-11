@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:38:28 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/11 20:02:06 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/12 00:31:05 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,26 @@ char	*find_value(char *name, char **envp)
 			if (envp[i][len] == '=')
 				return (ft_strchr(envp[i], '=') + 1);
 		}
+	}
+	return (NULL);
+}
+
+char	*find_key(char *str, int key)
+{
+	int		i;
+	char	*temp;
+
+	temp = (char *)malloc(sizeof(char) * strlen(str));
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == key)
+		{
+			temp[i] = 0;
+			return (temp);
+		}
+		else
+			temp[i] = str[i];
 	}
 	return (NULL);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: ysong <ysong@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/11/11 21:49:44 by hkwon            ###   ########.fr        #
+#    Updated: 2021/11/11 23:43:08 by ysong            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ LIBFT = libft.a
 
 CC = gcc
 # CFLAGS = -Wall -Wextra -Werror
-CFLAGS = -g3 -fsanitize=address
-# CFLAGS = -g
+# CFLAGS = -g3 -fsanitize=address
+CFLAGS = -g
 AR = ar rc
 RM = rm -f
 

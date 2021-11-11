@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 22:20:02 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/12 00:32:14 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,8 @@ int		ft_cd(t_mini *shell);
 int		ft_pwd(t_mini *shell);
 int		ft_export(t_mini *shell);
 int		is_export_valid(char *str);
+void	add_export(char *str, char **new, int i);
+int		export_no_value(char *str, char ***en);
 int		ft_unset(t_mini *shell);
 int		ft_env(t_mini *shell);
 int		ft_exit(t_mini *shell);
@@ -175,6 +177,7 @@ void	free_buff(char **buff);
 char	*find_en(char *key, char **en);
 char	*find_token(t_mini *shell, int type);
 char	*find_path(t_mini *shell, char *cmd);
+char	*find_key(char *str, int key);
 
 int		print_error2(char *msg1, char *msg2, char *err_num);
 int		print_error1(char *msg, char *err_num);
