@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:52 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 00:15:54 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 23:48:22 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int	ft_unset(t_mini *shell)
 	i = 0;
 	while (buff[++i])
 		status = check_env(buff[i]) && unset_en(buff[i], &shell->envp);
+	ft_free_arr(buff);
 	g_mini.exit_status = 0;
 	return (status);
 }
