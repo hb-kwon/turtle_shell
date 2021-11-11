@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:47 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 21:57:28 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 23:40:57 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ static int	check_export(char *str, char ***en)
 		new[i] = ft_strdup((*en)[i]);
 	add_export(str, new, i);
 	*en = new;
-	free(new);
 	return (1);
 }
 

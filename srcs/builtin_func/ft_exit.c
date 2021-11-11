@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:22:25 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 20:23:58 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 23:47:38 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	ft_exit(t_mini *shell)
 		print_error2("exit", buff[1], "numeric argument required");
 		status = 255;
 	}
+	ft_free_arr(buff);
 	g_mini.exit_status = status;
 	system("leaks minishell");
 	exit(status);
