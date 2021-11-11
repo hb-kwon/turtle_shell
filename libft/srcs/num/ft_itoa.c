@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 16:20:42 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 21:01:14 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 21:22:56 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ char	*ft_itoa(int n)
 		return (ft_strdup("0"));
 	else
 	{
-		len = n < 0 ? cnt_num(n) + 1 : cnt_num(n);
+		if (len = n < 0)
+			cnt_num(n) + 1;
+		else
+			cnt_num(n);
 		res = (char *)malloc(sizeof(char) * (len + 1));
 		if (!res)
 			return (0);
