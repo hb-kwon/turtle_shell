@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:15:38 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 22:18:25 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 22:46:07 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_cmd	*make_cmd(char *cmd_list)
 	return (cmd);
 }
 
-t_cmd	*make_cmd_rewind(t_cmd **cmd)
+void	make_cmd_rewind(t_cmd **cmd)
 {
 	while ((*cmd)->prev)
 		*cmd = (*cmd)->prev;
