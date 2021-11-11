@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:15:38 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 01:08:58 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 21:17:34 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_cmd	*make_cmd_list(char **cmd_list)
 {
 	t_cmd	*cmd;
 	t_cmd	*tmp;
-	t_token	*target;
 	int		i;
 
 	i = -1;
@@ -44,23 +43,8 @@ t_cmd	*make_cmd_list(char **cmd_list)
 	while (cmd_list[++i])
 	{
 		tmp = make_cmd(cmd_list[i]);
-		//test
-		if (cmd_list[i + 1] == NULL)
-			tmp->pipe_flag = 0;
-		else
+		if (cmd_list[i + 1] != NULL)
 			tmp->pipe_flag = 1;
-		//test end
-		//test2
-		target = tmp->token;
-		while (target)
-		{
-			if (target->type == RD_OUT)
-			{
-				tmp->re_flag = 1;
-			}
-			target = target->next;
-		}
-		//test2 end
 		if (!tmp)
 			return (NULL);
 		if (cmd == NULL)
