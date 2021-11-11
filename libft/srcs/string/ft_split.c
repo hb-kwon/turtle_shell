@@ -6,13 +6,13 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 16:34:35 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/10 01:29:58 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 21:04:59 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		cnt_size(char const *s, char c)
+static int	cnt_size(char const *s, char c)
 {
 	int	size;
 
@@ -25,7 +25,7 @@ static int		cnt_size(char const *s, char c)
 	return (size);
 }
 
-static int		cnt_word(char const *s, char c)
+static int	cnt_word(char const *s, char c)
 {
 	int	cnt;
 
@@ -41,7 +41,7 @@ static int		cnt_word(char const *s, char c)
 	return (cnt);
 }
 
-static char		**arr_free(char **arr, int i)
+static char	**arr_free(char **arr, int i)
 {
 	while (i--)
 		free(arr[i]);
@@ -49,7 +49,7 @@ static char		**arr_free(char **arr, int i)
 	return (0);
 }
 
-char			**ft_split(const char *s, char c)
+char	**ft_split(const char *s, char c)
 {
 	char	**res;
 	int		size;

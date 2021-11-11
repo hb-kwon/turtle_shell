@@ -6,13 +6,13 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 16:20:42 by hkwon             #+#    #+#             */
-/*   Updated: 2020/11/12 15:32:26 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 21:01:14 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		cnt_num(int n)
+static int	cnt_num(int n)
 {
 	int	cnt;
 
@@ -25,7 +25,7 @@ static int		cnt_num(int n)
 	return (cnt);
 }
 
-static void		write_num(char *dest, unsigned int n)
+static void	write_num(char *dest, unsigned int n)
 {
 	if (n < 10)
 		*dest = n + '0';
@@ -36,7 +36,7 @@ static void		write_num(char *dest, unsigned int n)
 	}
 }
 
-char			*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char			*res;
 	unsigned int	nbr;
@@ -48,7 +48,8 @@ char			*ft_itoa(int n)
 	else
 	{
 		len = n < 0 ? cnt_num(n) + 1 : cnt_num(n);
-		if (!(res = (char *)malloc(sizeof(char) * (len + 1))))
+		res = (char *)malloc(sizeof(char) * (len + 1));
+		if (!res)
 			return (0);
 		if (n < 0)
 		{

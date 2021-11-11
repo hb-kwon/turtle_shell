@@ -6,15 +6,15 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 22:54:07 by hkwon             #+#    #+#             */
-/*   Updated: 2021/02/23 22:56:26 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 21:02:25 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_putstr(char *s)
+int	ft_putstr(char *s)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(s);
 	write(1, s, len);

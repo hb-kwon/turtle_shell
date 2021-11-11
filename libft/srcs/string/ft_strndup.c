@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 06:02:41 by hkwon             #+#    #+#             */
-/*   Updated: 2021/06/01 06:02:50 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 21:06:27 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ char	*ft_strndup(const char *src, int n)
 	int		i;
 
 	i = 0;
-	if (!(dest = (char*)malloc(sizeof(char) * (n + 1))))
+	dest = (char*)malloc(sizeof(char) * (n + 1));
+	if (!dest)
 		return (0);
 	while (i < n)
 	{
