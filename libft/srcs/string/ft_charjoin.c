@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 14:27:46 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/01 14:40:11 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 18:05:25 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ char	*ft_charjoin(char *str, char c)
 	else
 	{
 		res = (char *)malloc(sizeof(char) * (len + 2));
+		if (!res)
+			return (NULL);
 		i = -1;
 		if (str == NULL)
 			res[0] = c;
