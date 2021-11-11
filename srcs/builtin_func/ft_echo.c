@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:11:43 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 20:46:40 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 22:05:49 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,8 @@
 // 	return (1);
 // }
 
-void	print_exit_status(t_mini *shell)
+static void	print_echo(t_token *token)
 {
-	ft_putstr_fd(ft_itoa(shell->exit_status), STDOUT);
-}
-
-int	ft_echo(t_mini *shell)
-{
-	int		n_flag;
-	t_token	*token;
-
-	token = shell->cmd->token->next;
-	n_flag = 0;
-	if (token->next && !ft_strcmp(token->arg, "-n"))
-	{
-		n_flag = 1;
-		token = token->next;
-	}
 	while (token)
 	{
 		if (token->type != ARGUMENT)
@@ -67,9 +52,23 @@ int	ft_echo(t_mini *shell)
 			ft_putstr_fd(token->arg, STDOUT);
 		token = token->next;
 	}
-	if (n_flag)
-		return (0);
-	write(1, "\n", 1);
+}
+
+int	ft_echo(t_mini *shell)
+{
+	int		n_flag;
+	t_token	*token;
+
+	token = shell->cmd->token->next;
+	n_flag = 0;
+	if (token && !ft_strcmp(token->arg, "-n"))
+	{
+		n_flag = 1;
+		token = token->next;
+	}
+	print_echo(token);
+	if (!n_flag)
+		write(1, "\n", 1);
 	g_mini.exit_status = 0;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:47 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 19:56:28 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 21:57:28 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ char	*find_key(char *str, int key)
 			return (temp);
 		}
 		else
-		{
 			temp[i] = str[i];
-		}
 	}
 	return (NULL);
 }

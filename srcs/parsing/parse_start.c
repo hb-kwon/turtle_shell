@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_start.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:15:38 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 21:17:34 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 22:18:25 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ t_cmd	*make_cmd(char *cmd_list)
 	cmd->pre_flag = 0;
 	cmd->re_flag = 0;
 	return (cmd);
+}
+
+t_cmd	*make_cmd_rewind(t_cmd **cmd)
+{
+	while ((*cmd)->prev)
+		*cmd = (*cmd)->prev;
 }
 
 t_cmd	*make_cmd_list(char **cmd_list)
@@ -57,8 +63,7 @@ t_cmd	*make_cmd_list(char **cmd_list)
 		}
 	}
 	ft_free_arr(cmd_list);
-	while (cmd->prev)
-		cmd = cmd->prev;
+	make_cmd_rewind(&cmd);
 	return (cmd);
 }
 

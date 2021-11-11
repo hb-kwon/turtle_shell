@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 19:25:10 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 22:20:02 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ void	minishell(char **en);
 int		check_cmd(char *cmd);
 int		run_blt(t_mini *shell, int i);
 int		run_inner(t_mini *shell);
+void	pipe_blt_run(int i, t_mini *shell);
 int		pipe_process(t_mini *shell);
 void	pipe_restore(t_mini *shell, int *old_fds);
 

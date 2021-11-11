@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:45:14 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 20:55:28 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 22:10:49 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,3 @@ void	init_shell(char ***en, char *envp[])
 	signal(SIGINT, signal_int);
 	signal(SIGQUIT, signal_quit);
 }
-
-/*
-** 터미널을 종료시키는 인터럽트를 발생시켰을 때,
-** 터미널이 종료되는게 아니라 우리의 minishell 프로그램만 종료되도록 액션을 변경해줘야 한다.
-** 이런 핸들러 역할을 하는게 아래의 signal 함수이다.
-*/

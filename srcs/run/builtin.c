@@ -3,47 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 13:26:18 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 02:53:55 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/11 22:19:42 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	pipe_blt_run(int i, t_mini *shell)
-{
-	int		status;
-	int		rd_fds[2];
-	int		old_fds[2];
-	char	*cmd;
-
-	cmd = shell->cmd->token->arg;
-	save_old_fds(old_fds);
-	pipe(shell->cmd->fds);
-	g_mini.pid = fork();
-	if (g_mini.pid == 0)
-	{
-		pipe_process(shell);
-		if (!redirect_process(shell, rd_fds))
-			exit(1);
-		(*blt_func(i))(shell);
-		if (i == 6 && !check_cmd(cmd))
-			print_error_blt(cmd);
-		exit(0);
-	}
-	else if (g_mini.pid == -1)
-		print_error1("pid", "fork error");
-	else
-	{
-		wait(&status);
-		if (status >> 8 != 0)
-			g_mini.exit_status = status >> 8;
-		redirect_close(rd_fds);
-		pipe_restore(shell, old_fds);
-	}
-}
 
 char	*blt_str(int i)
 {
@@ -111,12 +78,3 @@ int	run_blt(t_mini *shell, int i)
 	}
 	return (0);
 }
-
-/*
-** 함수포인터를 이용하여 내장 기능을 수행한다.
-** 함수포인터를 사용하는 이유는 ?
-** exit pwd cd
-** echo env unset export
-** 이차원배열을 만들어서 char *line -> char **cmd로 내장함수를 저장할 수 있게 만들자.
-** 함수포인터를 사용했을 때 인자값이 고정이 되어버린다.
-*/

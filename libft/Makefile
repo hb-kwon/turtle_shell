@@ -6,7 +6,7 @@
 #    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/28 01:44:43 by hkwon             #+#    #+#              #
-#    Updated: 2021/11/11 20:14:16 by hkwon            ###   ########.fr        #
+#    Updated: 2021/11/11 21:41:53 by hkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,6 @@ SRCS_LIST = $(addprefix $(SRCS_LIST_DIR)/, \
 
 SRCS_NUM_DIR = $(SRCS_DIR)/num
 SRCS_NUM = $(addprefix $(SRCS_NUM_DIR)/, \
-			ft_lltoa.c\
 			ft_convert_base.c\
 			ft_count_num.c\
 			ft_atoi.c\
