@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:44:11 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 21:08:55 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 21:27:52 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char *res;
+	char	*res;
 
 	if (ft_strlen(s) < start)
 		return (ft_strdup(""));

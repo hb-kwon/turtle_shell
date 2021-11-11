@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/26 17:24:23 by hkwon             #+#    #+#             */
-/*   Updated: 2021/06/01 05:13:25 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 21:37:31 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	get_store_line(char **store, char **line)
 	}
 }
 
-int			get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char	*store[OPEN_MAX + 1];
 	char		buf[BUFFER_SIZE + 1];
@@ -63,7 +63,8 @@ int			get_next_line(int fd, char **line)
 
 	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0 || !(line))
 		return (-1);
-	while ((read_size = read(fd, buf, BUFFER_SIZE)) >= 0)
+	read_size = read(fd, buf, BUFFER_SIZE);
+	while (read_size >= 0)
 	{
 		if (get_set_store(&store[fd], buf, read_size) || read_size == 0)
 			break ;

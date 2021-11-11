@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/13 15:31:31 by hkwon             #+#    #+#             */
-/*   Updated: 2020/11/13 15:34:06 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 21:24:34 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strnstr(const char *big, const char *little, size_t size)
 {
-	size_t i;
-	size_t j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	if (little[i] == '\0')

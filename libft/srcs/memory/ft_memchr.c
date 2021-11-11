@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 03:54:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 20:57:40 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 21:31:25 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*ft_memchr(const void *ptr, int value, size_t size)
 	while (size--)
 	{
 		if (*s == (unsigned char)value)
-			return ((void*)s);
+			return ((void *)s);
 		s++;
 	}
 	return (0);

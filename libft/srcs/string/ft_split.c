@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 16:34:35 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 21:04:59 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 21:27:24 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ char	**ft_split(const char *s, char c)
 		if (*s != c)
 		{
 			size = cnt_size(s, c);
-			if (!(res[i] = malloc(size + 1)))
+			res[i] = malloc(size + 1);
+			if (!res)
 				return (arr_free(res, i));
 			ft_strlcpy(res[i++], s, size + 1);
 			while (*s && *s != c)

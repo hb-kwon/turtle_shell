@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 16:20:42 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 21:01:14 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 21:39:16 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ static void	write_num(char *dest, unsigned int n)
 	}
 }
 
+static int	calc_len(int n)
+{
+	int	len;
+
+	if (n < 0)
+		len = cnt_num(n) + 1;
+	else
+		len = cnt_num(n);
+	return (len);
+}
+
 char	*ft_itoa(int n)
 {
 	char			*res;
@@ -47,7 +58,7 @@ char	*ft_itoa(int n)
 		return (ft_strdup("0"));
 	else
 	{
-		len = n < 0 ? cnt_num(n) + 1 : cnt_num(n);
+		len = calc_len(n);
 		res = (char *)malloc(sizeof(char) * (len + 1));
 		if (!res)
 			return (0);

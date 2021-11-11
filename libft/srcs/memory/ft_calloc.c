@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 03:51:49 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 20:58:00 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 21:21:44 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_calloc(size_t nelem, size_t size)
 {
-	void *res;
+	void	*res;
 
 	res = malloc(nelem * size);
 	if (!res)

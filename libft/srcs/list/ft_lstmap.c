@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/07 13:26:26 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 21:03:05 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/11 21:23:56 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list *curr;
-	t_list *res;
+	t_list	*curr;
+	t_list	*res;
 
 	res = ft_lstnew(f(lst->content));
 	if (!res)
