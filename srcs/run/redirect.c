@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/11 04:33:47 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/12 01:38:37 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,14 @@ static void	redirect_herdoc(t_mini *shell, int *rd_fds)
 
 	rd_fds[0] = open(".temp.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	end = find_token(shell, RD_HEREDOC);
-	write(1, "> ", 2);
-	r = readline(g_mini.path);
+	r = readline("> ");
 	while (r)
 	{
 		if (ft_strcmp(r, end) == 0)
 			break ;
-		write(1, "> ", 2);
 		write(rd_fds[0], r, strlen(r));
 		write(rd_fds[0], "\n", 1);
-		r = readline(g_mini.path);
+		r = readline("> ");
 	}
 	rd_fds[0] = open(".temp.txt", O_RDONLY);
 	dup2(rd_fds[0], STDIN_FILENO);
