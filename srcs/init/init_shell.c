@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:45:14 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 22:10:49 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/12 20:01:43 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,27 +45,13 @@ static void	signal_int(int signo)
 		}
 		else
 		{
-			//mac
 			printf("\033[%luC  \b\b\n", ft_strlen(g_mini.path));
-			//window
-			// printf("\b\b  \b\b\n");
 			if (rl_on_new_line() == -1)
 				exit(1);
 			rl_replace_line("", 0);
 			rl_redisplay();
 		}
 	}
-	// else
-	// {
-	// 	//mac
-	// 	printf("\033[%luC  \b\b\n", ft_strlen(g_mini.path));
-	// 	//window
-	// 	// printf("\b\b  \b\b\n");
-	// 	if (rl_on_new_line() == -1)
-	// 		exit(1);
-	// 	rl_replace_line("", 0);
-	// 	rl_redisplay();
-	// }
 }
 
 static void	signal_quit(int signo)
@@ -78,13 +64,8 @@ static void	signal_quit(int signo)
 			g_mini.sig_on = 1;
 		}
 		else
-			//mac
 			printf("\033[%luC  \b\b", ft_strlen(g_mini.path));
-			//window
-			// printf("\b\b  \b\b");
 	}
-	// else
-	// 	printf("\b\b  \b\b");
 }
 
 void	init_shell(char ***en, char *envp[])
