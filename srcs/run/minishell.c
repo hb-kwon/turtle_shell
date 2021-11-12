@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 23:26:06 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/12 16:50:08 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ static int	run_shell(t_mini *shell)
 		if (i >= BLTIN_NUM)
 			run_inner(shell);
 		temp = temp->next;
-		shell->cmd = shell->cmd->next;
+		if (shell->cmd->next)
+			shell->cmd = shell->cmd->next;
 	}
 	free_cmd(shell);
 	return (1);
@@ -77,6 +78,7 @@ static t_mini	*malloc_shell(void)
 void	minishell(char **en)
 {
 	int		status;
+	int		temp;
 	t_mini	*shell;
 
 	status = 1;
@@ -85,7 +87,8 @@ void	minishell(char **en)
 		shell = malloc_shell();
 		shell->envp = en;
 		g_mini.envp = en;
-		if (init_line(shell))
+		temp = init_line(shell);
+		if (temp)
 			status = run_shell(shell);
 		en = shell->envp;
 		free(shell);
