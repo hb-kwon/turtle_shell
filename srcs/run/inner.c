@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/12 19:18:44 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/12 20:04:54 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	run_inner_child(t_mini *shell, char **buff, int *rd_fds)
 	exit(EXIT_SUCCESS);
 }
 
-static void	run_inner_parent(t_mini *shell, char **buff)
+static void	run_inner_parent(t_mini *shell)
 {
 	int	status;
 

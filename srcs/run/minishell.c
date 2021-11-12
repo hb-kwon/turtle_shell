@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/12 19:28:33 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/12 20:05:19 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	run_blitin(int *i, t_mini *shell)
 static int	run_shell(t_mini *shell)
 {
 	int		i;
-	t_cmd	*temp;
+	// t_cmd	*temp;
 
 	// temp = shell->cmd;
 	i = -1;
