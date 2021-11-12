@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 14:31:57 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/12 20:51:43 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/13 03:57:02 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,10 @@ static void	get_no_question(char **res, char *args, int *i)
 	temp = NULL;
 	while (!ft_strchr(" \t\n\"\'\\/", args[++(*i)]))
 		name = ft_charjoin(name, args[*i]);
-	printf("name is : %s\n", name);
 	if (name == NULL)
 		*res = ft_strjoin_free(*res, "$", 1);
 	temp = set_value(find_value(name, g_mini.envp), 0);
 	*res = ft_strjoin_free(*res, temp, 3);
-	if (*res == NULL)
-		printf("res is null\n");
 	if (name)
 		free(name);
 }
@@ -64,15 +61,9 @@ int	parse_normal_string(char **res, char *args, int i)
 			i += 2;
 		}
 		else
-		{
-			printf("debug start\n");
 			get_no_question(res, args, &i);
-		}
 	}
 	else
-	{
-		printf("res is : %s\n", *res);
 		*res = ft_charjoin(*res, args[i++]);
-	}
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/12 20:08:10 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/13 03:20:35 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,8 @@ static int	run_blitin(int *i, t_mini *shell)
 
 static int	run_shell(t_mini *shell)
 {
-	int		i;
-	// t_cmd	*temp;
+	int	i;
 
-	// temp = shell->cmd;
 	i = -1;
 	while (shell->cmd)
 	{
@@ -78,8 +76,6 @@ static int	run_shell(t_mini *shell)
 			run_inner(shell);
 		if (shell->cmd->next)
 			shell->cmd = shell->cmd->next;
-		// if (temp->next)
-		// 	temp = temp->next;
 		else
 			break ;
 	}

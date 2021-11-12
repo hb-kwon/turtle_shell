@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:11:43 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/11 22:05:49 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/13 04:09:49 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ static void	print_echo(t_token *token)
 			break ;
 		else if (token->next && token->next->type == ARGUMENT)
 		{
-			ft_putstr_fd(token->arg, STDOUT);
-			ft_putstr_fd(" ", STDOUT);
+			if (token->arg[0] != '\0')
+			{
+				ft_putstr_fd(token->arg, STDOUT);
+				ft_putstr_fd(" ", STDOUT);
+			}
 		}
 		else
 			ft_putstr_fd(token->arg, STDOUT);

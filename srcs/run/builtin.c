@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 13:26:18 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/12 19:10:30 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/13 03:20:41 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	run_blt(t_mini *shell, int i)
 	int		old_fds[2];
 
 	cmd = shell->cmd->token->arg;
-	printf("debug cmd : %s\n", cmd);
 	save_old_fds(old_fds);
 	if (shell->cmd->pipe_flag > 0)
 		pipe_blt_run(i, shell);
