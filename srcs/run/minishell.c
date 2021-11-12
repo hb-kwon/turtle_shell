@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/12 16:50:08 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/12 19:28:33 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,34 @@
 ** ARGUMENT 32
 */
 
-static int	run_blitin(int *i, t_cmd *temp, t_mini *shell)
+// static int	run_blitin(int *i, t_cmd *temp, t_mini *shell)
+// {
+// 	int	temp_num;
+
+// 	temp_num = -1;
+// 	printf("debug run blt\n");
+// 	while (++temp_num < BLTIN_NUM)
+// 	{
+// 		if (!ft_strcmp(temp->token->arg, blt_str(temp_num)))
+// 		{
+// 			run_blt(shell, temp_num);
+// 			break ;
+// 		}
+// 	}
+// 	(*i) = temp_num;
+// 	return (0);
+// }
+
+static int	run_blitin(int *i, t_mini *shell)
 {
 	int	temp_num;
 
 	temp_num = -1;
+	printf("debug run blt\n");
 	while (++temp_num < BLTIN_NUM)
 	{
-		if (!ft_strcmp(temp->token->arg, blt_str(temp_num)))
+		printf("debug check : %s\n", shell->cmd->token->arg);
+		if (!ft_strcmp(shell->cmd->token->arg, blt_str(temp_num)))
 		{
 			run_blt(shell, temp_num);
 			break ;
@@ -51,16 +71,19 @@ static int	run_shell(t_mini *shell)
 	int		i;
 	t_cmd	*temp;
 
-	temp = shell->cmd;
+	// temp = shell->cmd;
 	i = -1;
-	while (temp)
+	while (shell->cmd)
 	{
-		run_blitin(&i, temp, shell);
+		run_blitin(&i, shell);
 		if (i >= BLTIN_NUM)
 			run_inner(shell);
-		temp = temp->next;
 		if (shell->cmd->next)
 			shell->cmd = shell->cmd->next;
+		// if (temp->next)
+		// 	temp = temp->next;
+		else
+			break ;
 	}
 	free_cmd(shell);
 	return (1);
@@ -72,13 +95,18 @@ static t_mini	*malloc_shell(void)
 
 	temp = (t_mini *)malloc(sizeof(t_mini));
 	temp->cmd = NULL;
+	temp->exit_status = 0;
+	temp->sig_on = 0;
+	temp->line = NULL;
+	temp->path = NULL;
+	temp->envp = NULL;
+	temp->pid = 10000;
 	return (temp);
 }
 
 void	minishell(char **en)
 {
 	int		status;
-	int		temp;
 	t_mini	*shell;
 
 	status = 1;
@@ -87,8 +115,7 @@ void	minishell(char **en)
 		shell = malloc_shell();
 		shell->envp = en;
 		g_mini.envp = en;
-		temp = init_line(shell);
-		if (temp)
+		if (init_line(shell))
 			status = run_shell(shell);
 		en = shell->envp;
 		free(shell);

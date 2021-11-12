@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 14:30:56 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/07 19:19:02 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/12 19:58:36 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ static int	parse_get_dquote_env(char **res, char *args, int i)
 		while (!ft_strchr(" \t\n\"\'\\/", args[++i]))
 			name = ft_charjoin(name, args[i]);
 		temp = set_value(find_value(name, g_mini.envp), 0);
+		if (temp == NULL)
+		*res = ft_strjoin_free(*res, "$", 1);
+			else
 		*res = ft_strjoin_free(*res, temp, 1);
 	}
 	if (name)

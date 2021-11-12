@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inner.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/12 16:27:58 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/12 19:18:44 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static int	run_inner_child(t_mini *shell, char **buff, int *rd_fds)
 			exit(EXIT_FAILURE);
 	}
 	free(path);
+	ft_free_arr(buff);
 	exit(EXIT_SUCCESS);
 }
 
@@ -61,7 +62,6 @@ static void	run_inner_parent(t_mini *shell, char **buff)
 		g_mini.exit_status = status >> 8;
 	else
 		g_mini.exit_status = 0;
-	ft_free_arr(buff);
 	(void)shell;
 }
 
