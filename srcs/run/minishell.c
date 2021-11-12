@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/12 20:05:19 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/12 20:08:10 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,8 @@ static int	run_blitin(int *i, t_mini *shell)
 	int	temp_num;
 
 	temp_num = -1;
-	printf("debug run blt\n");
 	while (++temp_num < BLTIN_NUM)
 	{
-		printf("debug check : %s\n", shell->cmd->token->arg);
 		if (!ft_strcmp(shell->cmd->token->arg, blt_str(temp_num)))
 		{
 			run_blt(shell, temp_num);

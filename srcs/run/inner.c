@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/12 20:04:54 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/12 20:06:56 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	run_inner(t_mini *shell)
 		print_error1("fork error", strerror(errno));
 	else
 	{
-		run_inner_parent(shell, buff);
+		run_inner_parent(shell);
 		redirect_close(rd_fds);
 		pipe_restore(shell, old_fds);
 	}
