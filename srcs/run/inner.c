@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inner.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/12 20:06:56 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/13 16:34:42 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ static int	path_error_check(char *path)
 	return (1);
 }
 
-static int	run_inner_child(t_mini *shell, char **buff, int *rd_fds)
+static int	run_inner_child(t_mini *shell, int *rd_fds)
 {
 	char		*path;
 	int			i;
-
+	char 		**buff;
+	
+	buff = make_buff(shell);
 	pipe_process(shell);
 	if (!redirect_process(shell, rd_fds))
 		exit (1);
@@ -67,16 +69,14 @@ static void	run_inner_parent(t_mini *shell)
 
 int	run_inner(t_mini *shell)
 {
-	char	**buff;
 	int		old_fds[2];
 	int		rd_fds[2];
 
 	save_old_fds(old_fds);
-	buff = make_buff(shell);
 	pipe(shell->cmd->fds);
 	g_mini.pid = fork();
 	if (g_mini.pid == 0)
-		run_inner_child(shell, buff, rd_fds);
+		run_inner_child(shell, rd_fds);
 	else if (g_mini.pid == -1)
 		print_error1("fork error", strerror(errno));
 	else

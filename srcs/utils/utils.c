@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 14:30:16 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/11 02:15:06 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/13 16:33:32 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,6 @@ char	**make_buff(t_mini *shell)
 	}
 	buff[j] = NULL;
 	return (buff);
-}
-
-void	free_buff(char **buff)
-{
-	int	i;
-
-	i = -1;
-	while (buff[++i])
-		free(buff[i]);
-	free(buff);
 }
 
 void	save_old_fds(int *old_fds)
