@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 02:17:30 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/12 00:31:09 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/14 00:41:23 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,22 +31,18 @@ int export_no_value(char *str, char ***en)
 	int		i;
 	char	**new;
 
+	/*
+		키만 들어왔을경우
+		기존에 있을 경우 그냥 패스
+	*/
 	i = -1;
 	while ((*en)[++i])
 	{
 		if(!ft_strncmp((*en)[i], str, ft_strlen(str)))
 		{
-			(*en)[i] = ft_strdup(str);
 			return (1);
 		}
 	}
-	new = malloc(sizeof(char *) * (i + 2));
-	if (!new)
-		return (0);
-	i = -1;
-	while ((*en)[++i])
-		new[i] = ft_strdup((*en)[i]);
-	add_export(str, new, i);
-	*en = new;
+	add_export(str, en);
 	return (1);
 }

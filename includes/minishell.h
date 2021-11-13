@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/13 18:36:03 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/14 00:26:58 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ int		ft_cd(t_mini *shell);
 int		ft_pwd(t_mini *shell);
 int		ft_export(t_mini *shell);
 int		is_export_valid(char *str);
-void	add_export(char *str, char **new, int i);
+void	add_export(char *str, char ***en);
 int		export_no_value(char *str, char ***en);
 int		ft_unset(t_mini *shell);
 int		ft_env(t_mini *shell);
