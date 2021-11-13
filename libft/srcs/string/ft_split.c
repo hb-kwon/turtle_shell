@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 16:34:35 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/13 03:33:37 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/13 18:07:19 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ char	**ft_split(const char *s, char c)
 		else
 			s++;
 	}
-	res[i] = '\0';
+	res[i] = 0;
 	return (res);
 }

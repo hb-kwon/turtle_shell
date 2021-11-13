@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inner.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/13 16:34:42 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/13 19:29:38 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ static int	path_error_check(char *path)
 
 static int	run_inner_child(t_mini *shell, int *rd_fds)
 {
-	char		*path;
-	int			i;
-	char 		**buff;
-	
+	char	*path;
+	int		i;
+	char	**buff;
+
 	buff = make_buff(shell);
 	pipe_process(shell);
 	if (!redirect_process(shell, rd_fds))
@@ -47,7 +47,7 @@ static int	run_inner_child(t_mini *shell, int *rd_fds)
 			exit(EXIT_FAILURE);
 	}
 	free(path);
-	ft_free_arr(buff);
+	free(buff);
 	exit(EXIT_SUCCESS);
 }
 

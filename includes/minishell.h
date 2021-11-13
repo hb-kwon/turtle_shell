@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/12 01:20:14 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/13 18:36:03 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ char	*find_key(char *str, int key);
 int		print_error2(char *msg1, char *msg2, char *err_num);
 int		print_error1(char *msg, char *err_num);
 
+void	free_token(t_token *tkn);
 void	free_cmd(t_mini *shell);
 void	ft_free_arr(char **arr);
 

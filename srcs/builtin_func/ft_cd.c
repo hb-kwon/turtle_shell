@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:19:13 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 00:15:33 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/13 19:29:00 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	ft_cd(t_mini *shell)
 	}
 	else if (token->arg[0] == '$')
 		cd_en(path, buff, shell->envp);
+	free(buff);
 	g_mini.exit_status = 0;
 	return (0);
 }

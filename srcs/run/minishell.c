@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/13 14:01:06 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/13 19:30:40 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ static t_mini	*malloc_shell(void)
 	temp->line = NULL;
 	temp->path = NULL;
 	temp->envp = NULL;
-	temp->pid = 10000;
 	return (temp);
 }
 
@@ -104,6 +103,7 @@ void	minishell(char **en)
 	t_mini	*shell;
 
 	status = 1;
+	g_mini.pid = 10000;
 	while (status)
 	{
 		shell = malloc_shell();
