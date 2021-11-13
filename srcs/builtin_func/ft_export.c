@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:47 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/12 00:36:25 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/13 13:49:56 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ static int	check_export(char *str, char ***en)
 	int		i;
 	char	**new;
 
+	i = -1;
+	while ((*en)[++i])
+	{
+		if (!ft_strncmp((*en)[i],ft_split(str, '=')[0], ft_strlen(ft_split(str, '=')[0])))
+		{
+			(*en)[i] = ft_strdup(str);
+			return (1);
+		}
+	}
 	i = -1;
 	while ((*en)[++i])
 	{
