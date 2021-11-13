@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:38:28 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/12 00:31:05 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/13 15:41:52 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ char	*find_key(char *str, int key)
 		else
 			temp[i] = str[i];
 	}
+	free(temp);
 	return (NULL);
 }
