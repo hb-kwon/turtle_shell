@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/12 01:38:37 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/13 16:47:25 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void	redirect_herdoc(t_mini *shell, int *rd_fds)
 	}
 	rd_fds[0] = open(".temp.txt", O_RDONLY);
 	dup2(rd_fds[0], STDIN_FILENO);
+	unlink(".temp.txt");
 }
 
 static void	redirect_out(t_mini *shell, int *rd_fds)
