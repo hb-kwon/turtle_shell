@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:38:28 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/13 15:41:52 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/14 15:25:44 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ char	*find_path(t_mini *shell, char *cmd)
 		new_path = ft_strjoin(paths[i], temp);
 		free(temp);
 		if (!stat(new_path, &s))
+		{
+			ft_free_arr(paths);
 			return (new_path);
+		}
 		free(new_path);
 	}
 	ft_free_arr(paths);
