@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:47 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/14 23:36:32 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/14 23:49:09 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	add_export(char *str, char ***en)
 		;
 	temp = (char **)malloc(sizeof(char *) * (i + 2));
 	i = -1;
-	while((*en)[++i])
+	while ((*en)[++i])
 	{
 		temp[i] = (char *)malloc(PATH_MAX + 1);
 		j = -1;
@@ -85,6 +85,7 @@ static void	ft_export_process(t_token *token, t_mini *shell)
 	else
 		export_key_value(token->arg, &shell->envp);
 }
+
 int	ft_export(t_mini *shell)
 {
 	int		status;
