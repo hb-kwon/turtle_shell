@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:47 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/14 00:43:16 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/14 11:31:12 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,16 +93,10 @@ int	ft_export(t_mini *shell)
 		print_export(shell->envp);
 	else
 	{
+		if (shell->cmd->pre_flag == 1)
+			return (0);
 		while (token)
 		{
-			/*
-				export가 2개 들어왔을 경우
-				2번째 인자로 key=value를 만든다
-				만약 키만들어 왔을 경우 키만만들고
-				키와 벨류가 들어왔을 경우
-					키가 기존에 존재하면 벨류값을 바꾸어주고
-					아니라면 새로히 en에 추가해준다
-			*/
 			if (!is_export_valid(token->arg))
 			{
 				print_error2("export", token->arg, \

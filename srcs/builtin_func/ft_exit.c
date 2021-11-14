@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:22:25 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/13 19:29:18 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/14 11:28:56 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	ft_exit(t_mini *shell)
 	buff = make_buff(shell);
 	ac = 0;
 	status = 1;
+	if (shell->cmd->pre_flag == 1)
+		return ;
 	while (buff[ac])
 		ac++;
 	ft_putstr_fd("exit\n", 2);
