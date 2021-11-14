@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:47 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/14 11:31:12 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/14 23:36:32 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ static void	print_export(char **en)
 
 void	add_export(char *str, char ***en)
 {
-	// 기존에 있던 걸 free하고 
-	int	i;
-	int	j;
-	char **temp;
+	int		i;
+	int		j;
+	char	**temp;
 
 	i = -1;
 	while ((*en)[++i])
@@ -54,17 +53,10 @@ void	add_export(char *str, char ***en)
 static int	export_key_value(char *str, char ***en)
 {
 	int		i;
-	char	**new;
-	
-	/*
-		키와 벨류가 들어왔을 떄
-		만약 기존에 있었다면 새로만든다
-		없었다면 추가
-	*/
-	i = -1;
-	char *temp;
 	int		len;
+	char	*temp;
 
+	i = -1;
 	temp = find_key(str, '=');
 	len = ft_strlen(temp);
 	free(temp);
@@ -81,10 +73,21 @@ static int	export_key_value(char *str, char ***en)
 	return (1);
 }
 
+static void	ft_export_process(t_token *token, t_mini *shell)
+{
+	if (!is_export_valid(token->arg))
+	{
+		print_error2("export", token->arg, \
+		": not a valid identifier");
+	}
+	else if (ft_strchr(token->arg, '=') == NULL)
+		export_no_value(token->arg, &shell->envp);
+	else
+		export_key_value(token->arg, &shell->envp);
+}
 int	ft_export(t_mini *shell)
 {
 	int		status;
-	char	*temp;
 	t_token	*token;
 
 	status = 0;
@@ -97,15 +100,7 @@ int	ft_export(t_mini *shell)
 			return (0);
 		while (token)
 		{
-			if (!is_export_valid(token->arg))
-			{
-				print_error2("export", token->arg, \
-				": not a valid identifier");
-			}
-			else if (ft_strchr(token->arg, '=') == NULL)
-				export_no_value(token->arg, &shell->envp);
-			else
-				export_key_value(token->arg, &shell->envp);
+			ft_export_process(token, shell);
 			token = token->next;
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:22:25 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/14 11:41:54 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/14 23:36:01 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,21 @@ static int	ft_isdigit_str(char *str)
 	return (1);
 }
 
+static void	ft_exit_process(int ac, int *status, char **buff)
+{
+	if (ac == 1)
+		status = 0;
+	else if (ac == 2 && ft_isdigit_str(buff[1]))
+		status = ft_atoi(buff[1]);
+	else if (ac > 2 && ft_isdigit_str(buff[1]))
+		print_error1("exit", "too many argments");
+	else
+	{
+		print_error2("exit", buff[1], "numeric argument required");
+		status = 255;
+	}
+}
+
 int	ft_exit(t_mini *shell)
 {
 	int		ac;
@@ -40,17 +55,7 @@ int	ft_exit(t_mini *shell)
 	while (buff[ac])
 		ac++;
 	ft_putstr_fd("exit\n", 2);
-	if (ac == 1)
-		status = 0;
-	else if (ac == 2 && ft_isdigit_str(buff[1]))
-		status = ft_atoi(buff[1]);
-	else if (ac > 2 && ft_isdigit_str(buff[1]))
-		print_error1("exit", "too many argments");
-	else
-	{
-		print_error2("exit", buff[1], "numeric argument required");
-		status = 255;
-	}
+	ft_exit_process(ac, &status, buff);
 	free(buff);
 	g_mini.exit_status = status;
 	system("leaks minishell");
