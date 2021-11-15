@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ysong <ysong@student.42.fr>                +#+  +:+       +#+         #
+#    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/11/13 13:56:58 by ysong            ###   ########.fr        #
+#    Updated: 2021/11/15 17:58:25 by hkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME = minishell
 LIBFT = libft.a
 
 CC = gcc
-# CFLAGS = -Wall -Wextra -Werror
-CFLAGS = -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
+#CFLAGS = -g3 -fsanitize=address
 # CFLAGS = -g
 AR = ar rc
 RM = rm -f
