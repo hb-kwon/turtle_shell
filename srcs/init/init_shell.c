@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:45:14 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/15 17:34:11 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/15 17:48:11 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ static void	signal_int(int signo)
 	// 	rl_replace_line("", 0);
 	// 	rl_redisplay();
 	// }
-	if (g_mini.pid == 0)
+	if (g_mini.pid > 0)
 	{
 			printf("\033[%luC  \b\b\n", ft_strlen(g_mini.path));
 			g_mini.sig_on = 1;
 	}
-	else
+	else (g_mini.pid == 0)
 	{
 		printf("\033[%luC  \b\b\n", ft_strlen(g_mini.path));
 		if (rl_on_new_line() == -1)
@@ -89,12 +89,12 @@ static void	signal_quit(int signo)
 	// }
 	// else
 	// 	printf("\033[%luC  \b\b", ft_strlen(g_mini.path));
-	if (g_mini.pid == 0)
+	if (g_mini.pid > 0)
 	{
 			printf("\033[%luC  \b\bQuit: 3\n", ft_strlen(g_mini.path));
 			g_mini.sig_on = 1;
 	}
-	else
+	else if (g_mini.pid == 0)
 		printf("\033[%luC  \b\b", ft_strlen(g_mini.path));
 }
 
