@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:45:14 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/15 18:16:56 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/15 19:15:53 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_env(char ***en, char *envp[])
 	return ;
 }
 
-static void	signal_int_util()
+static void	signal_int_util(void)
 {
 	if (rl_on_new_line() == -1)
 		exit(1);
