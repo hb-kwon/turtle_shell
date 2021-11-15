@@ -6,7 +6,7 @@
 #    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/11/15 17:58:25 by hkwon            ###   ########.fr        #
+#    Updated: 2021/11/15 18:08:50 by hkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,15 +97,15 @@ vpath %.c \
 
 all : $(NAME)
 
-# $(NAME) : $(LIBFT)
-# 	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -I $(LIB_DIR)/$(INCLUDE_DIR) \
-# 	-L ./$(LIB_DIR) -lreadline -L/Users/hkwon/.brew/opt/readline/lib -I/Users/hkwon/.brew/opt/readline/include \
-# 	-lft -o $(NAME) $(SRCS)
-
-# 우분투용 Make
 $(NAME) : $(LIBFT)
 	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -I $(LIB_DIR)/$(INCLUDE_DIR) \
-	-o $(NAME) $(SRCS) $(LIB_DIR)/libft.a -lreadline
+	-L ./$(LIB_DIR) -lreadline -L/Users/hkwon/.brew/opt/readline/lib -I/Users/hkwon/.brew/opt/readline/include \
+	-lft -o $(NAME) $(SRCS)
+
+# 우분투용 Make
+# $(NAME) : $(LIBFT)
+# 	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -I $(LIB_DIR)/$(INCLUDE_DIR) \
+# 	-o $(NAME) $(SRCS) $(LIB_DIR)/libft.a -lreadline
 
 # $(OBJS_DIR) :
 # 	@mkdir -p $(OBJS_DIR)
