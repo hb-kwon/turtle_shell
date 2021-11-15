@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/13 19:30:40 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/15 17:34:19 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void	minishell(char **en)
 	t_mini	*shell;
 
 	status = 1;
-	g_mini.pid = 10000;
 	while (status)
 	{
 		shell = malloc_shell();
