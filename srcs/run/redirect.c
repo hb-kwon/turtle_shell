@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/17 05:58:48 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/17 06:04:28 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 static int	redirect_in(t_mini *shell, int *rd_fds)
 {
+	char *path;
+
+	path = find_token(shell, RD_IN);
+	if (access(path, R_OK) == -1 && errno == EACCES)
+	{
+		print_error1(path, "Permission denied");
+		return (0);
+	}
 	if (rd_fds[0] > 0)
 		close(rd_fds[0]);
 	rd_fds[0] = open(find_token(shell, RD_IN), O_RDONLY);
