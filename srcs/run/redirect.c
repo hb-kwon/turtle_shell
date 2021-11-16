@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/16 17:11:12 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/17 05:56:34 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,40 @@ static void	redirect_herdoc(t_mini *shell, int *rd_fds)
 	unlink(".temp.txt");
 }
 
-static void	redirect_out(t_mini *shell, int *rd_fds)
+static int	redirect_out(t_mini *shell, int *rd_fds)
 {
+	char *path;
+
+	path = find_token(shell, ARG);
+	if (access(path, W_OK) == -1 && errno == EACCES)
+	{
+		print_error1(path, ": Permission denied");
+		return (0);
+	}
 	if (rd_fds[1] > 0)
 		close(rd_fds[1]);
 	rd_fds[1] = open(find_token(shell, ARG), \
 	O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	dup2(rd_fds[1], STDOUT_FILENO);
+	return (1);
 }
 
-static void	redirect_app(t_mini *shell, int *rd_fds)
+static int	redirect_app(t_mini *shell, int *rd_fds)
 {
+	char *path;
+
+	path = find_token(shell, RD_APPEND);
+	if (access(path, W_OK) == -1 && errno == EACCES)
+	{
+		print_error1(path, ": Permission denied");
+		return (0);
+	}
 	if (rd_fds[1] > 0)
 		close(rd_fds[1]);
 	rd_fds[1] = open(find_token(shell, RD_APPEND), \
 	O_WRONLY | O_CREAT | O_APPEND, 0644);
 	dup2(rd_fds[1], STDOUT_FILENO);
+	return (1);
 }
 
 int	redirect_process(t_mini *shell, int *rd_fds)
@@ -75,8 +93,8 @@ int	redirect_process(t_mini *shell, int *rd_fds)
 	else if (find_token(shell, RD_HEREDOC))
 		redirect_herdoc(shell, rd_fds);
 	else if (find_token(shell, RD_OUT))
-		redirect_out(shell, rd_fds);
+		return (redirect_out(shell, rd_fds));
 	else if (find_token(shell, RD_APPEND))
-		redirect_app(shell, rd_fds);
+		return (redirect_app(shell, rd_fds));
 	return (1);
 }
