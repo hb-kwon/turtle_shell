@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/16 17:19:39 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/16 18:54:26 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "libft.h"
 # include <sys/wait.h>
 # include <sys/stat.h>
-// # define PATH_MAX 1024
+# define PATH_MAX 1024
 # define BLTIN_NUM 7
 
 # define NONE 0
@@ -156,6 +156,7 @@ int		ft_pwd(t_mini *shell);
 int		ft_export(t_mini *shell);
 int		is_export_valid(char *str);
 void	add_export(char *str, char ***en);
+void	export_print(char **en, char *key, char *value, int i);
 int		export_no_value(char *str, char ***en);
 int		ft_unset(t_mini *shell);
 int		ft_env(t_mini *shell);
