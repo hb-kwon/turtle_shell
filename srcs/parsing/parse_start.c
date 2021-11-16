@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:15:38 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/16 17:18:48 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/16 19:44:01 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ t_cmd	*make_cmd_list(char **cmd_list)
 	while (cmd_list[++i])
 	{
 		tmp = make_cmd(cmd_list[i]);
-		if (cmd_list[i + 1] != NULL)
-			tmp->pipe_flag = 1;
 		if (!tmp)
 			return (NULL);
+		if (cmd_list[i + 1] != NULL)
+			tmp->pipe_flag = 1;
 		if (cmd == NULL)
 			cmd = tmp;
 		else

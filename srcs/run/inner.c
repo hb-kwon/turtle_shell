@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/13 19:29:38 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/16 21:42:50 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,18 @@
 
 static int	path_error_check(char *path)
 {
-	if (!ft_strchr(path, '/'))
+	struct stat	s;
+
+	if (!ft_strchr(path, '/') || !path)
 	{
-		ft_putstr_fd("minishell :", 2);
-		ft_putstr_fd(path, 2);
-		ft_putstr_fd(": ", 2);
-		ft_putendl_fd("command not found", 2);
+		print_error1(path, "command not found");
+		g_mini.exit_status = 127;
+		free(path);
+		return (0);
+	}
+	else if (stat(path, &s))
+	{
+		print_error1(path, "No such file or directory");
 		g_mini.exit_status = 127;
 		free(path);
 		return (0);
@@ -35,11 +41,11 @@ static int	run_inner_child(t_mini *shell, int *rd_fds)
 
 	buff = make_buff(shell);
 	pipe_process(shell);
-	if (!redirect_process(shell, rd_fds))
-		exit (1);
 	path = find_path(shell, find_token(shell, COMMAND));
 	if (!path_error_check(path))
 		exit(g_mini.exit_status);
+	if (!redirect_process(shell, rd_fds))
+		exit (1);
 	i = -1;
 	while (buff[++i])
 	{
