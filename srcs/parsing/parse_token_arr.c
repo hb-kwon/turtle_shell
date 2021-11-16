@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 14:32:48 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/27 15:53:32 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/16 17:18:55 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,6 @@ static void	args_quote_arr(char *cmd_list, int *index, int *flag)
 	(*index)++;
 }
 
-/*
-** index[3] == i, j, k;
-*/
 char	**parse_token_arr(char **args, char *cmd_list)
 {
 	int	index[3];

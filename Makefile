@@ -6,7 +6,7 @@
 #    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/11/16 17:09:58 by hkwon            ###   ########.fr        #
+#    Updated: 2021/11/16 17:20:09 by hkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,13 +16,11 @@ LIBFT = libft.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 #CFLAGS = -g3 -fsanitize=address
-# CFLAGS = -g
 AR = ar rc
 RM = rm -f
 
 INCLUDE_DIR = ./includes
 SRCS_DIR = ./srcs
-# OBJS_DIR = ./objs
 LIB_DIR = ./libft
 
 SRCS_BUILTIN_DIR = $(SRCS_DIR)/builtin_func
@@ -107,12 +105,6 @@ $(NAME) : $(LIBFT)
 # $(NAME) : $(LIBFT)
 # 	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -I $(LIB_DIR)/$(INCLUDE_DIR) \
 # 	-o $(NAME) $(SRCS) $(LIB_DIR)/libft.a -lreadline
-
-# $(OBJS_DIR) :
-# 	@mkdir -p $(OBJS_DIR)
-
-# $(OBJS_DIR)/%.o : %.c | $(OBJS_DIR)
-# 	$(CC) $(CFLAGS) -o $@ -I$(INCLUDE_DIR) -c $^
 
 $(LIBFT) :
 	@make -C $(LIB_DIR)

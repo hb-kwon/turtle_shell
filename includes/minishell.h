@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/16 17:13:04 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/16 17:19:39 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,6 @@ int		init_line(t_mini *shell);
 int		init_check(char *line);
 int		special_flag_onoff(char *line, int *i);
 int		line_empty_space(char *line);
-// void	signal_int(int sig_num);
-// void	signal_quit(int sig_num);
 
 /*
 ** parsing

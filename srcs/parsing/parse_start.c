@@ -6,16 +6,12 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 21:15:38 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/12 19:14:14 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/16 17:18:48 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-** command name이 필요한가?
-** command name이 필요한 이유 : blt_func을 실행할 때 문자열을 비교하여 실행하기 위해
-*/
 t_cmd	*make_cmd(char *cmd_list)
 {
 	t_cmd	*cmd;

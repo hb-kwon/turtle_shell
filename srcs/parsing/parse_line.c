@@ -6,19 +6,12 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 11:46:25 by hkwon             #+#    #+#             */
-/*   Updated: 2021/10/27 16:24:06 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/16 17:18:39 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-** single quote ascii number 39
-** double quote ascii number 34
-** "" 안의 ""를 처리를 해줄 것 인가?
-** echo "\"hello\"" -> "hello"
-** echo "\'hello\'"" -> \'hello\'
-*/
 static void	quote_onoff(char *line, int *s_q, int *d_q)
 {
 	if (*line == '\'')

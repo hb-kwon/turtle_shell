@@ -6,33 +6,11 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 14:31:57 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/13 03:57:02 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/16 17:18:45 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// static char	*get_env_set_envp(char *temp, char *res)
-// {
-// 	int	j;
-
-// 	j = 0;
-// 	while (temp && temp[j])
-// 	{
-// 		if (!ft_strchr("\t\n ", temp[j]))
-// 		{
-// 			res = ft_charjoin(res, ' ');
-// 			while (!ft_strchr("\t\n ", temp[j]))
-// 				j++;
-// 		}
-// 		else
-// 		{
-// 			res = ft_charjoin(res, temp[j]);
-// 			j++;
-// 		}
-// 	}
-// 	return (res);
-// }
 
 static void	get_no_question(char **res, char *args, int *i)
 {

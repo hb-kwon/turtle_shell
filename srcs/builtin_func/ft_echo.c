@@ -6,36 +6,11 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:11:43 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/13 04:09:49 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/16 17:19:24 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// static int	check_option(t_mini *shell)
-// {
-// 	t_token	*tmp2;
-// 	t_token	*check;
-// 	int		j;
-// 	int		i;
-
-// 	j = 0;
-// 	tmp2 = shell->cmd->token;
-// 	check = shell->cmd->token;
-// 	while (tmp2)
-// 	{
-// 		tmp2 = tmp2->next;
-// 		j++;
-// 	}
-// 	i = -1;
-// 	while (++i < j)
-// 	{
-// 		if (!ft_strcmp(check->arg, "-n"))
-// 			return (0);
-// 		check = check->next;
-// 	}
-// 	return (1);
-// }
 
 static void	print_echo(t_token *token)
 {

@@ -6,18 +6,12 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 11:04:30 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/13 02:41:16 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/16 17:19:02 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-** AND = &
-** OR = |
-** XOR = ^
-** NOT = ~
-*/
 static void	args_quote(char *cmd_list, int *i, char *flag)
 {
 	if (cmd_list[*i] == '\"' && !(*flag & D_QUOTE))

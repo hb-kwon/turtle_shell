@@ -6,46 +6,11 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:24:39 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/15 17:34:19 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/16 17:18:30 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-** NONE 0
-** CMD 1
-** REDIRECT 2
-** PIPE 4
-** ARG 8
-** S_QUOTE 16
-** D_QUOTE 32
-
-** RD_IN 1
-** RD_OUT 2
-** RD_APPEND 4
-** RD_HEREDOC	8
-** COMMAND 16
-** ARGUMENT 32
-*/
-
-// static int	run_blitin(int *i, t_cmd *temp, t_mini *shell)
-// {
-// 	int	temp_num;
-
-// 	temp_num = -1;
-// 	printf("debug run blt\n");
-// 	while (++temp_num < BLTIN_NUM)
-// 	{
-// 		if (!ft_strcmp(temp->token->arg, blt_str(temp_num)))
-// 		{
-// 			run_blt(shell, temp_num);
-// 			break ;
-// 		}
-// 	}
-// 	(*i) = temp_num;
-// 	return (0);
-// }
 
 static int	run_blitin(int *i, t_mini *shell)
 {
