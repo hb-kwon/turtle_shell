@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 16:03:49 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 01:06:38 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/16 17:12:07 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	ft_print_synerr(char c)
-{
-	ft_putstr_fd("minishell: syntax error", STDERR_FILENO);
-	write(STDERR_FILENO, &c, 1);
-	ft_putstr_fd("\'\n", STDERR_FILENO);
-	g_mini.exit_status = 258;
-	return (0);
-}
 
 static int	quote_last_open(char flag)
 {
@@ -76,6 +67,12 @@ int	init_check(char *line)
 			i++;
 		else if (line[i] == '\'' || line[i] == '\"')
 			quote_flag_onoff(line[i], &i, &flag);
+		else if (ft_strchr("<>|", line[i]) && \
+			!(flag & S_QUOTE) && !(flag & D_QUOTE))
+		{
+			if (!special_flag_onoff(line, &i))
+				return (0);
+		}
 		else
 			i++;
 	}

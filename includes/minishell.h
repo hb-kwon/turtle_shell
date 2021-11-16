@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/14 00:26:58 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/16 17:13:04 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int		main(int argc, char *argv[], char *envp[]);
 void	init_shell(char ***en, char *envp[]);
 int		init_line(t_mini *shell);
 int		init_check(char *line);
+int		special_flag_onoff(char *line, int *i);
 int		line_empty_space(char *line);
 // void	signal_int(int sig_num);
 // void	signal_quit(int sig_num);
@@ -177,6 +178,7 @@ char	*find_token(t_mini *shell, int type);
 char	*find_path(t_mini *shell, char *cmd);
 char	*find_key(char *str, int key);
 
+int		ft_print_synerr(char c);
 int		print_error2(char *msg1, char *msg2, char *err_num);
 int		print_error1(char *msg, char *err_num);
 

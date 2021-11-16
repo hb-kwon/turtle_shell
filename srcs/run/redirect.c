@@ -3,26 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/13 16:47:25 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/16 17:11:12 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	redirect_in(t_mini *shell, int *rd_fds)
+static int	redirect_in(t_mini *shell, int *rd_fds)
 {
 	if (rd_fds[0] > 0)
 		close(rd_fds[0]);
 	rd_fds[0] = open(find_token(shell, RD_IN), O_RDONLY);
 	if (rd_fds[0] == -1)
 	{
-		print_error2("bash :", find_token(shell, RD_IN), \
+		print_error1(find_token(shell, RD_IN), \
 		"No such file or directory");
+		return (0);
 	}
 	dup2(rd_fds[0], STDIN_FILENO);
+	return (1);
 }
 
 static void	redirect_herdoc(t_mini *shell, int *rd_fds)
@@ -69,7 +71,7 @@ int	redirect_process(t_mini *shell, int *rd_fds)
 	rd_fds[0] = 0;
 	rd_fds[1] = 0;
 	if (find_token(shell, RD_IN))
-		redirect_in(shell, rd_fds);
+		return (redirect_in(shell, rd_fds));
 	else if (find_token(shell, RD_HEREDOC))
 		redirect_herdoc(shell, rd_fds);
 	else if (find_token(shell, RD_OUT))

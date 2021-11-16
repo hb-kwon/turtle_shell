@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:23:36 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/11 02:14:27 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/16 17:13:01 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	ft_print_synerr(char c)
+{
+	ft_putstr_fd("minishell: syntax error\'", STDERR_FILENO);
+	write(STDERR_FILENO, &c, 1);
+	ft_putstr_fd("\'\n", STDERR_FILENO);
+	g_mini.exit_status = 258;
+	return (0);
+}
 
 int	print_error1(char *msg, char *err_num)
 {

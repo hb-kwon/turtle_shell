@@ -6,7 +6,7 @@
 #    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/11/15 18:08:50 by hkwon            ###   ########.fr        #
+#    Updated: 2021/11/16 17:09:58 by hkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS_INIT = $(addprefix $(SRCS_INIT_DIR)/, \
 		init_shell.c\
 		init_line.c\
 		init_check.c\
+		init_special_check.c\
 )
 
 SRCS_PARSE_DIR = $(SRCS_DIR)/parsing
