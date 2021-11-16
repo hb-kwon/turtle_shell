@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:47 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/16 18:54:13 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/16 20:18:42 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	print_export(char **en)
 		temp = ft_split(en[i], '=');
 		key = temp[0];
 		if (temp[1])
-			value = temp[1];
+			value = find_en(key, en);
 		else
 			value = NULL;
 		export_print(en, key, value, i);
