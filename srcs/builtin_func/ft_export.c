@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:12:47 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/14 23:49:09 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/16 18:33:17 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,30 @@
 static void	print_export(char **en)
 {
 	int	i;
+	char *key;
+	char *value;
+	char **temp;
 
 	i = -1;
 	while (en[++i])
 	{
+		temp = ft_split(en[i], '=');
+		key = temp[0];
+		if(temp[1])
+			value=temp[1];
+		else
+			value = NULL;
 		write(1, "declare -x ", ft_strlen("declare -x "));
-		ft_putendl_fd(en[i], 1);
+		write(1, key, ft_strlen(key));
+		if(ft_strchr(en[i], '='))
+		{
+			write(1, "=", 1);
+			write(1, "\"", 2);
+			write(1, value, ft_strlen(value));
+			write(1, "\"", 2);
+		}
+		write(1, "\n", 2);
+		ft_free_arr(temp);
 	}
 }
 
