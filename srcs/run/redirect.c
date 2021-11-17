@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/17 18:16:56 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/17 18:42:02 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	redirect_herdoc(t_mini *shell, int *rd_fds)
 	r = readline("> ");
 	while (r)
 	{
-		if (ft_strcmp(r, end) == 0)
+		if (!ft_strcmp(r, end))
 			break ;
 		write(rd_fds[0], r, strlen(r));
 		write(rd_fds[0], "\n", 1);

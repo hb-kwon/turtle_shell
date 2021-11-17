@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/17 18:04:44 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/17 18:37:19 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	path_error_check(char *path)
 	return (1);
 }
 
-static int	run_inner_child(t_mini *shell)
+static int	run_inner_child(t_mini *shell, int *rd_fds)
 {
 	char	*path;
 	int		i;
@@ -44,6 +44,8 @@ static int	run_inner_child(t_mini *shell)
 	path = find_path(shell, find_token(shell, COMMAND));
 	if (!path_error_check(path))
 		exit(g_mini.exit_status);
+	if (!redirect_process(shell, rd_fds))
+		exit (1);
 	i = -1;
 	while (buff[++i])
 	{
@@ -77,12 +79,10 @@ int	run_inner(t_mini *shell)
 	int		rd_fds[2];
 
 	save_old_fds(old_fds);
-	if (!redirect_process(shell, rd_fds))
-		exit (1);
 	pipe(shell->cmd->fds);
 	g_mini.pid = fork();
 	if (g_mini.pid == 0)
-		run_inner_child(shell);
+		run_inner_child(shell, rd_fds);
 	else if (g_mini.pid == -1)
 		print_error1("fork error", strerror(errno));
 	else
