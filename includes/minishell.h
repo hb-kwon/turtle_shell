@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/17 17:18:24 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/17 21:38:26 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ int		init_line(t_mini *shell);
 int		init_check(char *line);
 int		special_flag_onoff(char *line, int *i);
 int		line_empty_space(char *line);
-
+void	signal_quit(int signo);
+void	signal_int(int signo);
 /*
 ** parsing
 */

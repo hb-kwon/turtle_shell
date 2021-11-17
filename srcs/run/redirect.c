@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/17 21:28:36 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/17 21:38:59 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	redirect_in(t_mini *shell, int *rd_fds)
 {
-	char *path;
+	char	*path;
 
 	path = find_token(shell, RD_IN);
 	if (access(path, R_OK) == -1 && errno == EACCES)
@@ -47,15 +47,15 @@ static void	redirect_herdoc(t_mini *shell, int *rd_fds)
 	// printf("end = %s\n",end);
 	while (1)
 	{
-		// printf("---\n");
-		if (ft_strcmp(r, end) == 0)
+		if (!ft_strcmp(r, end))
 			break ;
 		// printf("---\n");
 		write(rd_fds[0], r, strlen(r));
 		write(rd_fds[0], "\n", 1);
-		// printf("---\n");
+		free(r);
 		r = readline("> ");
 	}
+	free(r);
 	rd_fds[0] = open(".temp.txt", O_RDONLY);
 	dup2(rd_fds[0], STDIN_FILENO);
 	unlink(".temp.txt");
@@ -63,7 +63,7 @@ static void	redirect_herdoc(t_mini *shell, int *rd_fds)
 
 static int	redirect_out(t_mini *shell, int *rd_fds)
 {
-	char *path;
+	char	*path;
 
 	path = find_token(shell, RD_OUT);
 	if (access(path, W_OK) == -1 && errno == EACCES)
@@ -81,7 +81,7 @@ static int	redirect_out(t_mini *shell, int *rd_fds)
 
 static int	redirect_app(t_mini *shell, int *rd_fds)
 {
-	char *path;
+	char	*path;
 
 	path = find_token(shell, RD_APPEND);
 	if (access(path, W_OK) == -1 && errno == EACCES)
