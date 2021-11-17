@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/17 21:38:59 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/17 23:52:49 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,36 @@ static int	redirect_in(t_mini *shell, int *rd_fds)
 	return (1);
 }
 
-static void	redirect_herdoc(t_mini *shell, int *rd_fds)
+void	redirect_herdoc(t_mini *shell, int *rd_fds)
 {
-	char	*r;
+	// char	*r;
 	char	*end;
-
-	rd_fds[0] = open(".temp.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	int		fd;
+	char	*buf;
+	int		r;
+	fd = open(".temp.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	// rd_fds[0] = open(".temp.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	end = find_token(shell, RD_HEREDOC);
-	r = readline("> ");
-	// printf("read = %s\n",r);
-	// printf("end = %s\n",end);
+	printf("end = %s\n",end);
+	// r = readline("> ");
+	r = get_next_line(rd_fds[0], &buf);
 	while (1)
 	{
-		if (!ft_strcmp(r, end))
+		if (!ft_strcmp(buf, end))
 			break ;
 		// printf("---\n");
-		write(rd_fds[0], r, strlen(r));
-		write(rd_fds[0], "\n", 1);
-		free(r);
-		r = readline("> ");
+		write(fd, buf, strlen(buf));
+		write(fd, "\n", 1);
+		// free(r);
+		// r = readline("> ");
+		r = get_next_line(rd_fds[0], &buf);
 	}
-	free(r);
+	// free(r);
+	if (buf)
+		free(buf);
+	close(fd);
 	rd_fds[0] = open(".temp.txt", O_RDONLY);
-	dup2(rd_fds[0], STDIN_FILENO);
+	dup2(rd_fds[0], fd);
 	unlink(".temp.txt");
 }
 
@@ -111,8 +118,8 @@ int	redirect_process(t_mini *shell, int *rd_fds)
 		*/
 	else if (find_token(shell, RD_IN))
 		return (redirect_in(shell, rd_fds));
-	else if (find_token(shell, RD_HEREDOC))
-		redirect_herdoc(shell, rd_fds);
+	// else if (find_token(shell, RD_HEREDOC))
+	// 	redirect_herdoc(shell, rd_fds);
 	else if (find_token(shell, RD_OUT))
 		return (redirect_out(shell, rd_fds));
 	else if (find_token(shell, RD_APPEND))

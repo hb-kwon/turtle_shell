@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/17 21:38:26 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/17 23:26:32 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@
 // # define PATH_MAX 1024
 # define BLTIN_NUM 7
 
-# define NONE 0
-# define CMD 1
-# define ARG 2
-# define REDIRECT 4
-# define PIPE 8
 # define S_QUOTE 16
 # define D_QUOTE 32
 
@@ -144,6 +139,7 @@ void	child_process(t_mini *shell);
 int		redirect_process(t_mini *shell, int *rd_fds);
 void	redirect_close(int *rd_fds);
 void	redirect_restore(int *rd_fds, int *old_fds);
+void	redirect_herdoc(t_mini *shell, int *rd_fds);
 void	print_error_blt(char *str);
 
 int		multi_rd(t_mini *shell, int *rd_fds);

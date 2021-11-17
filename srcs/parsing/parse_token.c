@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/18 11:04:30 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/16 17:19:02 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/17 22:53:32 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ static int	args_count(char *cmd_list)
 	flag = 0;
 	while (cmd_list[i])
 	{
-		if (!ft_strchr("\t\n ", cmd_list[i]))
+		if (!ft_strchr("<>\t\n ", cmd_list[i]))
 		{
 			cnt++;
-			while (!ft_strchr("\t\n ", cmd_list[i]))
+			while (!ft_strchr("<>\t\n ", cmd_list[i]))
 			{
 				args_quote(cmd_list, &i, &flag);
 				i++;
