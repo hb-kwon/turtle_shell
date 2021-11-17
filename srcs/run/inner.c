@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/16 21:42:50 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/17 16:11:06 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ static int	run_inner_child(t_mini *shell, int *rd_fds)
 	buff = make_buff(shell);
 	pipe_process(shell);
 	path = find_path(shell, find_token(shell, COMMAND));
-	if (!path_error_check(path))
-		exit(g_mini.exit_status);
 	if (!redirect_process(shell, rd_fds))
 		exit (1);
+	if (!path_error_check(path))
+		exit(g_mini.exit_status);
 	i = -1;
 	while (buff[++i])
 	{

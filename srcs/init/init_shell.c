@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:45:14 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/15 19:15:53 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/17 14:06:18 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	signal_quit(int signo)
 	{
 		if (!kill(g_mini.pid, signo))
 		{
-			printf("\033[%luCQuit: 3\n", ft_strlen(g_mini.path));
+			printf("\033[%luC\bQuit: 3\n", ft_strlen(g_mini.path));
 			g_mini.sig_on = 1;
 		}
 		else

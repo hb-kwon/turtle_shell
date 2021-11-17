@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/17 06:04:28 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/17 15:59:55 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	redirect_in(t_mini *shell, int *rd_fds)
 {
-	char *path;
+	char	*path;
 
 	path = find_token(shell, RD_IN);
 	if (access(path, R_OK) == -1 && errno == EACCES)
@@ -58,7 +58,7 @@ static void	redirect_herdoc(t_mini *shell, int *rd_fds)
 
 static int	redirect_out(t_mini *shell, int *rd_fds)
 {
-	char *path;
+	char	*path;
 
 	path = find_token(shell, ARG);
 	if (access(path, W_OK) == -1 && errno == EACCES)
@@ -76,7 +76,7 @@ static int	redirect_out(t_mini *shell, int *rd_fds)
 
 static int	redirect_app(t_mini *shell, int *rd_fds)
 {
-	char *path;
+	char	*path;
 
 	path = find_token(shell, RD_APPEND);
 	if (access(path, W_OK) == -1 && errno == EACCES)
