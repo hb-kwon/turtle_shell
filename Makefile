@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
+#    By: ysong <ysong@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/11/16 17:20:09 by hkwon            ###   ########.fr        #
+#    Updated: 2021/11/17 19:36:16 by ysong            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 LIBFT = libft.a
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 #CFLAGS = -g3 -fsanitize=address
 AR = ar rc
 RM = rm -f
@@ -63,6 +63,8 @@ SRCS_RUN = $(addprefix $(SRCS_RUN_DIR)/, \
 		pipe.c\
 		redirect.c\
 		redirect_close.c\
+		redirect_multi.c \
+		redirect_multi_utils.c \
 )
 
 SRCS_UTILS_DIR = $(SRCS_DIR)/utils
@@ -96,15 +98,15 @@ vpath %.c \
 
 all : $(NAME)
 
-$(NAME) : $(LIBFT)
-	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -I $(LIB_DIR)/$(INCLUDE_DIR) \
-	-L ./$(LIB_DIR) -lreadline -L/Users/hkwon/.brew/opt/readline/lib -I/Users/hkwon/.brew/opt/readline/include \
-	-lft -o $(NAME) $(SRCS)
-
-# 우분투용 Make
 # $(NAME) : $(LIBFT)
 # 	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -I $(LIB_DIR)/$(INCLUDE_DIR) \
-# 	-o $(NAME) $(SRCS) $(LIB_DIR)/libft.a -lreadline
+# 	-L ./$(LIB_DIR) -lreadline -L/Users/hkwon/.brew/opt/readline/lib -I/Users/hkwon/.brew/opt/readline/include \
+# 	-lft -o $(NAME) $(SRCS)
+
+# 우분투용 Make
+$(NAME) : $(LIBFT)
+	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -I $(LIB_DIR)/$(INCLUDE_DIR) \
+	-o $(NAME) $(SRCS) $(LIB_DIR)/libft.a -lreadline
 
 $(LIBFT) :
 	@make -C $(LIB_DIR)
