@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 22:33:46 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/17 16:07:08 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/17 18:06:17 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,9 @@ void	pipe_restore(t_mini *shell, int *old_fds)
 	}
 }
 
-static void	pipe_blt_child(t_mini *shell, int rd_fds[2], int i, char *cmd)
+static void	pipe_blt_child(t_mini *shell, int i, char *cmd)
 {
 	pipe_process(shell);
-	if (!redirect_process(shell, rd_fds))
-		exit(1);
 	(*blt_func(i))(shell);
 	if (i == 6 && !check_cmd(cmd))
 		print_error_blt(cmd);
@@ -85,10 +83,12 @@ void	pipe_blt_run(int i, t_mini *shell)
 
 	cmd = shell->cmd->token->arg;
 	save_old_fds(old_fds);
+	if (!redirect_process(shell, rd_fds))
+		exit(1);
 	pipe(shell->cmd->fds);
 	g_mini.pid = fork();
 	if (g_mini.pid == 0)
-		pipe_blt_child(shell, rd_fds, i, cmd);
+		pipe_blt_child(shell, i, cmd);
 	else if (g_mini.pid == -1)
 		print_error1("pid", "fork error");
 	else

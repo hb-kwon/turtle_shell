@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/17 15:59:55 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/17 18:16:56 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ static void	redirect_herdoc(t_mini *shell, int *rd_fds)
 			break ;
 		write(rd_fds[0], r, strlen(r));
 		write(rd_fds[0], "\n", 1);
+		free(r);
 		r = readline("> ");
 	}
+	free(r);
 	rd_fds[0] = open(".temp.txt", O_RDONLY);
 	dup2(rd_fds[0], STDIN_FILENO);
 	unlink(".temp.txt");

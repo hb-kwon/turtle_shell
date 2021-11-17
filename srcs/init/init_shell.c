@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 16:45:14 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/17 14:06:18 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/17 17:09:55 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,42 +42,42 @@ static void	signal_int_util(void)
 	rl_redisplay();
 }
 
-static void	signal_int(int signo)
+void	signal_int(int signo)
 {
 	if (g_mini.pid > 0)
 	{
 		if (!kill(g_mini.pid, signo))
 		{
-			printf("\033[%luC  \b\b\n", ft_strlen(g_mini.path));
+			printf("\033[%luC  \b\b\n", ft_strlen(g_mini.path) + rl_end);
 			g_mini.sig_on = 1;
 		}
 		else
 		{
-			printf("\033[%luC  \b\b\n", ft_strlen(g_mini.path));
+			printf("\033[%luC  \b\b\n", ft_strlen(g_mini.path) + rl_end);
 			signal_int_util();
 		}
 	}
 	else
 	{
-		printf("\033[%luC  \b\b\n", ft_strlen(g_mini.path));
+		printf("\033[%luC  \b\b\n", ft_strlen(g_mini.path) + rl_end);
 		signal_int_util();
 	}
 }
 
-static void	signal_quit(int signo)
+void	signal_quit(int signo)
 {
 	if (g_mini.pid > 0)
 	{
 		if (!kill(g_mini.pid, signo))
 		{
-			printf("\033[%luC\bQuit: 3\n", ft_strlen(g_mini.path));
+			printf("\033[%luC\bQuit: 3\n", ft_strlen(g_mini.path) + rl_end);
 			g_mini.sig_on = 1;
 		}
 		else
-			printf("\033[%luC  \b\b", ft_strlen(g_mini.path));
+			printf("\033[%luC  \b\b", ft_strlen(g_mini.path) + rl_end);
 	}
 	else
-		printf("\033[%luC  \b\b", ft_strlen(g_mini.path));
+		printf("\033[%luC  \b\b", ft_strlen(g_mini.path) + rl_end);
 }
 
 void	init_shell(char ***en, char *envp[])
