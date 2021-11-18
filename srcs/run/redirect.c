@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/18 15:49:51 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/18 18:50:15 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,19 @@ void	redirect_herdoc(t_mini *shell, int *rd_fds)
 	write(temp_fileno, "> ", 2);
 	while ((test_r = get_next_line(temp_fileno, &buf)) > 0)
 	{
+		// tcgetattr(STDIN_FILENO, &g_mini.org_term);
+		// tcgetattr(STDIN_FILENO, &g_mini.new_term); // STDIN으로부터 터미널 속성을 받아온다
+		// g_mini.new_term.c_lflag &= ~(ICANON | ECHO);  // ICANON, ECHO 속성을 off
+		// g_mini.new_term.c_cc[VMIN] = 1;               // 1 바이트씩 처리
+		// g_mini.new_term.c_cc[VTIME] = 0;              // 시간은 설정하지 않음
+		// tcsetattr(STDIN_FILENO, TCSANOW, &g_mini.new_term); // 변경된 속성의 터미널을 STDIN에 바로 적용
 		if (!ft_strcmp(buf, end))
 			break ;
 		write(fd, buf, strlen(buf));
 		write(fd, "\n", 1);
 		write(temp_fileno, "> ", 2);
 		free(buf);
+		// tcsetattr(STDIN_FILENO, TCSANOW, &g_mini.org_term);
 	}
 	if (!(fd <= 2))
 		close(fd);
