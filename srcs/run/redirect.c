@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/18 19:01:11 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/18 19:33:39 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,24 @@ static int	redirect_in(t_mini *shell, int *rd_fds)
 void	redirect_herdoc(t_mini *shell, int *rd_fds)
 {
 	int		fd;
-	int		test_r;
+	int		temp;
 	char	*end;
 	char	*buf;
-	int		temp_fileno;
+	int		fileno;
 
 	fd = open(".temp.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (shell->cmd->prev && shell->cmd->prev->pipe_flag && \
 		!shell->cmd->next)
-		temp_fileno = STDOUT_FILENO;
+		fileno = STDOUT_FILENO;
 	else if (shell->cmd->next && !shell->cmd->prev)
-		temp_fileno = STDIN_FILENO;
+		fileno = STDIN_FILENO;
 	else if (shell->cmd->next && shell->cmd->prev)
-		temp_fileno = shell->cmd->prev->fds[1];
+		fileno = shell->cmd->prev->fds[1];
 	else
-		temp_fileno = STDIN_FILENO;
+		fileno = STDIN_FILENO;
 	end = find_token(shell, RD_HEREDOC);
-	write(temp_fileno, "> ", 2);
-	while ((test_r = get_next_line(temp_fileno, &buf)) > 0)
+	write(fileno, "> ", 2);
+	while ((temp = get_next_line(fileno, &buf)) > 0)
 	{
 		if (!ft_strcmp(buf, end))
 		{
@@ -64,7 +64,7 @@ void	redirect_herdoc(t_mini *shell, int *rd_fds)
 		}
 		write(fd, buf, strlen(buf));
 		write(fd, "\n", 1);
-		write(temp_fileno, "> ", 2);
+		write(fileno, "> ", 2);
 		free(buf);
 	}
 	if (!(fd <= 2))

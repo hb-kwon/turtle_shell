@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:26:31 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/17 21:33:01 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/18 20:01:41 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ int rd_option_in_and_out(t_mini *shell, int *rd_fds)
             last_type = temp->type;
         temp = temp->next;
     }
+    
     if (last_type == RD_IN || last_type == RD_HEREDOC)
     {
         rd_option_only_out(shell,rd_fds);
