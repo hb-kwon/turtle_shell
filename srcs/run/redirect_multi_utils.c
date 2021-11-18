@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 16:27:10 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/18 14:42:32 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/18 19:30:52 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,41 +36,31 @@ int	multi_redirect_in(char *open_file, int *rd_fds)
 void	multi_redirect_herdoc(t_mini *shell, int *rd_fds)
 {
 	int		fd;
-	int		test;
 	int		test_r;
 	char	*end;
 	char	*buf;
 	int		temp_fileno;
 
 	fd = open(".temp.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (shell->cmd->prev && shell->cmd->prev->pipe_flag)
-	{
-		test = dup2(fd, shell->cmd->prev->fds[0]);
-		test = fd;
+	if (shell->cmd->prev && shell->cmd->prev->pipe_flag && \
+		!shell->cmd->next)
 		temp_fileno = STDOUT_FILENO;
-	}
-	else if (shell->cmd->next)
-	{
-		printf("next test\n");
-		test = dup2(fd, shell->cmd->fds[0]);
-		test = fd;
+	else if (shell->cmd->next && !shell->cmd->prev)
 		temp_fileno = STDIN_FILENO;
-	}
+	else if (shell->cmd->next && shell->cmd->prev)
+		temp_fileno = shell->cmd->prev->fds[1];
 	else
-		test = STDIN_FILENO;
-	printf("test = %d\n", test);
+		temp_fileno = STDIN_FILENO;
 	end = find_token(shell, RD_HEREDOC);
 	write(temp_fileno, "> ", 2);
 	while ((test_r = get_next_line(temp_fileno, &buf)) > 0)
 	{
-
 		if (!ft_strcmp(buf, end))
 			break ;
 		write(fd, buf, strlen(buf));
 		write(fd, "\n", 1);
 		write(temp_fileno, "> ", 2);
 		free(buf);
-
 	}
 	if (!(fd <= 2))
 		close(fd);
