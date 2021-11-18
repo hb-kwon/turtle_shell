@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/17 23:26:32 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/18 18:46:06 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ struct s_mini
 	char			*path;
 	char			**envp;
 	pid_t			pid;
+	struct termios	org_term;
+	struct termios	new_term;
 };
 
 extern t_mini				g_mini;

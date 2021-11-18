@@ -6,7 +6,7 @@
 #    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/11/17 23:28:56 by hkwon            ###   ########.fr        #
+#    Updated: 2021/11/18 18:51:40 by hkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME = minishell
 LIBFT = libft.a
 
 CC = gcc
-#CFLAGS = -Wall -Wextra -Werror -g
-CFLAGS = -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g
+#CFLAGS = -g3 -fsanitize=address
 AR = ar rc
 RM = rm -f
 
@@ -98,15 +98,15 @@ vpath %.c \
 
 all : $(NAME)
 
-# $(NAME) : $(LIBFT)
-# 	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -I $(LIB_DIR)/$(INCLUDE_DIR) \
-# 	-L ./$(LIB_DIR) -lreadline -L/Users/hkwon/.brew/opt/readline/lib -I/Users/hkwon/.brew/opt/readline/include \
-# 	-lft -o $(NAME) $(SRCS)
-
-# 우분투용 Make
 $(NAME) : $(LIBFT)
 	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -I $(LIB_DIR)/$(INCLUDE_DIR) \
-	-o $(NAME) $(SRCS) $(LIB_DIR)/libft.a -lreadline
+	-L ./$(LIB_DIR) -lreadline -L/Users/hkwon/.brew/opt/readline/lib -I/Users/hkwon/.brew/opt/readline/include \
+	-lft -o $(NAME) $(SRCS)
+
+# 우분투용 Make
+# $(NAME) : $(LIBFT)
+# 	$(CC) $(CFLAGS) -I $(INCLUDE_DIR) -I $(LIB_DIR)/$(INCLUDE_DIR) \
+# 	-o $(NAME) $(SRCS) $(LIB_DIR)/libft.a -lreadline
 
 $(LIBFT) :
 	@make -C $(LIB_DIR)

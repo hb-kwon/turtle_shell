@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/18 15:49:51 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/18 19:01:11 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ void	redirect_herdoc(t_mini *shell, int *rd_fds)
 	while ((test_r = get_next_line(temp_fileno, &buf)) > 0)
 	{
 		if (!ft_strcmp(buf, end))
+		{
+			free(buf);
 			break ;
+		}
 		write(fd, buf, strlen(buf));
 		write(fd, "\n", 1);
 		write(temp_fileno, "> ", 2);

@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 16:27:10 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/18 19:30:52 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/18 19:31:36 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	multi_redirect_in(char *open_file, int *rd_fds)
 {
-	
+
 	if (access(open_file, R_OK) == -1 && errno == EACCES)
 	{
 		print_error1(open_file, "Permission denied");
@@ -56,7 +56,10 @@ void	multi_redirect_herdoc(t_mini *shell, int *rd_fds)
 	while ((test_r = get_next_line(temp_fileno, &buf)) > 0)
 	{
 		if (!ft_strcmp(buf, end))
+		{
+			free(buf);
 			break ;
+		}
 		write(fd, buf, strlen(buf));
 		write(fd, "\n", 1);
 		write(temp_fileno, "> ", 2);
