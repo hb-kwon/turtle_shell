@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 22:33:46 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/18 13:15:50 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/18 14:58:05 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ void	pipe_blt_run(int i, t_mini *shell)
 
 	cmd = shell->cmd->token->arg;
 	save_old_fds(old_fds);
-	// if (find_token(shell, RD_HEREDOC))
-	// 	redirect_herdoc(shell, rd_fds);
 	pipe(shell->cmd->fds);
 	g_mini.pid = fork();
 	if (g_mini.pid == 0)

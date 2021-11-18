@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/18 13:34:34 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/18 15:47:13 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,54 +37,48 @@ static int	redirect_in(t_mini *shell, int *rd_fds)
 
 void	redirect_herdoc(t_mini *shell, int *rd_fds)
 {
-	// char	*r;
-	char	*end;
 	int		fd;
-	char	*buf;
-	char	*r;
-	int		test_r;
 	int		test;
-
+	int		test_r;
+	char	*end;
+	char	*buf;
+	int		temp_fileno;
 
 	fd = open(".temp.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-// 파이프가 있으면 다르게 작동하도록 하자
-	if (shell->cmd->prev && shell->cmd->prev->pipe_flag)
-		{test = dup2(fd, shell->cmd->prev->fds[0]);
-		test = fd;}
-	else
-		test = STDIN_FILENO;
-	// printf("shell->cmd->pipe_flag = %d\n",shell->cmd->prev->pipe_flag);
-	// printf("test = %d\n",test);
-	end = find_token(shell, RD_HEREDOC);
-	write(STDOUT_FILENO, "> ", 2);
-	int line = 1;
-	// printf("test%d\n",line++);
-	while ((test_r = get_next_line(STDOUT_FILENO, &buf)) > 0)
+	if (shell->cmd->prev && shell->cmd->prev->pipe_flag && \
+		!shell->cmd->next)
 	{
-		// printf("test%d\n",line++);
-		// if (!ft_strcmp(buf, end))
-		if (end[0] == buf[0])
+		test = dup2(fd, shell->cmd->prev->fds[1]);
+		temp_fileno = STDOUT_FILENO;
+	}
+	else if (shell->cmd->next && !shell->cmd->prev)
+	{
+		test = dup2(fd, shell->cmd->fds[0]);
+		temp_fileno = STDIN_FILENO;
+	}
+	else if (shell->cmd->next && shell->cmd->prev)
+	{
+		// test = dup2(fd, shell->cmd->prev->fds[1]);
+		// temp_fileno = dup2(fd, shell->cmd->fds[0]);
+		temp_fileno = shell->cmd->prev->fds[1];
+	}
+	else
+		temp_fileno = STDIN_FILENO;
+	end = find_token(shell, RD_HEREDOC);
+	write(temp_fileno, "> ", 2);
+	while ((test_r = get_next_line(temp_fileno, &buf)) > 0)
+	{
+		if (!ft_strcmp(buf, end))
 			break ;
-		// printf("test%d\n",line++);
 		write(fd, buf, strlen(buf));
 		write(fd, "\n", 1);
-		write(STDOUT_FILENO, "> ", 2);
+		write(temp_fileno, "> ", 2);
 		free(buf);
-		// printf("test%d\n",line++);
 	}
-	// if (buf)
-	// 	free(buf);
 	if (!(fd <= 2))
 		close(fd);
 	rd_fds[0] = open(".temp.txt", O_RDONLY);
-	// printf("test%d\n",line++);
-	// dup2(fd, test);
-	if (shell->cmd->prev && shell->cmd->prev->pipe_flag)
-		dup2(rd_fds[0], STDIN_FILENO);
-	else
-		dup2(rd_fds[0], STDIN_FILENO);
-	// printf("shell->cmd->pipe_flag = %d\n",shell->cmd->prev->pipe_flag);
-	// printf("test%d\n",line++);
+	dup2(rd_fds[0], STDIN_FILENO);
 	unlink(".temp.txt");
 }
 

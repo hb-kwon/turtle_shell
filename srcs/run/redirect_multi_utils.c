@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 16:27:10 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/17 21:21:09 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/18 14:42:32 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,45 @@ int	multi_redirect_in(char *open_file, int *rd_fds)
 
 void	multi_redirect_herdoc(t_mini *shell, int *rd_fds)
 {
-	char	*r;
+	int		fd;
+	int		test;
+	int		test_r;
 	char	*end;
+	char	*buf;
+	int		temp_fileno;
 
-	rd_fds[0] = open(".temp.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	end = find_token(shell, RD_HEREDOC);
-	r = readline("> ");
-	while (1)
+	fd = open(".temp.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (shell->cmd->prev && shell->cmd->prev->pipe_flag)
 	{
-		if (ft_strcmp(r, end) == 0)
-			break ;
-		write(rd_fds[0], r, strlen(r));
-		write(rd_fds[0], "\n", 1);
-		r = readline("> ");
+		test = dup2(fd, shell->cmd->prev->fds[0]);
+		test = fd;
+		temp_fileno = STDOUT_FILENO;
 	}
+	else if (shell->cmd->next)
+	{
+		printf("next test\n");
+		test = dup2(fd, shell->cmd->fds[0]);
+		test = fd;
+		temp_fileno = STDIN_FILENO;
+	}
+	else
+		test = STDIN_FILENO;
+	printf("test = %d\n", test);
+	end = find_token(shell, RD_HEREDOC);
+	write(temp_fileno, "> ", 2);
+	while ((test_r = get_next_line(temp_fileno, &buf)) > 0)
+	{
+
+		if (!ft_strcmp(buf, end))
+			break ;
+		write(fd, buf, strlen(buf));
+		write(fd, "\n", 1);
+		write(temp_fileno, "> ", 2);
+		free(buf);
+
+	}
+	if (!(fd <= 2))
+		close(fd);
 	rd_fds[0] = open(".temp.txt", O_RDONLY);
 	dup2(rd_fds[0], STDIN_FILENO);
 	unlink(".temp.txt");
