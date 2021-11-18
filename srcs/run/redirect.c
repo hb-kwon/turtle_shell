@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/18 19:33:39 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/18 20:38:34 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,15 @@ void	redirect_herdoc(t_mini *shell, int *rd_fds)
 {
 	int		fd;
 	int		temp;
-	char	*end;
 	char	*buf;
 	int		fileno;
 
 	fd = open(".temp.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (shell->cmd->prev && shell->cmd->prev->pipe_flag && \
-		!shell->cmd->next)
-		fileno = STDOUT_FILENO;
-	else if (shell->cmd->next && !shell->cmd->prev)
-		fileno = STDIN_FILENO;
-	else if (shell->cmd->next && shell->cmd->prev)
-		fileno = shell->cmd->prev->fds[1];
-	else
-		fileno = STDIN_FILENO;
-	end = find_token(shell, RD_HEREDOC);
+	set_fileno(shell, &fileno);
 	write(fileno, "> ", 2);
 	while ((temp = get_next_line(fileno, &buf)) > 0)
 	{
-		if (!ft_strcmp(buf, end))
+		if (!ft_strcmp(buf, find_token(shell, RD_HEREDOC)))
 		{
 			free(buf);
 			break ;

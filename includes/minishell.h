@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/18 18:46:06 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/18 20:52:19 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void	print_error_blt(char *str);
 
 int		multi_rd(t_mini *shell, int *rd_fds);
 int		multi_redirect_in(char *open_file, int *rd_fds);
-void	multi_redirect_herdoc(t_mini *shell, int *rd_fds);
+void	multi_redirect_herdoc(t_mini *shell, int *rd_fds, char *end);
 int		multi_redirect_out(char *open_file, int *rd_fds);
 int		multi_redirect_app(char *open_file, int *rd_fds);
 int 	check_multi_rd(t_mini *shell);
@@ -177,6 +177,7 @@ char	*find_value(char *name, char **envp);
 int		turn_on_flag(int *flag, int quote, int idx);
 char	**make_buff(t_mini *shell);
 void	free_buff(char **buff);
+void	set_fileno(t_mini *shell, int *fileno);
 
 char	*find_en(char *key, char **en);
 char	*find_token(t_mini *shell, int type);
