@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inner.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/17 23:30:48 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/18 08:52:49 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ int	run_inner(t_mini *shell)
 	int		rd_fds[2];
 
 	save_old_fds(old_fds);
-	if (find_token(shell, RD_HEREDOC))
-		redirect_herdoc(shell, rd_fds);
 	pipe(shell->cmd->fds);
+	// if (find_token(shell, RD_HEREDOC))
+	// 	redirect_herdoc(shell, rd_fds);
 	g_mini.pid = fork();
 	if (g_mini.pid == 0)
 		run_inner_child(shell, rd_fds);

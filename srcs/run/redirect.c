@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/17 23:52:49 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/18 13:34:34 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,30 +41,50 @@ void	redirect_herdoc(t_mini *shell, int *rd_fds)
 	char	*end;
 	int		fd;
 	char	*buf;
-	int		r;
+	char	*r;
+	int		test_r;
+	int		test;
+
+
 	fd = open(".temp.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	// rd_fds[0] = open(".temp.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+// 파이프가 있으면 다르게 작동하도록 하자
+	if (shell->cmd->prev && shell->cmd->prev->pipe_flag)
+		{test = dup2(fd, shell->cmd->prev->fds[0]);
+		test = fd;}
+	else
+		test = STDIN_FILENO;
+	// printf("shell->cmd->pipe_flag = %d\n",shell->cmd->prev->pipe_flag);
+	// printf("test = %d\n",test);
 	end = find_token(shell, RD_HEREDOC);
-	printf("end = %s\n",end);
-	// r = readline("> ");
-	r = get_next_line(rd_fds[0], &buf);
-	while (1)
+	write(STDOUT_FILENO, "> ", 2);
+	int line = 1;
+	// printf("test%d\n",line++);
+	while ((test_r = get_next_line(STDOUT_FILENO, &buf)) > 0)
 	{
-		if (!ft_strcmp(buf, end))
+		// printf("test%d\n",line++);
+		// if (!ft_strcmp(buf, end))
+		if (end[0] == buf[0])
 			break ;
-		// printf("---\n");
+		// printf("test%d\n",line++);
 		write(fd, buf, strlen(buf));
 		write(fd, "\n", 1);
-		// free(r);
-		// r = readline("> ");
-		r = get_next_line(rd_fds[0], &buf);
-	}
-	// free(r);
-	if (buf)
+		write(STDOUT_FILENO, "> ", 2);
 		free(buf);
-	close(fd);
+		// printf("test%d\n",line++);
+	}
+	// if (buf)
+	// 	free(buf);
+	if (!(fd <= 2))
+		close(fd);
 	rd_fds[0] = open(".temp.txt", O_RDONLY);
-	dup2(rd_fds[0], fd);
+	// printf("test%d\n",line++);
+	// dup2(fd, test);
+	if (shell->cmd->prev && shell->cmd->prev->pipe_flag)
+		dup2(rd_fds[0], STDIN_FILENO);
+	else
+		dup2(rd_fds[0], STDIN_FILENO);
+	// printf("shell->cmd->pipe_flag = %d\n",shell->cmd->prev->pipe_flag);
+	// printf("test%d\n",line++);
 	unlink(".temp.txt");
 }
 
@@ -110,16 +130,10 @@ int	redirect_process(t_mini *shell, int *rd_fds)
 	rd_fds[1] = 0;
 	if (check_multi_rd(shell))
 		return (multi_rd(shell, rd_fds));
-		/*
-		멀티 rd_in만 있을경우
-		멀티 rd-out만 있을경우
-		멀티 두개 다 있을 경우
-
-		*/
 	else if (find_token(shell, RD_IN))
 		return (redirect_in(shell, rd_fds));
-	// else if (find_token(shell, RD_HEREDOC))
-	// 	redirect_herdoc(shell, rd_fds);
+	else if (find_token(shell, RD_HEREDOC))
+		redirect_herdoc(shell, rd_fds);
 	else if (find_token(shell, RD_OUT))
 		return (redirect_out(shell, rd_fds));
 	else if (find_token(shell, RD_APPEND))
