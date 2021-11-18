@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/18 15:47:13 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/18 15:49:51 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static int	redirect_in(t_mini *shell, int *rd_fds)
 void	redirect_herdoc(t_mini *shell, int *rd_fds)
 {
 	int		fd;
-	int		test;
 	int		test_r;
 	char	*end;
 	char	*buf;
@@ -47,21 +46,11 @@ void	redirect_herdoc(t_mini *shell, int *rd_fds)
 	fd = open(".temp.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (shell->cmd->prev && shell->cmd->prev->pipe_flag && \
 		!shell->cmd->next)
-	{
-		test = dup2(fd, shell->cmd->prev->fds[1]);
 		temp_fileno = STDOUT_FILENO;
-	}
 	else if (shell->cmd->next && !shell->cmd->prev)
-	{
-		test = dup2(fd, shell->cmd->fds[0]);
 		temp_fileno = STDIN_FILENO;
-	}
 	else if (shell->cmd->next && shell->cmd->prev)
-	{
-		// test = dup2(fd, shell->cmd->prev->fds[1]);
-		// temp_fileno = dup2(fd, shell->cmd->fds[0]);
 		temp_fileno = shell->cmd->prev->fds[1];
-	}
 	else
 		temp_fileno = STDIN_FILENO;
 	end = find_token(shell, RD_HEREDOC);
