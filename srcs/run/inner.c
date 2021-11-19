@@ -6,37 +6,40 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/19 20:33:54 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/19 21:31:50 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static int	print_path_err(char *arg, char *err, int err_num, char **path)
+{
+	ft_putstr_fd("minishell :", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putendl_fd(err, 2);
+	g_mini.exit_status = err_num;
+	free(*path);
+	return (0);
+}
+
 static int	path_error_check(char **path, t_mini *shell)
 {
 	struct stat	s;
+	char		*arg;
 
+	arg = find_token(shell, COMMAND);
 	if (!stat(*path, &s) && S_ISDIR(s.st_mode))
-		print_error1(find_token(shell, COMMAND), "is a directory");
+		print_path_err(arg, "is a directory", 126, path);
 	if (!*path || !ft_strchr(*path, '/'))
 	{
 		if (!stat(find_token(shell, COMMAND), &s))
 			*path = find_token(shell, COMMAND);
 		else
-		{
-			print_error1(*path, "command not found");
-			g_mini.exit_status = 127;
-			free(*path);
-			return (0);
-		}
+			print_path_err(arg, "command not found", 127, path);
 	}
 	if (stat(*path, &s))
-	{
-		print_error1(find_token(shell, COMMAND), "No such file or directory");
-		g_mini.exit_status = 127;
-		free(*path);
-		return (0);
-	}
+		print_path_err(arg, "No such file or directory", 127, path);
 	return (1);
 }
 
