@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inner.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/19 21:31:50 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/19 22:33:16 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static int	path_error_check(char **path, t_mini *shell)
 		if (!stat(find_token(shell, COMMAND), &s))
 			*path = find_token(shell, COMMAND);
 		else
-			print_path_err(arg, "command not found", 127, path);
+			return(print_path_err(arg, "command not found", 127, path));
 	}
 	if (stat(*path, &s))
-		print_path_err(arg, "No such file or directory", 127, path);
+		return(print_path_err(arg, "No such file or directory", 127, path));
 	return (1);
 }
 
