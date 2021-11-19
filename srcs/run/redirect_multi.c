@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_multi.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:26:31 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/19 15:11:20 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/19 18:34:55 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,9 @@ int	rd_option_only_in(t_mini *shell, int *rd_fds)
 {
 	t_token	*temp;
 	char	*open_file;
-	int		type;
 	int		old_fds[2];
 
 	save_old_fds(old_fds);
-	type = 0;
 	temp = shell->cmd->token;
 	while (temp)
 	{
@@ -85,7 +83,6 @@ int	rd_option_only_in(t_mini *shell, int *rd_fds)
 				multi_redirect_herdoc(shell, rd_fds);
 				redirect_restore(rd_fds, old_fds);
 			}
-			type = temp->type;
 		}
 		temp = temp->next;
 	}

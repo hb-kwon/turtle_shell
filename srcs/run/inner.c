@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inner.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/19 14:53:08 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/19 18:35:32 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,15 @@ static int	run_inner_child(t_mini *shell, int *rd_fds)
 	if (!redirect_process(shell, rd_fds))
 		exit (1);
 	i = -1;
+	if (find_token(shell, COMMAND)[0] == '/')
+		path = find_token(shell, COMMAND);
 	while (buff[++i])
 	{
 		if (execve(path, buff, shell->envp) == -1)
+		{
+			print_error1(path, "NO such file or directory");
 			exit(EXIT_FAILURE);
+		}
 	}
 	free(path);
 	free(buff);
