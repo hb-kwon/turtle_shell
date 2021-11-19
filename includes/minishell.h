@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/19 15:01:49 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/19 22:25:17 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "libft.h"
 # include <sys/wait.h>
 # include <sys/stat.h>
-# define PATH_MAX 1024
+// # define PATH_MAX 1024
 # define BLTIN_NUM 7
 
 # define S_QUOTE 16
@@ -146,7 +146,7 @@ void	print_error_blt(char *str);
 
 int		multi_rd(t_mini *shell, int *rd_fds);
 int		multi_redirect_in(char *open_file, int *rd_fds);
-void	multi_redirect_herdoc(t_mini *shell, int *rd_fds);
+void	multi_redirect_herdoc(t_mini *shell, int *rd_fds, char *end);
 int		multi_redirect_out(char *open_file, int *rd_fds);
 int		multi_redirect_app(char *open_file, int *rd_fds);
 int		check_multi_rd(t_mini *shell);

@@ -6,7 +6,7 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:26:31 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/19 18:34:55 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/19 22:24:49 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	rd_option_only_in(t_mini *shell, int *rd_fds)
 				multi_redirect_in(open_file, rd_fds);
 			if (temp->type == RD_HEREDOC)
 			{
-				multi_redirect_herdoc(shell, rd_fds);
+				multi_redirect_herdoc(shell, rd_fds, temp->arg);
 				redirect_restore(rd_fds, old_fds);
 			}
 		}

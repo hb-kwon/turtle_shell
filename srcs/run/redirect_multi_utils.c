@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_multi_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 16:27:10 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/19 21:46:12 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/19 22:24:22 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	multi_redirect_in(char *open_file, int *rd_fds)
 	return (1);
 }
 
-void	multi_redirect_herdoc(t_mini *shell, int *rd_fds)
+void	multi_redirect_herdoc(t_mini *shell, int *rd_fds, char *end)
 {
 	int		fd;
 	int		temp;
@@ -45,7 +45,7 @@ void	multi_redirect_herdoc(t_mini *shell, int *rd_fds)
 	temp = get_next_line(fileno, &buf);
 	while (temp > 0)
 	{
-		if (!ft_strcmp(buf, find_token(shell, RD_HEREDOC)))
+		if (!ft_strcmp(buf, end))
 			break ;
 		ft_print_heredoc(fd, buf, fileno);
 		temp = get_next_line(fileno, &buf);
