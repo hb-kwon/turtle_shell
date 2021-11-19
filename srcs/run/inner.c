@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inner.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/19 18:39:24 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/19 20:33:54 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,21 @@ static int	path_error_check(char **path, t_mini *shell)
 {
 	struct stat	s;
 
-	if (!stat(find_token(shell, COMMAND), &s) && S_ISDIR(s.st_mode))
+	if (!stat(*path, &s) && S_ISDIR(s.st_mode))
 		print_error1(find_token(shell, COMMAND), "is a directory");
-	else if (!stat(find_token(shell, COMMAND), &s) && !(s.st_mode & S_IXUSR))
-		print_error1(find_token(shell, COMMAND), "Permission denied");
-	else if (*path == NULL || !ft_strchr(*path, '/'))
+	if (!*path || !ft_strchr(*path, '/'))
 	{
 		if (!stat(find_token(shell, COMMAND), &s))
 			*path = find_token(shell, COMMAND);
 		else
 		{
-			print_error1(find_token(shell, COMMAND), "command not found");
+			print_error1(*path, "command not found");
 			g_mini.exit_status = 127;
 			free(*path);
 			return (0);
 		}
 	}
-	else
+	if (stat(*path, &s))
 	{
 		print_error1(find_token(shell, COMMAND), "No such file or directory");
 		g_mini.exit_status = 127;
@@ -56,15 +54,10 @@ static int	run_inner_child(t_mini *shell, int *rd_fds)
 	if (!redirect_process(shell, rd_fds))
 		exit (1);
 	i = -1;
-	if (find_token(shell, COMMAND)[0] == '/')
-		path = find_token(shell, COMMAND);
 	while (buff[++i])
 	{
 		if (execve(path, buff, shell->envp) == -1)
-		{
-			print_error1(path, "NO such file or directory");
 			exit(EXIT_FAILURE);
-		}
 	}
 	free(path);
 	free(buff);

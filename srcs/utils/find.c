@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:38:28 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/19 17:14:52 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/19 20:33:54 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char	*find_path(t_mini *shell, char *cmd)
 	char		**paths;
 	struct stat	s;
 
+	if (ft_strchr("./", cmd[0]))
+		return (ft_strdup(cmd));
 	temp = find_en("PATH=", shell->envp);
 	if (temp == NULL)
 		return (NULL);
@@ -53,9 +55,7 @@ char	*find_path(t_mini *shell, char *cmd)
 	i = -1;
 	while (paths[++i])
 	{
-		temp = ft_strjoin("/", cmd);
-		new_path = ft_strjoin(paths[i], temp);
-		free(temp);
+		new_path = ft_strjoin_free(paths[i], ft_strjoin("/", cmd), 2);
 		if (!stat(new_path, &s))
 		{
 			ft_free_arr(paths);
