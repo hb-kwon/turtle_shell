@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 22:38:28 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/19 20:38:44 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/19 21:18:24 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ char	*find_value(char *name, char **envp)
 		{
 			if (envp[i][len] == '=')
 				return (ft_strchr(envp[i], '=') + 1);
+			break ;
 		}
 	}
 	return (NULL);
