@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/18 20:52:19 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/19 15:01:49 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "libft.h"
 # include <sys/wait.h>
 # include <sys/stat.h>
-// # define PATH_MAX 1024
+# define PATH_MAX 1024
 # define BLTIN_NUM 7
 
 # define S_QUOTE 16
@@ -146,11 +146,11 @@ void	print_error_blt(char *str);
 
 int		multi_rd(t_mini *shell, int *rd_fds);
 int		multi_redirect_in(char *open_file, int *rd_fds);
-void	multi_redirect_herdoc(t_mini *shell, int *rd_fds, char *end);
+void	multi_redirect_herdoc(t_mini *shell, int *rd_fds);
 int		multi_redirect_out(char *open_file, int *rd_fds);
 int		multi_redirect_app(char *open_file, int *rd_fds);
-int 	check_multi_rd(t_mini *shell);
-int count_rd_option(t_mini *shell, int option);
+int		check_multi_rd(t_mini *shell);
+int		count_rd_option(t_mini *shell, int option);
 /*
 ** builtin
 */
@@ -187,6 +187,7 @@ char	*find_key(char *str, int key);
 int		ft_print_synerr(char c);
 int		print_error2(char *msg1, char *msg2, char *err_num);
 int		print_error1(char *msg, char *err_num);
+void	ft_print_heredoc(int fd, char *buf, int fileno);
 
 void	free_token(t_token *tkn);
 void	free_cmd(t_mini *shell);

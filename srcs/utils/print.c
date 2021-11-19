@@ -6,11 +6,18 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:23:36 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/16 17:13:01 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/19 15:01:11 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_print_heredoc(int fd, char *buf, int fileno)
+{
+	write(fd, buf, strlen(buf));
+	write(fd, "\n", 1);
+	write(fileno, "> ", 2);
+}
 
 int	ft_print_synerr(char c)
 {

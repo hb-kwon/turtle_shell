@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:02:52 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/17 18:11:05 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/19 15:08:50 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,9 @@ static int	line_enter(t_mini *shell)
 
 static void	line_eof(t_mini *shell)
 {
-	printf("\x1b[1A\033[%luCline eof exit\n", ft_strlen(g_mini.path));
+	printf("\x1b[1A\033[%luCexit\n", ft_strlen(g_mini.path));
 	line_free();
 	free(shell);
-	system("leaks minishell");
 	exit(0);
 }
 

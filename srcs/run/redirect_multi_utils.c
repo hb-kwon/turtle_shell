@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_multi_utils.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 16:27:10 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/18 20:54:12 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/19 15:05:21 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	multi_redirect_in(char *open_file, int *rd_fds)
 {
-
-	if (access(open_file, R_OK) == -1 && errno == EACCES)
+	if ((access(open_file, R_OK) == -1) && (errno == EACCES))
 	{
 		print_error1(open_file, "Permission denied");
 		return (0);
@@ -33,7 +32,7 @@ int	multi_redirect_in(char *open_file, int *rd_fds)
 	return (1);
 }
 
-void	multi_redirect_herdoc(t_mini *shell, int *rd_fds, char *end)
+void	multi_redirect_herdoc(t_mini *shell, int *rd_fds)
 {
 	int		fd;
 	int		temp;
@@ -43,17 +42,17 @@ void	multi_redirect_herdoc(t_mini *shell, int *rd_fds, char *end)
 	fd = open(".temp.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	set_fileno(shell, &fileno);
 	write(fileno, "> ", 2);
-	while ((temp = get_next_line(fileno, &buf)) > 0)
+	temp = get_next_line(fileno, &buf);
+	while (temp > 0)
 	{
-		if (!ft_strcmp(buf, end))
+		if (!ft_strcmp(buf, find_token(shell, RD_HEREDOC)))
 		{
 			free(buf);
 			break ;
 		}
-		write(fd, buf, strlen(buf));
-		write(fd, "\n", 1);
-		write(fileno, "> ", 2);
+		ft_print_heredoc(fd, buf, fileno);
 		free(buf);
+		temp = get_next_line(fileno, &buf);
 	}
 	if (!(fd <= 2))
 		close(fd);
@@ -92,16 +91,16 @@ int	multi_redirect_app(char *open_file, int *rd_fds)
 	return (1);
 }
 
-int check_multi_rd(t_mini *shell)
+int	check_multi_rd(t_mini *shell)
 {
-    int in_count;
-    int out_count;
+	int	in_count;
+	int	out_count;
 
 	in_count = count_rd_option(shell, 1);
 	out_count = count_rd_option(shell, 0);
-    if ((in_count == 0 && out_count == 0) || \
-        (in_count == 1 && out_count == 0) || \
-        (in_count == 0 && out_count == 1))
-			return (0);
-    return (1);
+	if ((in_count == 0 && out_count == 0) || \
+		(in_count == 1 && out_count == 0) || \
+		(in_count == 0 && out_count == 1))
+		return (0);
+	return (1);
 }

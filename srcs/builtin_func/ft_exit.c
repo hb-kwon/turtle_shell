@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:22:25 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/14 23:52:34 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/19 15:08:58 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,5 @@ int	ft_exit(t_mini *shell)
 	ft_exit_process(ac, &status, buff);
 	free(buff);
 	g_mini.exit_status = status;
-	system("leaks minishell");
 	exit(status);
 }
