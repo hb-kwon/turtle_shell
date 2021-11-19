@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 16:27:10 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/19 15:05:21 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/19 21:46:12 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,12 @@ void	multi_redirect_herdoc(t_mini *shell, int *rd_fds)
 	while (temp > 0)
 	{
 		if (!ft_strcmp(buf, find_token(shell, RD_HEREDOC)))
-		{
-			free(buf);
 			break ;
-		}
 		ft_print_heredoc(fd, buf, fileno);
-		free(buf);
 		temp = get_next_line(fileno, &buf);
 	}
+	if (buf)
+		free(buf);
 	if (!(fd <= 2))
 		close(fd);
 	rd_fds[0] = open(".temp.txt", O_RDONLY);
