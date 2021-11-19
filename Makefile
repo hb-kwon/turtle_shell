@@ -6,7 +6,7 @@
 #    By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/04 03:12:03 by kwonhyukbae       #+#    #+#              #
-#    Updated: 2021/11/18 18:51:40 by hkwon            ###   ########.fr        #
+#    Updated: 2021/11/19 16:06:49 by hkwon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 LIBFT = libft.a
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 #CFLAGS = -g3 -fsanitize=address
 AR = ar rc
 RM = rm -f

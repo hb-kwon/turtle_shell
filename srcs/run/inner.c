@@ -6,28 +6,37 @@
 /*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/19 18:35:32 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/19 18:39:24 by ysong            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	path_error_check(char *path)
+static int	path_error_check(char **path, t_mini *shell)
 {
 	struct stat	s;
 
-	if (!ft_strchr(path, '/') || !path)
+	if (!stat(find_token(shell, COMMAND), &s) && S_ISDIR(s.st_mode))
+		print_error1(find_token(shell, COMMAND), "is a directory");
+	else if (!stat(find_token(shell, COMMAND), &s) && !(s.st_mode & S_IXUSR))
+		print_error1(find_token(shell, COMMAND), "Permission denied");
+	else if (*path == NULL || !ft_strchr(*path, '/'))
 	{
-		print_error1(path, "command not found");
-		g_mini.exit_status = 127;
-		free(path);
-		return (0);
+		if (!stat(find_token(shell, COMMAND), &s))
+			*path = find_token(shell, COMMAND);
+		else
+		{
+			print_error1(find_token(shell, COMMAND), "command not found");
+			g_mini.exit_status = 127;
+			free(*path);
+			return (0);
+		}
 	}
-	else if (stat(path, &s))
+	else
 	{
-		print_error1(path, "No such file or directory");
+		print_error1(find_token(shell, COMMAND), "No such file or directory");
 		g_mini.exit_status = 127;
-		free(path);
+		free(*path);
 		return (0);
 	}
 	return (1);
@@ -42,7 +51,7 @@ static int	run_inner_child(t_mini *shell, int *rd_fds)
 	buff = make_buff(shell);
 	pipe_process(shell);
 	path = find_path(shell, find_token(shell, COMMAND));
-	if (!path_error_check(path))
+	if (!path_error_check(&path, shell))
 		exit(g_mini.exit_status);
 	if (!redirect_process(shell, rd_fds))
 		exit (1);
