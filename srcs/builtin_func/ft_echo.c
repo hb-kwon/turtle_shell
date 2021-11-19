@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 14:11:43 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/19 15:40:39 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/19 20:59:24 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_echo(t_mini *shell)
 
 	token = shell->cmd->token->next;
 	n_flag = 0;
-	if (token && !ft_strcmp(token->arg, "-n"))
+	while (token && !ft_strcmp(token->arg, "-n"))
 	{
 		n_flag = 1;
 		token = token->next;
