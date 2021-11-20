@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inner.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/19 22:33:16 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/20 13:36:38 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,18 @@ static int	path_error_check(char **path, t_mini *shell)
 
 	arg = find_token(shell, COMMAND);
 	if (!stat(*path, &s) && S_ISDIR(s.st_mode))
-		print_path_err(arg, "is a directory", 126, path);
+		return (print_path_err(arg, "is a directory", 126, path));
+	if (!stat(*path, &s) && !(s.st_mode & S_IXUSR))
+		return (print_path_err(arg, "Permission denied", 126, path));
 	if (!*path || !ft_strchr(*path, '/'))
 	{
 		if (!stat(find_token(shell, COMMAND), &s))
 			*path = find_token(shell, COMMAND);
 		else
-			return(print_path_err(arg, "command not found", 127, path));
+			return (print_path_err(arg, "command not found", 127, path));
 	}
 	if (stat(*path, &s))
-		return(print_path_err(arg, "No such file or directory", 127, path));
+		return (print_path_err(arg, "No such file or directory", 127, path));
 	return (1);
 }
 
