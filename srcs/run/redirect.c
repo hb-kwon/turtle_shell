@@ -6,7 +6,7 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 07:27:54 by ysong             #+#    #+#             */
-/*   Updated: 2021/11/20 13:36:31 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/20 14:38:21 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static int	redirect_in(t_mini *shell, int *rd_fds)
 	path = find_token(shell, RD_IN);
 	if (access(path, R_OK) == -1 && errno == EACCES)
 		return (print_path_err(path, \
-		"Permission denied", 126, path));
+		"Permission denied", 126, &path));
 	if (rd_fds[0] > 0)
 		close(rd_fds[0]);
 	rd_fds[0] = open(find_token(shell, RD_IN), O_RDONLY);
 	if (rd_fds[0] == -1)
 		return (print_path_err(path, \
-		"No such file or directory", 127, path));
+		"No such file or directory", 127, &path));
 	dup2(rd_fds[0], STDIN_FILENO);
 	return (1);
 }
@@ -64,7 +64,7 @@ static int	redirect_out(t_mini *shell, int *rd_fds)
 	path = find_token(shell, RD_OUT);
 	if (access(path, W_OK) == -1 && errno == EACCES)
 		return (print_path_err(path, \
-		"Permission denied", 126, path));
+		"Permission denied", 126, &path));
 	if (rd_fds[1] > 0)
 		close(rd_fds[1]);
 	rd_fds[1] = open(find_token(shell, RD_OUT), \
@@ -80,7 +80,7 @@ static int	redirect_app(t_mini *shell, int *rd_fds)
 	path = find_token(shell, RD_APPEND);
 	if (access(path, W_OK) == -1 && errno == EACCES)
 		return (print_path_err(path, \
-		"Permission denied", 126, path));
+		"Permission denied", 126, &path));
 	if (rd_fds[1] > 0)
 		close(rd_fds[1]);
 	rd_fds[1] = open(find_token(shell, RD_APPEND), \

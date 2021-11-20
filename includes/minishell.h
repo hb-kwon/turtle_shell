@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysong <ysong@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 11:10:37 by kwonhyukbae       #+#    #+#             */
-/*   Updated: 2021/11/19 22:25:17 by ysong            ###   ########.fr       */
+/*   Updated: 2021/11/20 14:37:41 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ int		ft_print_synerr(char c);
 int		print_error2(char *msg1, char *msg2, char *err_num);
 int		print_error1(char *msg, char *err_num);
 void	ft_print_heredoc(int fd, char *buf, int fileno);
-
+int		print_path_err(char *arg, char *err, int err_num, char **path);
 void	free_token(t_token *tkn);
 void	free_cmd(t_mini *shell);
 void	ft_free_arr(char **arr);

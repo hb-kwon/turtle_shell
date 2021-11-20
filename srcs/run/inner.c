@@ -6,13 +6,13 @@
 /*   By: hkwon <hkwon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:53:10 by hkwon             #+#    #+#             */
-/*   Updated: 2021/11/20 13:36:38 by hkwon            ###   ########.fr       */
+/*   Updated: 2021/11/20 14:38:33 by hkwon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	print_path_err(char *arg, char *err, int err_num, char **path)
+int	print_path_err(char *arg, char *err, int err_num, char **path)
 {
 	ft_putstr_fd("minishell :", 2);
 	ft_putstr_fd(arg, 2);
